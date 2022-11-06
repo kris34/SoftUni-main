@@ -22,7 +22,7 @@ authController.post('/register', async (req, res) => {
     if (req.body.password != req.body.repass) {
       throw new Error('Passwords dont match!');
     }
-    
+
     const token = await register(
       req.body.username,
       req.body.email,
@@ -55,7 +55,7 @@ authController.get('/login', (req, res) => {
 
 authController.post('/login', async (req, res) => {
   try {
-    const token = await login(req.body.username, req.body.password);
+    const token = await login(req.body.email, req.body.password);
 
     res.cookie('token', token);
     res.redirect('/'); //TODO replace with redirect by assignment
@@ -65,14 +65,14 @@ authController.post('/login', async (req, res) => {
       title: 'Login Page',
       errors,
       body: {
-        username: req.body.username,
+        email: req.body.email,
       },
     });
   }
 });
 
-authController.get('logout', (req, res) => {
-  res.clearCookie(token);
+authController.get('/logout', (req, res) => {
+  res.clearCookie("token");
   res.redirect('/');
 });
 
