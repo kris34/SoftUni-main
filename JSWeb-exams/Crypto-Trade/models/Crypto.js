@@ -1,21 +1,27 @@
 const { Schema, model, Types } = require('mongoose');
 
+const URL_PATTERN = /^https?:\/\/.+$/i;
+
 const cryptoSchema = new Schema({
   name: {
     type: String,
     required: true,
     unique: true,
   },
-  image: {
+  imageUrl: {
     type: String,
     required: true,
+    validate: {
+      validator: (value) => URL_PATTERN.test(value),
+      message: 'Image not valid!',
+    },
   },
   price: {
     type: Number,
     required: true,
   },
   description: {
-    type: string,
+    type: String,
     required: true,
   },
   paymentMethod: {
@@ -30,6 +36,6 @@ const cryptoSchema = new Schema({
   owner: { type: Types.ObjectId, ref: 'User' },
 });
 
-const crypto = model('Crypto', cryptoSchema);
+const Crypto = model('Crypto', cryptoSchema);
 
-module.exports = crypto;
+module.exports = Crypto;

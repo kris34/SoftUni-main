@@ -7,26 +7,9 @@
     </div>
 
     <div class="coin-list">
-        <div class="coin">
-            <img src="./static/images/bitcoin.png">
-            <div>
-                <h3>$31,166.71</h3>
-                <p>Bitcoin</p>
-            </div>
-        </div>
-        <div class="coin">
-            <img src="./static/images/ethereum.png">
-            <div>
-                <h3>$2,338.55</h3>
-                <p>Ethereum</p>
-            </div>
-        </div>
-        <div class="coin">
-            <img src="./static/images/dogecoin.png">
-            <div>
-                <h3>$0.09478</h3>
-                <p>Dogecoin</p>
-            </div>
-        </div>
+          {{#each coins }}
+          {{> coinCard}}
+          {{/each}}
     </div>
+   
 </main>
