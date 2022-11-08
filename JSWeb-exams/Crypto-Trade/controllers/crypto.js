@@ -2,6 +2,7 @@ const {
   createCrypto,
   getAllCrypto,
   findCoinById,
+  buyCrypto,
 } = require('../services/cryptoService');
 const { parseError } = require('../util/parser');
 
@@ -75,6 +76,24 @@ cryptoController.get('/details/:id', async (req, res) => {
   });
 });
 
+cryptoController.get('/buy/:id', async (req, res) => {
+  const coin = await findCoinById(req.params.id);
 
+  if (
+    coin.owner.toString() != req.user?._id?.toString() &&
+    coin.bought.map((x) => x.toString()).includes(req.user?._id?.toString()) ==
+      false
+  ) {
+    try {
+      await buyCrypto(req.user._id, req.params.id);
+      res.redirect(`/crypto/details/${req.params.id}`);
+    } catch (err) {
+      res.render('catalog', {
+        errors: parseError(err),
+        coin,
+      });
+    }
+  } 
+});
 
 module.exports = cryptoController;

@@ -15,11 +15,8 @@ async function findCoinById(id) {
 
 async function buyCrypto(userId, coinId) {
   const coin = await Crypto.findById(coinId);
-  const user = await User.findById(userId);
-  user.boughtCoins.push(coinId);
   coin.bought.push(userId);
-
-  return coin.save() && user.save();
+  return coin.save();
 }
 
 module.exports = {
