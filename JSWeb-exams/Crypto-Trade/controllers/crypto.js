@@ -3,6 +3,7 @@ const {
   getAllCrypto,
   findCoinById,
   buyCrypto,
+  deleteCoin,
 } = require('../services/cryptoService');
 const { parseError } = require('../util/parser');
 
@@ -93,7 +94,13 @@ cryptoController.get('/buy/:id', async (req, res) => {
         coin,
       });
     }
-  } 
+  }
+});
+
+cryptoController.get('/delete/:id', async (req, res) => {
+  await deleteCoin(req.params.id);
+
+  res.redirect('/');
 });
 
 module.exports = cryptoController;
