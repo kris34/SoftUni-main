@@ -15,6 +15,11 @@ const userSchema = new Schema({
     minlength: [5, 'Email must be atleast 5 charakters long!'],
   },
   hashedPassword: { type: String, required: true },
+  boughtCoins: {
+    type: [Types.ObjectId],
+    ref: 'Crypto',
+    default: [],
+  },
 });
 
 userSchema.index(
