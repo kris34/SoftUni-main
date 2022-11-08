@@ -1,7 +1,27 @@
-const { createCrypto } = require('../services/cryptoService');
+const {
+  createCrypto,
+  getAllCrypto,
+  findCoinById,
+} = require('../services/cryptoService');
 const { parseError } = require('../util/parser');
 
 const cryptoController = require('express').Router();
+
+cryptoController.get('/catalog', async (req, res) => {
+  try {
+    const coins = await getAllCrypto();
+    res.render('catalog', {
+      title: 'Catalog Page',
+      coins,
+    });
+  } catch (err) {
+    res.render('home', {
+      title: 'Home Page',
+      user: req.user,
+      errors: parseError(err),
+    });
+  }
+});
 
 cryptoController.get('/create', (req, res) => {
   res.render('create', {
@@ -38,5 +58,23 @@ cryptoController.post('/create', async (req, res) => {
     });
   }
 });
+
+cryptoController.get('/details/:id', async (req, res) => {
+  const coin = await findCoinById(req.params.id);
+
+  coin.isOwner = coin.owner.toString() == req.user?._id?.toString();
+
+  coin.bought = coin.bought
+    .map((x) => x.toString())
+    .includes(req.user?._id.toString());
+
+  res.render('details', {
+    title: 'Coin Details',
+    user: req.user,
+    coin,
+  });
+});
+
+
 
 module.exports = cryptoController;
