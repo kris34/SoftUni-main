@@ -4,6 +4,7 @@ const {
   findCoinById,
   buyCrypto,
   deleteCoin,
+  updateCoin,
 } = require('../services/cryptoService');
 const { parseError } = require('../util/parser');
 
@@ -98,9 +99,48 @@ cryptoController.get('/buy/:id', async (req, res) => {
 });
 
 cryptoController.get('/delete/:id', async (req, res) => {
+  const coin = await findCoinById(req.params.id);
+  const isOwner = coin.owner.toString() == req.user?._id?.toString();
+
+  if (!isOwner) {
+    return res.redirect('/auth/login');
+  }
+
   await deleteCoin(req.params.id);
 
   res.redirect('/');
+});
+
+cryptoController.get('/edit/:id', async (req, res) => {
+  const coin = await findCoinById(req.params.id);
+
+  res.render('edit', {
+    title: 'Edit Coin',
+    coin,
+    user: req.user,
+  });
+});
+
+cryptoController.post('/edit/:id', async (req, res) => {
+  const coin = await findCoinById(req.params.id);
+
+  const isOwner = coin.owner.toString() == req.user?._id?.toString();
+
+  if (!isOwner) {
+    return res.redirect('/auth/login');
+  }
+
+  try {
+    await updateCoin(req.params.id, req.body);
+    res.redirect(`/crypto/details/${req.params.id}`);
+  } catch (err) {
+    res.render('edit', {
+      title: 'Edit',
+      errors: parseError(err),
+      coin,
+      user: req.user,
+    });
+  }
 });
 
 module.exports = cryptoController;

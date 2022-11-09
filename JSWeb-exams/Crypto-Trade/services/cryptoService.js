@@ -20,7 +20,18 @@ async function buyCrypto(userId, coinId) {
 }
 
 async function deleteCoin(id) {
-  return  Crypto.findByIdAndDelete(id);
+  return Crypto.findByIdAndDelete(id);
+}
+
+async function updateCoin(id, data) {
+  const existing = await Crypto.findById(id);
+  existing.name = data.name;
+  existing.imageUrl = data.imageUrl;
+  existing.price = data.price;
+  existing.description = data.description;
+  existing.paymentMethod = data.paymentMethod;
+
+  return existing.save();
 }
 
 module.exports = {
@@ -28,5 +39,6 @@ module.exports = {
   getAllCrypto,
   findCoinById,
   buyCrypto,
-  deleteCoin
+  deleteCoin,
+  updateCoin,
 };
