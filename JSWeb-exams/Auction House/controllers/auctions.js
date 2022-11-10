@@ -1,6 +1,5 @@
-const createAuction = require('../services/auctionService');
+const { createAuction, getAll } = require('../services/auctionService');
 const { parseError } = require('../util/parser');
-const authController = require('./auth');
 
 const auctionsController = require('express').Router();
 
@@ -20,12 +19,15 @@ auctionsController.post('/create', async (req, res) => {
     description: req.body.description,
     owner: req.user._id,
   };
-  
+
   try {
     if (req.body.price < 0) {
       throw new Error('Price cannot be below $0');
     }
 
+    if (Object.values(req.body).some((v) => !v)) {
+      throw new Error('All fields are required!');
+    }
     await createAuction(auction);
 
     res.redirect('/auctions/create');
@@ -37,6 +39,16 @@ auctionsController.post('/create', async (req, res) => {
       user: req.user,
     });
   }
+});
+
+auctionsController.get('/catalog', async (req, res) => {
+  const auctions = await getAll();
+
+  res.render('catalog', {
+    title: 'Catalog',
+    auctions,
+    user: req.user,
+  });
 });
 
 module.exports = auctionsController;
