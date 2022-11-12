@@ -5,6 +5,7 @@ const {
   getOne,
   bid,
   getUser,
+  editItem,
 } = require('../services/auctionService');
 const { parseError } = require('../util/parser');
 
@@ -62,7 +63,7 @@ auctionsController.get('/details/:id', async (req, res) => {
   const item = await getOne(req.params.id);
   let view;
   let currentBidder;
-  
+
   const isOwner = item.owner._id.toString() == req.user?._id?.toString();
   item.hasBidders = false;
 
@@ -72,10 +73,10 @@ auctionsController.get('/details/:id', async (req, res) => {
   }
 
   const bidder = await getUser(currentBidder);
-  item.currentBidder = bidder.email;
-  
-  item.userBidder = item.currentBidder == req.user?.email?.toString()
-  
+  item.currentBidder = bidder?.email?.toString();
+
+  item.userBidder = item.currentBidder == req.user?.email?.toString();
+
   if (isOwner) {
     view = 'details-owner';
   } else {
@@ -103,6 +104,34 @@ auctionsController.post('/details/:id', async (req, res) => {
     const errors = parseError(err);
     res.render('details', {
       errors,
+    });
+  }
+});
+
+auctionsController.get('/edit/:id', async (req, res) => {
+  const item = await getOne(req.params.id);
+
+  item.noBidder = item.bidders.length == 0;
+
+  res.render('edit', {
+    title: 'Edit Page',
+    item,
+  });
+});
+
+auctionsController.post('/edit/:id', async (req, res) => {
+  const item = await getOne(req.params.id);
+  const data = req.body
+  
+  try {
+    await editItem(data , req.params.id);
+    res.redirect(`/auctions/details/${req.params.id}`);
+  } catch (err) {
+    const errors = parseError(err)
+    res.render('edit', {
+      title: 'Edit Page',
+      errors,
+      item,
     });
   }
 });

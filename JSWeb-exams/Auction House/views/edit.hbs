@@ -1,58 +1,52 @@
+<main>
+  <section id='create-section'>
+    <h1 class='item'>Edit Auction</h1>
+    <div class='item padded align-center'>
+      <form class='layout left large' method='post'>
+        <div class='col aligned'>
+          <label>
+            <span>Title</span>
+            <input type='text' name='title' value='{{item.title}}' /></label>
+          <label>
+            <span>Category</span>
+            <select name='category'>
+              <option value='estate'>Real Estate</option>
+              <option value='vehicles'>Vehicles</option>
+              <option value='furniture'>Furniture</option>
+              <option value='electronics'>Electronics</option>
+              <option value='other'>Other</option>
+            </select>
+          </label>
+          <label>
+            <span>Image URL</span> 
+            <input type='text' name='imageUrl' value='{{item.imageUrl}}' />
+          </label>
 
-        <main>
+          {{#if item.noBidder}}
+            <label>
+              <span>Starting price</span>
+              <!-- If the current auction has a bidder, this input field should be disabled -->
+              <input type='number' name='price' value='{{item.price}}' />
+            </label>
+          {{/if}}
+        </div>
 
-        
-            <section id="create-section">
+        <div class='content pad-med align-center vertical'>
+          <label>
+            <span>Description</span>
+            <textarea name='description'>{{item.description}}
+            </textarea>
+          </label>
 
-                <h1 class="item">Edit Auction</h1>
+          <div class='align-center'>
+            <input class='action' type='submit' value='Update Listing' />
+          </div>
+        </div>
 
-                <div class="item padded align-center">
+      </form>
 
-                    <form class="layout left large" method="" action="">
+    </div>
 
-                        <div class="col aligned">
-                            <label>
-                                <span>Title</span>
-                                <input type="text" name="" value="Fishing Boat"></label>
-                            <label>
-                                <span>Category</span>
-                                <select name="">
-                                    <option value="estate">Real Estate</option>
-                                    <option value="vehicles">Vehicles</option>
-                                    <option value="furniture">Furniture</option>
-                                    <option value="electronics">Electronics</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </label>
-                            <label>
-                                <span>Image URL</span>
-                                <input type="text" name="" value="/static/assets/boat.jpg">
-                            </label>
-                            <label>
-                                <span>Starting price</span>
+  </section>
 
-                                <!-- If the current auction has a bidder, this input field should be disabled -->
-                                <input type="number" name="" value="5000">
-                            </label>
-                        </div>
-
-                        <div class="content pad-med align-center vertical">
-                            <label>
-                                <span>Description</span>
-                                <textarea name="">Excellent condition. Onboard diesel motor, upholstered cockpit, fishing sonar. Includes trailer.
-                                </textarea>
-                            </label>
-
-                            <div class="align-center">
-                                <input class="action" type="submit" value="Update Listing">
-                            </div>
-                        </div>
-
-                    </form>
-
-                </div>
-
-            </section>
-
-        </main>
-
+</main>

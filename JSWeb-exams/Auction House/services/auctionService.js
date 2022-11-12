@@ -24,10 +24,28 @@ async function getUser(id) {
   return await User.findById(id).lean();
 }
 
+async function editItem(data, id) {
+  const existing = await Auction.findById(id);
+  const price = existing.price;
+  existing.title = data.title;
+  existing.description = data.description;
+  existing.category = data.category;
+  existing.imageUrl = data.imageUrl;
+  
+  if (existing.bidders.length > 0) {
+    existing.price = price;
+  } else {
+    existing.price = data.price;
+  }
+
+  existing.save();
+}
+
 module.exports = {
   createAuction,
   getAll,
   getOne,
   bid,
-  getUser
+  getUser,
+  editItem,
 };
