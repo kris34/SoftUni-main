@@ -4,6 +4,7 @@ const {
   getAll,
   getOne,
   bid,
+  getUser,
 } = require('../services/auctionService');
 const { parseError } = require('../util/parser');
 
@@ -61,12 +62,20 @@ auctionsController.get('/details/:id', async (req, res) => {
   const item = await getOne(req.params.id);
   let view;
   let currentBidder;
-
+  
   const isOwner = item.owner._id.toString() == req.user?._id?.toString();
+  item.hasBidders = false;
+
   if (item.bidders.length > 0) {
-    item.currentBidder = item.bidders[item.bidders.length - 1];
+    currentBidder = item.bidders[item.bidders.length - 1];
+    item.hasBidders = true;
   }
 
+  const bidder = await getUser(currentBidder);
+  item.currentBidder = bidder.email;
+  
+  item.userBidder = item.currentBidder == req.user?.email?.toString()
+  
   if (isOwner) {
     view = 'details-owner';
   } else {

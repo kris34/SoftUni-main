@@ -1,4 +1,5 @@
 const Auction = require('../models/auction');
+const User = require('../models/User');
 
 async function createAuction(data) {
   return await Auction.create(data);
@@ -19,9 +20,14 @@ async function bid(newBid, itemId, userId) {
   return existing.save();
 }
 
+async function getUser(id) {
+  return await User.findById(id).lean();
+}
+
 module.exports = {
   createAuction,
   getAll,
   getOne,
   bid,
+  getUser
 };
