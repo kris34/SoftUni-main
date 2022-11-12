@@ -1,16 +1,22 @@
-const { createAuction, getAll } = require('../services/auctionService');
+const { isGuest } = require('../middlewares/guards');
+const {
+  createAuction,
+  getAll,
+  getOne,
+  bid,
+} = require('../services/auctionService');
 const { parseError } = require('../util/parser');
 
 const auctionsController = require('express').Router();
 
-auctionsController.get('/create', async (req, res) => {
+auctionsController.get('/create', isGuest(), async (req, res) => {
   res.render('create', {
     title: 'Create auction',
     user: req.user,
   });
 });
 
-auctionsController.post('/create', async (req, res) => {
+auctionsController.post('/create', isGuest(), async (req, res) => {
   const auction = {
     title: req.body.title,
     category: req.body.category,
@@ -49,6 +55,47 @@ auctionsController.get('/catalog', async (req, res) => {
     auctions,
     user: req.user,
   });
+});
+
+auctionsController.get('/details/:id', async (req, res) => {
+  const item = await getOne(req.params.id);
+  let view;
+  let currentBidder;
+
+  const isOwner = item.owner._id.toString() == req.user?._id?.toString();
+  if (item.bidders.length > 0) {
+    item.currentBidder = item.bidders[item.bidders.length - 1];
+  }
+
+  if (isOwner) {
+    view = 'details-owner';
+  } else {
+    view = 'details';
+  }
+
+  res.render(view, {
+    title: 'Details',
+    item,
+    user: req.user,
+  });
+});
+
+auctionsController.post('/details/:id', async (req, res) => {
+  const item = await getOne(req.params.id);
+
+  try {
+    if (Number(req.body.price) < item.price) {
+      throw new Error('You cant bid less then the current highest bid!');
+    }
+
+    await bid(req.body.price, req.params.id, req.user._id);
+    res.redirect(`/auctions/details/${req.params.id}`);
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('details', {
+      errors,
+    });
+  }
 });
 
 module.exports = auctionsController;
