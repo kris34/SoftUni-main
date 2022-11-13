@@ -1,4 +1,5 @@
 const Ad = require('../models/Ad');
+const User = require('../models/User');
 
 async function createAd(data) {
   return await Ad.create(data);
@@ -18,9 +19,14 @@ async function adApply(userId, adId) {
   return ad.save();
 }
 
+async function getUser(id) {
+  return await User.findById(id);
+}
+
 module.exports = {
   createAd,
   getAll,
   getOne,
   adApply,
+  getUser,
 };

@@ -26,11 +26,15 @@
               <a href='/site/{{ad._id}}/delete' class='btn-delete'>Delete</a>
             {{/if}}
             <!--logged in user who did not apply for current ad-->
-            <a href='#' class='btn-apply'>Apply now!</a>
-            <p class='applied-people'>Hurry up,
-              {{ad.count}} people have already applied.</p>
-            <!--logged in user who has already applied for current ad-->
-            <!--<p class="already-applied">You have already applied!</p>-->
+            {{#if notApplied}}
+              <a href='/site/{{ad._id}}/apply' class='btn-apply'>Apply now!</a>
+              <p class='applied-people'>Hurry up,
+                {{ad.count}}
+                people have already applied.</p>
+            {{else}}
+              <!--logged in user who has already applied for current ad-->
+              <p class='already-applied'>You have already applied!</p>
+            {{/if}}
           </article>
         {{/if}}
       </article>
@@ -40,7 +44,7 @@
   </section>
 
   <!--This section should only be visible to the author of the current ad-->
-  <!--
+     {{#if ad.owner}}
             <section id="info-about-candidates">
                 <h2>Candidates for this ad:</h2>
                 <!\--If there are people who have applied, show each of them in the following format--\>
@@ -54,6 +58,6 @@
                     <h3>Description of the candidate's skills: Experience with Node.js</h3>
                 </article>
                 <!\--If not, you don't need to visualize anything further-\->
-            </section>-->
-
+            </section>
+{{/if}}
 </main>
