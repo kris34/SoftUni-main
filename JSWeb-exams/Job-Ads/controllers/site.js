@@ -34,8 +34,8 @@ siteController.post('/create', async (req, res) => {
   }
 });
 
-
-
-
+siteController.get('/catalog', async (req, res) => {
+  res.render('catalog');
+});
 
 module.exports = siteController;
