@@ -1,4 +1,4 @@
-const { isGuest } = require('../middlewares/guards');
+const { isGuest, hasUser } = require('../middlewares/guards');
 const {
   createAuction,
   getAll,
@@ -6,6 +6,7 @@ const {
   bid,
   getUser,
   editItem,
+  deleteById,
 } = require('../services/auctionService');
 const { parseError } = require('../util/parser');
 
@@ -121,13 +122,13 @@ auctionsController.get('/edit/:id', async (req, res) => {
 
 auctionsController.post('/edit/:id', async (req, res) => {
   const item = await getOne(req.params.id);
-  const data = req.body
-  
+  const data = req.body;
+
   try {
-    await editItem(data , req.params.id);
+    await editItem(data, req.params.id);
     res.redirect(`/auctions/details/${req.params.id}`);
   } catch (err) {
-    const errors = parseError(err)
+    const errors = parseError(err);
     res.render('edit', {
       title: 'Edit Page',
       errors,
@@ -136,4 +137,11 @@ auctionsController.post('/edit/:id', async (req, res) => {
   }
 });
 
+auctionsController.get('/delete/:id', hasUser(), async (req, res) => {
+  await deleteById(req.params.id);
+
+  res.redirect('/auctions/catalog');
+});
+
 module.exports = auctionsController;
+ 

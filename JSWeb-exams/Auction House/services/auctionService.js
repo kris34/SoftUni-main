@@ -31,7 +31,7 @@ async function editItem(data, id) {
   existing.description = data.description;
   existing.category = data.category;
   existing.imageUrl = data.imageUrl;
-  
+
   if (existing.bidders.length > 0) {
     existing.price = price;
   } else {
@@ -41,6 +41,10 @@ async function editItem(data, id) {
   existing.save();
 }
 
+async function deleteById(id){ 
+  return await Auction.findByIdAndDelete(id)
+}
+
 module.exports = {
   createAuction,
   getAll,
@@ -48,4 +52,5 @@ module.exports = {
   bid,
   getUser,
   editItem,
+  deleteById
 };
