@@ -4,8 +4,9 @@ const {
   getOne,
   adApply,
   getUser,
+  pushAdToUser,
 } = require('../services/siteService');
-const { parseError } = require('../util/parser');
+const { parseError, parseUserId } = require('../util/parser');
 
 const siteController = require('express').Router();
 
@@ -24,16 +25,15 @@ siteController.post('/create', async (req, res) => {
     author: req.user._id,
   };
 
-  const user = await getUser(req.user._id);
-
+  
   try {
     if (Object.values(data).some((v) => !v)) {
       throw new Error('All fields are required!');
     }
 
     const ad = await createAd(data);
-    user.myAds.push(ad._id);
-    user.save();
+    
+    await pushAdToUser(ad._id.toString(), req.user._id);
 
     res.redirect('/');
   } catch (err) {
@@ -56,17 +56,27 @@ siteController.get('/catalog', async (req, res) => {
 
 siteController.get('/catalog/details/:id', async (req, res) => {
   const ad = await getOne(req.params.id);
-
-  ad.owner = ad.author._id.toString() == req.user?._id?.toString();
+  let appliedUsers;
+  ad.owner = ad.author?._id?.toString() == req.user?._id?.toString();
   ad.count = ad.applied.length;
 
-  if (ad.applied.map((x) => x.toString()).includes(req.user?._id?.toString()) == false) {
+  if (
+    ad.applied.map((x) => x.toString()).includes(req.user?._id?.toString()) ==
+    false
+  ) {
     ad.notApplied = true;
   }
+
+  if (ad.applied.length > 0) {
+    ad.hasApplicants = true;
+  }
+
+  appliedUsers = await parseUserId(ad.applied);
 
   res.render('details', {
     title: 'Job Details',
     ad,
+    appliedUsers,
   });
 });
 
