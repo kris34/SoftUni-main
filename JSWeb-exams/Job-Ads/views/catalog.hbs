@@ -5,8 +5,8 @@
             <h1>All ads</h1>
         </article>
         <!--If there are job ads in the database, show each one-->
-        {{#if ads}}
-        {{#each ads}}
+        {{#if allAds}}
+        {{#each allAds}}
         {{> catalogAd}}
         {{/each}}
         {{else}}

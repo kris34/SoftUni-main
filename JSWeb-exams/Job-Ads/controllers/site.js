@@ -1,4 +1,4 @@
-const { createAd } = require('../services/siteService');
+const { createAd, getAll, getOne } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -35,7 +35,24 @@ siteController.post('/create', async (req, res) => {
 });
 
 siteController.get('/catalog', async (req, res) => {
-  res.render('catalog');
+  const allAds = await getAll();
+
+  res.render('catalog', {
+    title: 'Catalog',
+    allAds,
+  });
+});
+
+siteController.get('/catalog/details/:id', async (req, res) => {
+  const ad = await getOne(req.params.id);
+
+  ad.owner = ad.author._id.toString() == req.user?._id?.toString();
+  ad.count = ad.applied.length;
+
+  res.render('details', {
+    title: 'Job Details',
+    ad,
+  });
 });
 
 module.exports = siteController;
