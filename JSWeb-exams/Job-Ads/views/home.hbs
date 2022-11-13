@@ -28,13 +28,26 @@
       <img src='/static/img/strip-square.png' alt='strip-square' />
     </article>
 
-    <article class='intro-right-side'>
-      <!--If there are job ads in the database, show them (max 3)-->
-      
 
-      <!--If not show:-->
-      <!--<p class="no-ads-created">No ads created!</p>-->
+      <article class='intro-right-side'>
+        <!--If there are job ads in the database, show them (max 3)-->
+        {{#if ads}}
+          {{#each ads}}
+            <article class='intro-right-side-content'>
+              <img src='/static/img/technology.png' alt='technology' />
+              <h5>
+                <!--Put the value of the headline below-->
+                {{headline}}
+                <!--Put the value of the total number of candidates below-->
+                <span>Candidates: {{count}}</span>
+              </h5>
+            </article>
+          {{/each}}
+        {{else}}
+          <!--If not show:-->
+          <p class='no-ads-created'>No ads created!</p>
+        {{/if}}
+      </article>
 
-    </article>
   </section>
 </main>
