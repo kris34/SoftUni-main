@@ -4,7 +4,7 @@ const { Schema, model, Types } = require('mongoose');
 const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   hashedPassword: { type: String, required: true },
-  skills: { type: String, required: true },
+  description: { type: String, required: true },
   myAds: { type: [Types.ObjectId], ref: 'Ad', default: [] },
 });
 

@@ -4,21 +4,22 @@ const bcrypt = require('bcrypt');
 
 const jwt_secret = 'qwer234asdfg34w2r';
 
-async function register(username, password) {
-  const existing = await User.findOne({ username }).collation({
+async function register(email, password, description) {
+  const existing = await User.findOne({ email }).collation({
     locale: 'en',
     strength: 2,
   });
 
   if (existing) {
-    throw new Error('Username is taken!');
+    throw new Error('Email is taken!');
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await User.create({
-    username,
+    email,
     hashedPassword,
+    description
   });
 
   //TODO see assignment if registration creates user Session
@@ -26,8 +27,8 @@ async function register(username, password) {
   return createSession(user);
 }
 
-async function login(username, password) {
-  const user = await User.findOne({ username }).collation({
+async function login(email, password) {
+  const user = await User.findOne({ email }).collation({
     locale: 'en',
     strength: 2,
   });
@@ -47,10 +48,10 @@ function verifyToken(token) {
   return jwt.verify(token, jwt_secret);
 }
 
-function createSession({ _id, username }) {
+function createSession({ _id, email }) {
   const payload = {
     _id,
-    username,
+    email,
   };
 
   return jwt.sign(payload, jwt_secret);
