@@ -7,7 +7,7 @@ const postSchema = new Schema({
   keyword: { type: String, required: true },
   location: { type: String, required: true },
   date: { type: String, required: true },
-  image: {
+  imageUrl: {
     type: String,
     required: true,
     validate: {
