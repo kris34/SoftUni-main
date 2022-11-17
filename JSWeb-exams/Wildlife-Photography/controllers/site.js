@@ -1,11 +1,14 @@
-const { createPost } = require('../services/siteService');
+const { createPost, getAll } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
 
 siteController.get('/create', async (req, res) => {
+  const posts = await getAll();
+
   res.render('create', {
     title: 'Create post',
+    
   });
 });
 

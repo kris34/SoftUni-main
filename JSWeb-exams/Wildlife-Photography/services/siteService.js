@@ -4,6 +4,11 @@ async function createPost(data) {
   return await Post.create(data);
 }
 
-module.exports = { 
-    createPost
+async function getAll() {
+  return await Post.find({}).lean();
 }
+
+module.exports = {
+  createPost,
+  getAll,
+};
