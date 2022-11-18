@@ -92,13 +92,18 @@ siteController.get('/details/:id/upVote', async (req, res) => {
   const post = await getOne(req.params.id);
 
   post.owner = req.user?._id?.toString() == post.author._id.toString();
-  
-  await upVote(req.params.id);
 
-  res.render('details', {
-    title: 'Details',
-    post,
-  });
+  try {
+    await upVote(req.params.id);
+
+    res.redirect(`/site/details/${req.params.id}`);
+  } catch (err) {
+    const errors = parseError(err);
+    console.log(errors);
+    res.render('details', {
+      errors,
+    });
+  }
 });
 
 module.exports = siteController;

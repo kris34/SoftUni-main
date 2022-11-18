@@ -26,18 +26,18 @@ async function getOne(id) {
   return await Post.findById(id).populate('author').lean();
 }
 
-async function upVote(postid) {
+async function upVote(postid, userid) {
   const post = await Post.findById(postid);
-  post.votes++;
+  post.rating++;
+  post.votes.push(userid);
   return post.save();
 }
 
-async function downVote(){ 
+async function downVote() {
   const post = await Post.findById(postid);
-  post.votes--;
+  post.rating--;
   return post.save();
 }
-
 
 module.exports = {
   createPost,
@@ -46,5 +46,5 @@ module.exports = {
   getUserPosts,
   getOne,
   upVote,
-  downVote
+  downVote,
 };
