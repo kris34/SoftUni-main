@@ -16,6 +16,7 @@ const userSchema = new Schema({
     unique: true,
   },
   hashedPassword: { type: String, required: true },
+  myPosts: { type: [Types.ObjectId], ref: 'Post', default: [] },
 });
 
 userSchema.index(

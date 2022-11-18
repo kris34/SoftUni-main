@@ -1,4 +1,9 @@
-const { createPost, getAll } = require('../services/siteService');
+const User = require('../models/User');
+const {
+  createPost,
+  getAll,
+  addPostToUser,
+} = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -8,12 +13,11 @@ siteController.get('/create', async (req, res) => {
 
   res.render('create', {
     title: 'Create post',
-    
   });
 });
 
 siteController.post('/create', async (req, res) => {
-  const post = {
+  const data = {
     title: req.body.title,
     keyword: req.body.keyword,
     location: req.body.location,
@@ -24,11 +28,14 @@ siteController.post('/create', async (req, res) => {
   };
 
   try {
-    if (Object.values(post).some((v) => !v) == true) {
+    if (Object.values(data).some((v) => !v) == true) {
       throw new Error('All fields required!');
     }
 
-    await createPost(post);
+    const post = await createPost(data);
+    //console.log(post._id.toString());
+ 
+    await addPostToUser(req.user._id, post._id.toString());
 
     res.redirect('/');
   } catch (err) {
@@ -36,7 +43,7 @@ siteController.post('/create', async (req, res) => {
 
     res.render('create', {
       title: 'Create',
-      post,
+      data,
       errors,
     });
   }
