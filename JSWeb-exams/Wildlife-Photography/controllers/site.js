@@ -51,7 +51,7 @@ siteController.post('/create', async (req, res) => {
   }
 });
 
-siteController.get('/myPosts', async (req, res) => { 
+siteController.get('/myPosts', async (req, res) => {
   let myPosts = await getUserPosts(req.user?._id?.toString());
   let posts = [];
 
@@ -66,7 +66,13 @@ siteController.get('/myPosts', async (req, res) => {
   });
 });
 
-siteController.get('');
+siteController.get('/catalog', async (req, res) => {
+  const posts = await getAll();
+
+  res.render('all-posts', {
+    title: 'Catalog',
+    posts,
+  });
+});
 
 module.exports = siteController;
- 
