@@ -33,7 +33,7 @@ async function upVote(postid, userid) {
   return post.save();
 }
 
-async function downVote() {
+async function downVote(postid) {
   const post = await Post.findById(postid);
   post.rating--;
   return post.save();

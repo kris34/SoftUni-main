@@ -94,8 +94,7 @@ siteController.get('/details/:id/upVote', async (req, res) => {
   post.owner = req.user?._id?.toString() == post.author._id.toString();
 
   try {
-    await upVote(req.params.id);
-
+    await upVote(req.params.id, req.user._id);
     res.redirect(`/site/details/${req.params.id}`);
   } catch (err) {
     const errors = parseError(err);
@@ -105,5 +104,7 @@ siteController.get('/details/:id/upVote', async (req, res) => {
     });
   }
 });
+
+
 
 module.exports = siteController;
