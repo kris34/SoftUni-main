@@ -1,8 +1,10 @@
+const Post = require('../models/Post');
 const User = require('../models/User');
 const {
   createPost,
   getAll,
   addPostToUser,
+  getUserPosts,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -34,7 +36,7 @@ siteController.post('/create', async (req, res) => {
 
     const post = await createPost(data);
     //console.log(post._id.toString());
- 
+
     await addPostToUser(req.user._id, post._id.toString());
 
     res.redirect('/');
@@ -49,4 +51,18 @@ siteController.post('/create', async (req, res) => {
   }
 });
 
+siteController.get('/myPosts', async (req, res) => {
+  let myPosts = await getUserPosts(req.user?._id?.toString());
+  let posts = [];
+
+  for (let post of myPosts) {
+    const x = await Post.findById(post).populate("author").lean();
+    posts.push(x);
+  }
+
+  res.render('my-posts', {
+    title: 'My Posts',
+    posts,
+  });
+});
 module.exports = siteController;

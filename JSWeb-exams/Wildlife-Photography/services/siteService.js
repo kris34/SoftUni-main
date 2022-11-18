@@ -14,8 +14,17 @@ async function addPostToUser(userId, postId) {
   user.myPosts.push(postId);
   return user.save();
 }
+
+async function getUserPosts(userId) {
+  const user = await User.findById(userId);
+  let posts = user.myPosts.map((x) => x.toString());
+
+  return posts;
+}
+
 module.exports = {
   createPost,
   getAll,
-  addPostToUser
+  addPostToUser,
+  getUserPosts,
 };
