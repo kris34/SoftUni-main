@@ -51,12 +51,12 @@ siteController.post('/create', async (req, res) => {
   }
 });
 
-siteController.get('/myPosts', async (req, res) => {
+siteController.get('/myPosts', async (req, res) => { 
   let myPosts = await getUserPosts(req.user?._id?.toString());
   let posts = [];
 
   for (let post of myPosts) {
-    const x = await Post.findById(post).populate("author").lean();
+    const x = await Post.findById(post).populate('author').lean();
     posts.push(x);
   }
 
@@ -65,4 +65,8 @@ siteController.get('/myPosts', async (req, res) => {
     posts,
   });
 });
+
+siteController.get('');
+
 module.exports = siteController;
+ 
