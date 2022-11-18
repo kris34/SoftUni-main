@@ -19,15 +19,7 @@ const userSchema = new Schema({
   myPosts: { type: [Types.ObjectId], ref: 'Post', default: [] },
 });
 
-userSchema.index(
-  { username: 1 },
-  {
-    collation: {
-      locale: 'en',
-      strength: 2,
-    },
-  }
-);
+
 
 const User = model('User', userSchema);
 

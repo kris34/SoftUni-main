@@ -5,6 +5,8 @@ const {
   getAll,
   addPostToUser,
   getUserPosts,
+  getOne,
+  upVote,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -72,6 +74,30 @@ siteController.get('/catalog', async (req, res) => {
   res.render('all-posts', {
     title: 'Catalog',
     posts,
+  });
+});
+
+siteController.get('/details/:id', async (req, res) => {
+  const post = await getOne(req.params.id);
+
+  post.owner = req.user?._id?.toString() == post.author._id.toString();
+
+  res.render('details', {
+    title: 'Details',
+    post,
+  });
+});
+
+siteController.get('/details/:id/upVote', async (req, res) => {
+  const post = await getOne(req.params.id);
+
+  post.owner = req.user?._id?.toString() == post.author._id.toString();
+  
+  await upVote(req.params.id);
+
+  res.render('details', {
+    title: 'Details',
+    post,
   });
 });
 

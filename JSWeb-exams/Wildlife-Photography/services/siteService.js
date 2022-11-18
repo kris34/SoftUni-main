@@ -22,9 +22,29 @@ async function getUserPosts(userId) {
   return posts;
 }
 
+async function getOne(id) {
+  return await Post.findById(id).populate('author').lean();
+}
+
+async function upVote(postid) {
+  const post = await Post.findById(postid);
+  post.votes++;
+  return post.save();
+}
+
+async function downVote(){ 
+  const post = await Post.findById(postid);
+  post.votes--;
+  return post.save();
+}
+
+
 module.exports = {
   createPost,
   getAll,
   addPostToUser,
   getUserPosts,
+  getOne,
+  upVote,
+  downVote
 };
