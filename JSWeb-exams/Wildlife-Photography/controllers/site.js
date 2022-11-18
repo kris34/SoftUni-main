@@ -7,6 +7,7 @@ const {
   getUserPosts,
   getOne,
   upVote,
+  downVote,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -88,7 +89,7 @@ siteController.get('/details/:id', async (req, res) => {
   });
 });
 
-siteController.get('/details/:id/upVote', async (req, res) => {
+siteController.get('/details/:id/upvote', async (req, res) => {
   const post = await getOne(req.params.id);
 
   post.owner = req.user?._id?.toString() == post.author._id.toString();
@@ -105,6 +106,18 @@ siteController.get('/details/:id/upVote', async (req, res) => {
   }
 });
 
+siteController.get('/details/:id/downvote', async (req, res) => {
+  const post = await getOne(req.params.id);
 
+  post.owner = req.user?._id?.toString() == post.author._id.toString();
+
+  try {
+    await downVote(req.params.id, req.user._id);
+    res.redirect(`/site/details/${req.params.id}`);
+  } catch (err) {
+    const errors = parseError(err);
+    console.log(errors);
+  }
+});
 
 module.exports = siteController;
