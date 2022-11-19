@@ -1,77 +1,77 @@
 <main>
-  {{#with post}}
-    <section id='details-page'>
 
-      <div class='main_card'>
-        <div class='card_left'>
-          <div class='card_datails'>
+  <section id='details-page'>
 
-            <h1>Title:{{title}}</h1>
-            <h3>Created by an author: {{author.email}}</h3>
-            <div class='card_animal'>
-              <p class='card-keyword'>Keyword: {{keyword}}</p>
-              <p class='card-location'>Location: {{location}}</p>
-              <p class='card-date'>Date: {{date}}</p>
-            </div>
+    <div class='main_card'>
+      <div class='card_left'>
+        <div class='card_datails'>
 
-            <p class='disc'>Description: {{description}}</p>
+          <h1>Title:{{post.title}}</h1>
+          <h3>Created by an author: {{post.author.email}}</h3>
+          <div class='card_animal'>
+            <p class='card-keyword'>Keyword: {{post.keyword}}</p>
+            <p class='card-location'>Location: {{post.location}}</p>
+            <p class='card-date'>Date: {{post.date}}</p>
+          </div>
 
-            <!-- If there is no registered user, do not display buttons-->
+          <p class='disc'>Description: {{post.description}}</p>
 
-            <div class='social-btn'>
-              {{#if email}}
-                {{#if owner}}
-                  <!-- Only for registered user and author of the post -->
-                  <a href='#' class='edit-btn'>Edit</a>
-                  <a href='#' class='del-btn'>Delete</a>
+          <!-- If there is no registered user, do not display buttons-->
+
+          <div class='social-btn'>
+            {{#if email}}
+              {{#if post.owner}}
+                <!-- Only for registered user and author of the post -->
+                <a href='#' class='edit-btn'>Edit</a>
+                <a href='#' class='del-btn'>Delete</a>
+              {{else}}
+
+                <!-- logged in users, who have not yet voted-->
+                {{#if post.notVoted}}
+                  <a
+                    href='/site/details/{{post._id}}/upvote'
+                    class='vote-up'
+                  >UpVote</a>
+                  <a
+                    href='/site/details/{{post._id}}/downvote'
+                    class='vote-down'
+                  >DownVote</a>
                 {{else}}
-
-                  <!-- logged in users, who have not yet voted-->
-                  {{#if notVoted}}
-                    <a
-                      href='/site/details/{{_id}}/upvote'
-                      class='vote-up'
-                    >UpVote</a>
-                    <a
-                      href='/site/details/{{_id}}/downvote'
-                      class='vote-down'
-                    >DownVote</a>
-                  {{else}}
-                    <!-- logged in user who has already voted-->
-                    <p class='thanks-for-vote'>Thanks For Voting</p>
-                  {{/if}}
+                  <!-- logged in user who has already voted-->
+                  <p class='thanks-for-vote'>Thanks For Voting</p>
                 {{/if}}
               {{/if}}
-            </div>
-          </div>
-        </div>
-        <div class='card_right'>
-          <img src='{{imageUrl}}' alt='image' />
-        </div>
-      </div>
-
-    </section>
-
-    <section id='votes'>
-      <div class='vote-info'>
-        <div class='card_left'>
-          <div class='card_datails'>
-            <h1>Votes</h1>
-            <div class='card_vote'>
-              <!-- Show the rating of votes, if there are no votes yet, the number must be 0. -->
-              <p class='PV'>Total rating of votes: {{rating}}</p>
-            </div>
-            <!-- If there are already people who have cast their vote for the post, separate their emails with a comma and a space ", " -->
-            {{#if hasVotes}}
-              <p class='disc'>People who voted for the post - {{voteList}}</p>
-            {{else}}
-              <!-- If not display: -->
-              <p class='disc'>People who voted for the post - No one has voted
-                yet.</p>
             {{/if}}
           </div>
         </div>
       </div>
-    </section>
-  {{/with}}
+      <div class='card_right'>
+        <img src='{{imageUrl}}' alt='image' />
+      </div>
+    </div>
+
+  </section>
+
+  <section id='votes'>
+    <div class='vote-info'>
+      <div class='card_left'>
+        <div class='card_datails'>
+          <h1>Votes</h1>
+          <div class='card_vote'>
+            <!-- Show the rating of votes, if there are no votes yet, the number must be 0. -->
+            <p class='PV'>Total rating of votes: {{post.rating}}</p>
+          </div>
+          <!-- If there are already people who have cast their vote for the post, separate their emails with a comma and a space ", " -->
+          {{#if post.hasVotes}}
+            <p class='disc'>People who voted for the post -
+              {{post.voteList}}</p>
+          {{else}}
+            <!-- If not display: -->
+            <p class='disc'>People who voted for the post - No one has voted
+              yet.</p>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </section>
 </main>

@@ -133,4 +133,13 @@ siteController.get('/details/:id/downvote', hasUser(), async (req, res) => {
   }
 });
 
+siteController.get('/edit/:id', hasUser(), async (req, res) => {
+  const post = await getOne(req.params._id);
+
+  res.render('edit', {
+    title: 'Edit Post',
+    post,
+  });
+});
+
 module.exports = siteController;

@@ -47,9 +47,22 @@ async function getVoterEmails(idArray) {
     const user = await User.findById(id);
     votesArr.push(user.email);
   }
-  
-  let voteList = votesArr.join(", ")
+
+  let voteList = votesArr.join(', ');
   return voteList;
+}
+
+async function updatePost(existingId, data) {
+  const existing = await Post.findById(existingId);
+
+  existing.title = data.title;
+  existing.keyword = data.keyword;
+  existing.location = data.location;
+  existing.date = data.date;
+  existing.imageUrl = data.imageUrl;
+  existing.description = data.description;
+
+  return existing.save();
 }
 
 module.exports = {
@@ -60,5 +73,6 @@ module.exports = {
   getOne,
   upVote,
   downVote,
-  getVoterEmails
+  getVoterEmails,
+  updatePost
 };
