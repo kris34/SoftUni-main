@@ -1,3 +1,4 @@
+const { hasUser } = require('../middlewares/guards');
 const Post = require('../models/Post');
 const User = require('../models/User');
 const {
@@ -14,7 +15,7 @@ const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
 
-siteController.get('/create', async (req, res) => {
+siteController.get('/create', hasUser(), async (req, res) => {
   const posts = await getAll();
 
   res.render('create', {
@@ -22,7 +23,7 @@ siteController.get('/create', async (req, res) => {
   });
 });
 
-siteController.post('/create', async (req, res) => {
+siteController.post('/create', hasUser(), async (req, res) => {
   const data = {
     title: req.body.title,
     keyword: req.body.keyword,
@@ -55,7 +56,7 @@ siteController.post('/create', async (req, res) => {
   }
 });
 
-siteController.get('/myPosts', async (req, res) => {
+siteController.get('/myPosts', hasUser(), async (req, res) => {
   let myPosts = await getUserPosts(req.user?._id?.toString());
   let posts = [];
 
@@ -92,16 +93,15 @@ siteController.get('/details/:id', async (req, res) => {
     post.hasVotes = true;
   }
 
-  post.voteList = await  getVoterEmails(post.votes);
+  post.voteList = await getVoterEmails(post.votes);
 
   res.render('details', {
     title: 'Details',
     post,
-    
   });
 });
 
-siteController.get('/details/:id/upvote', async (req, res) => {
+siteController.get('/details/:id/upvote', hasUser(), async (req, res) => {
   const post = await getOne(req.params.id);
 
   post.owner = req.user?._id?.toString() == post.author._id.toString();
@@ -119,7 +119,7 @@ siteController.get('/details/:id/upvote', async (req, res) => {
   }
 });
 
-siteController.get('/details/:id/downvote', async (req, res) => {
+siteController.get('/details/:id/downvote', hasUser(), async (req, res) => {
   const post = await getOne(req.params.id);
 
   post.owner = req.user?._id?.toString() == post.author._id.toString();
