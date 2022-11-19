@@ -59,11 +59,13 @@
               <p class='PV'>Total rating of votes: {{rating}}</p>
             </div>
             <!-- If there are already people who have cast their vote for the post, separate their emails with a comma and a space ", " -->
-            <!-- <p class="disc">People who voted for the post - alex@gmai.com, petar@gmail.com, petq@gmail.com</p>-->
-
-            <!-- If not display: -->
-            <p class='disc'>People who voted for the post - No one has voted
-              yet.</p>
+            {{#if hasVotes}}
+              <p class='disc'>People who voted for the post - {{voteList}}</p>
+            {{else}}
+              <!-- If not display: -->
+              <p class='disc'>People who voted for the post - No one has voted
+                yet.</p>
+            {{/if}}
           </div>
         </div>
       </div>

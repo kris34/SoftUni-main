@@ -8,6 +8,7 @@ const {
   getOne,
   upVote,
   downVote,
+  getVoterEmails,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -83,11 +84,20 @@ siteController.get('/details/:id', async (req, res) => {
 
   post.owner = req.user?._id?.toString() == post.author._id.toString();
 
-  post.notVoted = post.votes.map((x) => x.toString()).includes(req.user?._id?.toString()) == false
-   
+  post.notVoted =
+    post.votes.map((x) => x.toString()).includes(req.user?._id?.toString()) ==
+    false;
+
+  if (post.votes.length > 0) {
+    post.hasVotes = true;
+  }
+
+  post.voteList = await  getVoterEmails(post.votes);
+
   res.render('details', {
     title: 'Details',
     post,
+    
   });
 });
 

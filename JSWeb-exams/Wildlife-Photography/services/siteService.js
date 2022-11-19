@@ -40,6 +40,18 @@ async function downVote(postid, userid) {
   return post.save();
 }
 
+async function getVoterEmails(idArray) {
+  const votesArr = [];
+
+  for (let id of idArray) {
+    const user = await User.findById(id);
+    votesArr.push(user.email);
+  }
+  
+  let voteList = votesArr.join(", ")
+  return voteList;
+}
+
 module.exports = {
   createPost,
   getAll,
@@ -48,4 +60,5 @@ module.exports = {
   getOne,
   upVote,
   downVote,
+  getVoterEmails
 };
