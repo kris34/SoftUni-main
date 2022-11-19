@@ -10,6 +10,7 @@ const {
   upVote,
   downVote,
   getVoterEmails,
+  updatePost,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -135,11 +136,27 @@ siteController.get('/details/:id/downvote', hasUser(), async (req, res) => {
 
 siteController.get('/edit/:id', hasUser(), async (req, res) => {
   const post = await getOne(req.params.id);
-  
+
   res.render('edit', {
     title: 'Edit Post',
     post,
   });
+});
+
+siteController.post('/edit/:id', hasUser(), async (req, res) => {
+  const post = await getOne(req.params.id);
+
+  try {
+    await updatePost(req.params.id, req.body);
+    res.redirect(`/site/details/${req.params.id}`);
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('edit', {
+      title: 'Edit',
+      post,
+      errors,
+    });
+  }
 });
 
 module.exports = siteController;
