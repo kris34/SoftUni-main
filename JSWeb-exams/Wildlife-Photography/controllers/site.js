@@ -83,6 +83,8 @@ siteController.get('/details/:id', async (req, res) => {
 
   post.owner = req.user?._id?.toString() == post.author._id.toString();
 
+  post.notVoted = post.votes.map((x) => x.toString()).includes(req.user?._id?.toString()) == false
+   
   res.render('details', {
     title: 'Details',
     post,
@@ -95,7 +97,8 @@ siteController.get('/details/:id/upvote', async (req, res) => {
   post.owner = req.user?._id?.toString() == post.author._id.toString();
 
   try {
-    await upVote(req.params.id, req.user._id);
+    await upVote(req.params.id, req.user._id.toString());
+
     res.redirect(`/site/details/${req.params.id}`);
   } catch (err) {
     const errors = parseError(err);

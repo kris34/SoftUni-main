@@ -36,8 +36,7 @@ async function upVote(postid, userid) {
 async function downVote(postid, userid) {
   const post = await Post.findById(postid);
   post.rating--;
-  let index = post.votes.indexOf(userid);
-  post.votes.splice(index, 1);
+  post.votes.push(userid);
   return post.save();
 }
 

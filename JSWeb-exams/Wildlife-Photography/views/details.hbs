@@ -26,13 +26,19 @@
               {{/if}}
 
               <!-- logged in users, who have not yet voted-->
-              <a href='/site/details/{{_id}}/upvote' class='vote-up'>UpVote</a>
-              <a
-                href='/site/details/{{_id}}/downvote'
-                class='vote-down'
-              >DownVote</a>
-              <!-- logged in user who has already voted-->
-              <p class='thanks-for-vote'>Thanks For Voting</p>
+              {{#if notVoted}}
+                <a
+                  href='/site/details/{{_id}}/upvote'
+                  class='vote-up'
+                >UpVote</a>
+                <a
+                  href='/site/details/{{_id}}/downvote'
+                  class='vote-down'
+                >DownVote</a>
+              {{else}}
+                <!-- logged in user who has already voted-->
+                <p class='thanks-for-vote'>Thanks For Voting</p>
+              {{/if}}
             </div>
           </div>
         </div>
