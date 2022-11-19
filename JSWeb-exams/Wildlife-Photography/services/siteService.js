@@ -61,14 +61,16 @@ async function updatePost(existingId, data) {
   existing.date = data.date;
   existing.imageUrl = data.imageUrl;
   existing.description = data.description;
-
+ 
   return existing.save();
 }
 
 async function deletePost(id, userId) {
-  const user = 
-  await Post.findByIdAndDelete(id);
-  
+  let user = await User.findById(userId);
+  const index = user.myPosts.indexOf(id);
+  user.myPosts.splice(index, 1);
+
+  return await Post.findByIdAndDelete(id), user.save();
 }
 
 module.exports = {

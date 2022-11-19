@@ -143,10 +143,14 @@ siteController.get('/details/:id/downvote', hasUser(), async (req, res) => {
 siteController.get('/edit/:id', hasUser(), async (req, res) => {
   const post = await getOne(req.params.id);
 
-  res.render('edit', {
-    title: 'Edit Post',
-    post,
-  });
+  if (post.author.toString() != req.user?._id?.toString()) {
+    res.redirect('/');
+  } else {
+    res.render('edit', {
+      title: 'Edit Post',
+      post,
+    });
+  }
 });
 
 siteController.post('/edit/:id', hasUser(), async (req, res) => {
@@ -164,9 +168,9 @@ siteController.post('/edit/:id', hasUser(), async (req, res) => {
     });
   }
 });
- 
+
 siteController.get('/delete/:id', hasUser(), async (req, res) => {
-  await deletePost(req.params.id);
+  await deletePost(req.params.id, req.user._id);
   res.redirect('/');
 });
 
