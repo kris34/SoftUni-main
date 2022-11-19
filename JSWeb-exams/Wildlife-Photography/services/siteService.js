@@ -65,6 +65,12 @@ async function updatePost(existingId, data) {
   return existing.save();
 }
 
+async function deletePost(id, userId) {
+  const user = 
+  await Post.findByIdAndDelete(id);
+  
+}
+
 module.exports = {
   createPost,
   getAll,
@@ -74,5 +80,6 @@ module.exports = {
   upVote,
   downVote,
   getVoterEmails,
-  updatePost
+  updatePost,
+  deletePost,
 };

@@ -23,7 +23,7 @@
               {{#if post.owner}}
                 <!-- Only for registered user and author of the post -->
                 <a href='/site/edit/{{post._id}}' class='edit-btn'>Edit</a>
-                <a href='#' class='del-btn'>Delete</a>
+                <a href='/site/delete/{{post._id}}' class='del-btn'>Delete</a>
               {{else}}
 
                 <!-- logged in users, who have not yet voted-->
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class='card_right'>
-        <img src='{{imageUrl}}' alt='image' />
+        <img src='{{post.imageUrl}}' alt='image' />
       </div>
     </div>
 

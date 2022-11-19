@@ -11,6 +11,7 @@ const {
   downVote,
   getVoterEmails,
   updatePost,
+  deletePost,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -64,6 +65,11 @@ siteController.get('/myPosts', hasUser(), async (req, res) => {
   for (let post of myPosts) {
     const x = await Post.findById(post).populate('author').lean();
     posts.push(x);
+  }
+  let noPosts = false;
+
+  if (myPosts.length == 0) {
+    noPosts = true;
   }
 
   res.render('my-posts', {
@@ -157,6 +163,11 @@ siteController.post('/edit/:id', hasUser(), async (req, res) => {
       errors,
     });
   }
+});
+ 
+siteController.get('/delete/:id', hasUser(), async (req, res) => {
+  await deletePost(req.params.id);
+  res.redirect('/');
 });
 
 module.exports = siteController;
