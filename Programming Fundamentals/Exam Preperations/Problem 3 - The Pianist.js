@@ -4,16 +4,38 @@ function solve(arr) {
   let pieces = {};
 
   for (let i = 0; i < n; i++) {
-    let [piece, composer, key] = arr[i].split('|');
+    let [piece, composer, key] = arr.shift().split('|');
 
     pieces[piece] = {
       composer,
       key,
     };
   }
-  
-  
 
+  console.log(arr);
+
+  while (arr[0] != 'Stop') {
+    let [command, pieceName, param2, param3] = arr.shift().split('|');
+
+    if (command == 'Add') {
+      if (pieces[pieceName]) {
+        console.log(`${pieceName} is already in the collection!
+        `);
+        continue;
+      }
+
+      pieces[pieceName] = {
+        param2,
+        param3,
+      };
+
+      console.log(
+        `${pieceName} by ${param2} in ${param3} added to the collection!`
+      );
+    }
+  }
+
+  console.log(pieces);
 }
 solve([
   '3',
