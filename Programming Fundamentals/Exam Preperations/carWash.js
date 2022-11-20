@@ -7,7 +7,7 @@ function carWash(command) {
       value += 10;
     } else if (command[i] === "water") {
       discount = value * 0.2;
-      value += discount;Deepwater Horizon
+      value += discount
 
     } else if (command[i] === "vacuum cleaner") {
       discount = value * 0.25;

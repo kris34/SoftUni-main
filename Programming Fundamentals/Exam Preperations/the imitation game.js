@@ -1,54 +1,43 @@
-function solve(input) {
-  let message = input.shift();
+function solve(arr) {
+  let word = arr.shift();
 
-  let commands = {
-    Move,
-    Insert,
-    ChangeAll,
-  };
+  while (arr[0] != 'Decode') {
+    let [command, param1, param2] = arr.shift().split('|');
 
-  while (input[0] != "Decode") {
-    let line = input.shift();
-    let tokens = line.split("|");
-    let command = tokens[0];
-    message = commands[command](message, tokens[1], tokens[2]);              
+    if (command == 'ChangeAll') {
+      word = changeAll(word, param1, param2);
+    } else if (command == 'Insert') {
+      word = insert(word, param1, param2);
+    } else if (command == 'Move') {
+      word = move(word, param1);
+    }
   }
 
-  function Move(string, count) {
-    let result = string.substring(count) + string.substring(0, count);
-    return result;
-  }
+  console.log(`The decrypted message is: ${word}`);
+  function changeAll(word, oldChar, newChar) {
+    let result = '';
 
-  function Insert(string, index, value) {
-    let splitted = string.split("");
-    let first = splitted.slice(0, index);
-    let second = splitted.slice(index);
-    let result = first.join("") + value + second.join("");
-    return result;
-  }
-
-  function ChangeAll(string, substring, replacement) {
-    let result = "";
-    for (let letter of string) {
-      if (letter !== substring) {
-        result += letter;
-      } else {
-        let replace = letter.replace(letter, replacement);
-        result += replace;
+    for (let char of word) {
+      if (char == oldChar) {
+        char = newChar;
       }
+      result += char;
     }
     return result;
   }
 
-  console.log(`The decrypted message is: ${message}`);
-}
-solve(["zzHe", "ChangeAll|z|l", "Insert|2|o", "Move|3", "Decode"]);
+  function insert(word, index, char) {
+    let arr = word.split('');
+    arr.splice(index, 0, char);
+    let result = arr.join('');
+    return result;
+  }
 
-/* if (line[0] == "ChangeAll") {
-  message = changeAll(message, line[1], line[2]);
-} else if (line[0] == "Insert") {
-  message = insert(message, line[1], line[2]);
-} else if (line[0] == "Move") {
-  message = move(message, line[1]);
+  function move(word, n) {
+    const firstThree = word.substring(0, n);
+    word = word.substring(n);
+    const result = word + firstThree;
+    return result;
+  }
 }
- */
+solve(['owyouh', 'Move|2', 'Move|3', 'Insert|3|are', 'Insert|9|?', 'Decode']);
