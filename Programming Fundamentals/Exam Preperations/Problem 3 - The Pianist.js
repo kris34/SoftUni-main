@@ -12,7 +12,7 @@ function solve(arr) {
     };
   }
 
-  //console.log(arr);
+  //  console.log(pieces);
 
   while (arr[0] != 'Stop') {
     let [command, pieceName, param2, param3] = arr.shift().split('|');
@@ -22,31 +22,40 @@ function solve(arr) {
         console.log(`${pieceName} is already in the collection!`);
         continue;
       }
+      let composer = param2;
+      let key = param3;
       pieces[pieceName] = {
-        param2,
-        param3,
+        composer,
+        key,
       };
       console.log(
-        `${pieceName} by ${param2} in ${param3} added to the collection!`);
+        `${pieceName} by ${composer} in ${key} added to the collection!`
+      );
     } else if (command == 'Remove') {
       if (pieces[pieceName]) {
         delete pieces[pieceName];
         console.log(`Successfully removed ${pieceName}!`);
       } else {
         console.log(
-          `Invalid operation! ${pieceName} does not exist in the collection.`);
+          `Invalid operation! ${pieceName} does not exist in the collection.`
+        );
       }
     } else if (command == 'ChangeKey') {
       if (pieces[pieceName]) {
-        pieces[pieceName] = pieces[param2];
+        pieces[pieceName].key = pieces[pieceName].key = param2;
         console.log(`Changed the key of ${pieceName} to ${param2}!`);
       } else {
-        console.log(`Invalid operation! ${pieceName} does not exist in the collection.`);
+        console.log(
+          `Invalid operation! ${pieceName} does not exist in the collection.`
+        );
       }
     }
   }
-
-
+  for (let [name, properties] of Object.entries(pieces)) {
+    console.log(
+      `${name} -> Composer: ${properties.composer}, Key: ${properties.key}`
+    );
+  }
 }
 solve([
   '3',
