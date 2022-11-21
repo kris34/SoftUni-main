@@ -14,7 +14,10 @@ function solve() {
     finished: document.getElementById('finished'),
   };
 
+  let counter = document.getElementById('progress-count');
+  let count = 0;
   document.getElementById('form-btn').addEventListener('click', submitForm);
+  document.getElementById('clear-btn').addEventListener('click', clearBox);
 
   function submitForm(event) {
     event.preventDefault();
@@ -25,22 +28,38 @@ function solve() {
     const p1 = document.createElement('p');
     const p2 = document.createElement('p2');
     const editBtn = document.createElement('button');
-    editBtn.textContent = "Edit"
+    editBtn.textContent = 'Edit';
     editBtn.classList.add('edit-btn');
     const completeBtn = document.createElement('button');
-    completeBtn.textContent = "Mark as Complete"
+    completeBtn.textContent = 'Mark as Complete';
     completeBtn.classList.add('complete-btn');
 
     h4.textContent = `${inputs.firstName.value} ${inputs.lastName.value}`;
     p1.textContent = `${inputs.gender.value}, ${inputs.age.value}`;
     p2.textContent = inputs.task.value;
 
-    const arr = [h4, p1, p2,];
-    arr.forEach((x) => articleEl.appendChild(x));
+    const elArr = [h4, p1, p2];
+    elArr.forEach((x) => articleEl.appendChild(x));
     li.appendChild(articleEl);
-    li.appendChild(editBtn)
-    li.appendChild(completeBtn)
+    li.appendChild(editBtn);
+    li.appendChild(completeBtn);
 
     lists.inProgress.appendChild(li);
+    count++;
+    counter.textContent = count;
+
+    completeBtn.addEventListener('click', completeTask);
+    function completeTask() {
+      lists.finished.appendChild(li);
+      editBtn.remove();
+      completeBtn.remove();
+      count--;
+
+      counter.textContent = count;
+    }
+  }
+
+  function clearBox() {
+    lists.finished.innerHTML = ' ';
   }
 }
