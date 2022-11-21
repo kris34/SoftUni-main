@@ -21,6 +21,11 @@ function solve() {
 
   function submitForm(event) {
     event.preventDefault();
+    const firstName = inputs.firstName.value
+    const lastName = inputs.lastName.value
+    const gender = inputs.gender.value
+    const age = inputs.age.value
+    const task =  inputs.task.value
     const li = document.createElement('li');
     li.classList.add('each-line');
     const articleEl = document.createElement('article');
@@ -34,9 +39,9 @@ function solve() {
     completeBtn.textContent = 'Mark as Complete';
     completeBtn.classList.add('complete-btn');
 
-    h4.textContent = `${inputs.firstName.value} ${inputs.lastName.value}`;
-    p1.textContent = `${inputs.gender.value}, ${inputs.age.value}`;
-    p2.textContent = inputs.task.value;
+    h4.textContent = `${firstName} ${lastName}`;
+    p1.textContent = `${gender}, ${age}`;
+    p2.textContent = task
 
     const elArr = [h4, p1, p2];
     elArr.forEach((x) => articleEl.appendChild(x));
@@ -49,6 +54,7 @@ function solve() {
     counter.textContent = count;
 
     completeBtn.addEventListener('click', completeTask);
+    editBtn.addEventListener("click", edit )
     function completeTask() {
       lists.finished.appendChild(li);
       editBtn.remove();
@@ -56,6 +62,22 @@ function solve() {
       count--;
 
       counter.textContent = count;
+    }
+
+    inputs.firstName.value = ' ';
+    inputs.lastName.value = ' ';
+    inputs.task.value = ' ';
+
+    function edit() {
+      inputs.firstName.value = firstName
+      inputs.lastName.value = lastName
+      inputs.gender.value = gender
+      inputs.task.value = task
+      inputs.age.value = age
+      count--;
+
+      counter.textContent = count;
+        li.remove();
     }
   }
 
