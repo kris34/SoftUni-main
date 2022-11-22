@@ -10,27 +10,24 @@ class Garden {
       throw new Error('Not Enough space in the garden');
     }
 
-    const plant = {
+    this.spaceAvailable -= spaceRequired;
+    this.plants.push({
       plantName,
       spaceRequired,
       ripe: false,
       quantity: 0,
-    };
-
-    this.spaceAvailable -= spaceRequired;
-    this.plants.push(plant);
+    });
 
     return `The ${plantName} has been successfully planted in the garden.`;
   }
 
   ripenPlant(plantName, quantity) {
     const plant = this.plants.find((p) => p.plantName == plantName);
-
-    if (!this.plants.includes(plant[plantName])) {
+    if (!this.plants.includes(plant)) {
       throw new Error(`There is no ${plantName} in the garden.`);
     }
 
-    if (plant[plantName].ripe == true) {
+    if (plant.ripe == true) {
       throw new Error(`The ${plantName} is already ripe.`);
     }
 
@@ -38,7 +35,7 @@ class Garden {
       throw new Error('The quantity cannot be zero or ngeative.');
     }
 
-    plant[plantName].ripe = true;
+    plant.ripe = true;
 
     if (quantity == 1) {
       return `${quantity} ${plantName} has successfully ripened.`;
@@ -47,19 +44,39 @@ class Garden {
     }
   }
 
-  harvestPlant(plantName){ 
+  harvestPlant(plantName) {
     const plant = this.plants.find((p) => p.plantName == plantName);
+    const index = this.plants.indexOf(plant);
 
-    if (!this.plants.includes(plant[plantName])) {
+    if (!this.plants.includes(plant)) {
       throw new Error(`There is no ${plantName} in the garden.`);
     }
 
-    if(plant[plantName].ripe == false){ 
-        throw new Error(`The ${plantName} cannot be harvested before it is ripe.`)
+    if (plant.ripe == false) {
+      throw new Error(
+        `The ${plantName} cannot be harvested before it is ripe.`
+      );
     }
 
-    
+    this.plants.splice(index, 1);
+
+    this.storage.push({
+      plantName,
+      quantity: Number(plant.quantity),
+    });
+
+    this.spaceAvailable += plant.spaceRequired;
+
+    return `The ${plantName} has been successfully harvested.`;
   }
 
-
+  gen
 }
+const myGarden = new Garden(250)
+console.log(myGarden.addPlant('apple', 20));
+console.log(myGarden.addPlant('orange', 200));
+console.log(myGarden.addPlant('raspberry', 10));
+console.log(myGarden.ripenPlant('apple', 10));
+console.log(myGarden.ripenPlant('orange', 1));
+console.log(myGarden.harvestPlant('apple'));
+console.log(myGarden.harvestPlant('olive'));
