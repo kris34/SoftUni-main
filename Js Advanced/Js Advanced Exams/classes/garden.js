@@ -7,7 +7,7 @@ class Garden {
 
   addPlant(plantName, spaceRequired) {
     if (this.spaceAvailable < spaceRequired) {
-      throw new Error('Not Enough space in the garden');
+      throw new Error('Not Enough space in the garden.');
     }
 
     this.spaceAvailable -= spaceRequired;
@@ -70,9 +70,26 @@ class Garden {
     return `The ${plantName} has been successfully harvested.`;
   }
 
-  gen
+  generateReport() {
+    const plantAsString = this.plants
+      .map((p) => p.plantName)
+      .sort((a, b) => a.localeCompare(b));
+    const row = `Plants in the garden: ${plantAsString.join(', ')}`;
+    let storageRow = 'Plants in storage: The storage is empty.';
+
+    if (this.storage.length > 0) {
+      const storage = this.storage.map((p) => `${p.plantName} (${p.quantity})`);
+      storageRow = `Plants in storage: ${storage.join(', ')}`;
+    }
+
+    return [
+      `The garden has ${this.spaceAvailable} free space left.`,
+      row,
+      storageRow,
+    ].join('\n');
+  }
 }
-const myGarden = new Garden(250)
+const myGarden = new Garden(250);
 console.log(myGarden.addPlant('apple', 20));
 console.log(myGarden.addPlant('orange', 200));
 console.log(myGarden.addPlant('raspberry', 10));
