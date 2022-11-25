@@ -1,11 +1,12 @@
 import { page, render } from './lib.js';
+import { catalogView } from './views/catalog.js';
 import { homeView } from './views/home.js';
 
 const main = document.querySelector('main');
 
 page(decorateContext);
 page('/', homeView);
-page('/memes', () => console.log('catalog'));
+page('/memes', catalogView);
 page('/memes/:id', () => console.log('details'));
 page('/edit/:id', () => console.log('edit'));
 page('/login', () => console.log('login'));
