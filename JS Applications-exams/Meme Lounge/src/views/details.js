@@ -1,7 +1,8 @@
 import { getAllMemes, getMemeById } from '../api/memes.js';
 import { html } from '../lib.js';
+import { getUserData } from '../util.js';
 
-const detailsTemplate = (meme) => html`
+const detailsTemplate = (meme, isOwner) => html`
   <section id="meme-details">
     <h1>Meme Title: ${meme.title}</h1>
     <div class="meme-details">
@@ -13,15 +14,18 @@ const detailsTemplate = (meme) => html`
         <p>${meme.description}</p>
 
         <!-- Buttons Edit/Delete should be displayed only for creator of this meme  -->
-        <a class="button warning" href="#">Edit</a>
-        <button class="button danger">Delete</button>
+        ${isOwner
+          ? html` <a class="button warning" href="/edit/${meme._id}">Edit</a>
+              <button class="button danger">Delete</button>`
+          : ''}
       </div>
     </div>
   </section>
 `;
 
 export async function detailsView(ctx) {
-
   const meme = await getMemeById(ctx.params.id);
-      ctx.render(detailsTemplate(meme));
+  const userData = getUserData();
+  const isOwner = userData?.id == meme._ownerId;
+  ctx.render(detailsTemplate(meme, isOwner));
 }
