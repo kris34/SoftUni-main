@@ -1,7 +1,8 @@
+import { login } from '../api/users.js';
 import { html } from '../lib.js';
 
-const loginTemplate = () => html`
-  <section id="login">
+const loginTemplate = (onSubmit) => html`
+  <section @submit=${onSubmit} id="login">
     <form id="login-form">
       <div class="container">
         <h1>Login</h1>
@@ -24,5 +25,22 @@ const loginTemplate = () => html`
 `;
 
 export function loginView(ctx) {
-  ctx.render(loginTemplate());
+  ctx.render(loginTemplate(onSubmit));
+
+  async function onSubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    const email = formData.get('email').trim();
+    const password = formData.get('password').trim();
+
+    if (email == '' || password == '') {
+      return alert('All fields are required!');
+    }
+
+    await login(email, password);
+
+    ctx.page.redirect('/memes');
+  }
 }
