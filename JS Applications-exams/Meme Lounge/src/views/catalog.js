@@ -1,71 +1,30 @@
+import { getAllMemes } from '../api/memes.js';
 import { html } from '../lib.js';
 
-const catalogTemplate = () => html`
+const catalogTemplate = (memes) => html`
   <section id="meme-feed">
     <h1>All Memes</h1>
     <div id="memes">
-      <!-- Display : All memes in database ( If any ) -->
-      <div class="meme">
-        <div class="card">
-          <div class="info">
-            <p class="meme-title">Debugging</p>
-            <img class="meme-image" alt="meme-img" src="/images/2.png" />
-          </div>
-          <div id="data-buttons">
-            <a class="button" href="#">Details</a>
-          </div>
-        </div>
-      </div>
-      <div class="meme">
-        <div class="card">
-          <div class="info">
-            <p class="meme-title">Java Script</p>
-            <img class="meme-image" alt="meme-img" src="/images/4.png" />
-          </div>
-          <div id="data-buttons">
-            <a class="button" href="#">Details</a>
-          </div>
-        </div>
-      </div>
-      <div class="meme">
-        <div class="card">
-          <div class="info">
-            <p class="meme-title">Yes, arrays are objects</p>
-            <img class="meme-image" alt="meme-img" src="/images/6.png" />
-          </div>
-          <div id="data-buttons">
-            <a class="button" href="#">Details</a>
-          </div>
-        </div>
-      </div>
-      <div class="meme">
-        <div class="card">
-          <div class="info">
-            <p class="meme-title">Java Script joke</p>
-            <img class="meme-image" alt="meme-img" src="/images/1.png" />
-          </div>
-          <div id="data-buttons">
-            <a class="button" href="#">Details</a>
-          </div>
-        </div>
-      </div>
-      <div class="meme">
-        <div class="card">
-          <div class="info">
-            <p class="meme-title">Bad code can present some problems</p>
-            <img class="meme-image" alt="meme-img" src="/images/3.png" />
-          </div>
-          <div id="data-buttons">
-            <a class="button" href="#">Details</a>
-          </div>
-        </div>
-      </div>
-      <!-- Display : If there are no memes in database -->
-      <p class="no-memes">No memes in database.</p>
+      ${memes.length == 0
+        ? html` <p class="no-memes">No memes in database.</p>`
+        : memes.map(memeCard)}
     </div>
   </section>
 `;
 
-export function catalogView(ctx) {
-  ctx.render(catalogTemplate());
+const memeCard = (meme) => html` <div class="meme">
+  <div class="card">
+    <div class="info">
+      <p class="meme-title">${meme.title}</p>
+      <img class="meme-image" alt="meme-img" src="${meme.imageUrl}" />
+    </div>
+    <div id="data-buttons">
+      <a class="button" href="/memes/${meme._id}">Details</a>
+    </div>
+  </div>
+</div>`;
+
+export async function catalogView(ctx) {
+  const memes = await getAllMemes();
+  ctx.render(catalogTemplate(memes));
 }
