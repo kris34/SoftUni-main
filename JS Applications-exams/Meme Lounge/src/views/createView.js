@@ -29,7 +29,7 @@ const createTemplate = (onSubmit) => html`
 
 export function createView(ctx) {
   ctx.render(createTemplate(onSubmit));
-
+  console.log('here');
   async function onSubmit(event) {
     event.preventDefault();
 

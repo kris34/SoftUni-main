@@ -26,5 +26,6 @@ const memeCard = (meme) => html` <div class="meme">
 
 export async function catalogView(ctx) {
   const memes = await getAllMemes();
+  
   ctx.render(catalogTemplate(memes));
 }
