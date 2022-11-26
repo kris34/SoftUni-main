@@ -32,29 +32,34 @@
 
           <ul class='navbar-nav ml-auto'>
             <!-- Guest users and Logged users -->
+
             <li class='nav-item'>
-              <a class='nav-link' href=''>Home</a>
+              <a class='nav-link' href='/'>Home</a>
             </li>
             <li class='nav-item'>
-              <a class='nav-link' href=''>Shared Trips</a>
+              <a class='nav-link' href='/site/sharedTrips'>Shared Trips</a>
             </li>
-            <!-- Logged users -->
-            <li class='nav-item'>
-              <a class='nav-link' href=''>Offer Trip</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href=''>Profile</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href=''>Logout as [ test@abv.bg ]</a>
-            </li>
-            <!-- Guest users -->
-            <li class='nav-item'>
-              <a class='nav-link' href='/auth/login'>Login</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href='/auth/register'>Register</a>
-            </li>
+            {{#if email}}
+              <!-- Logged users -->
+              <li class='nav-item'>
+                <a class='nav-link' href='/site/offer'>Offer Trip</a>
+              </li>
+              <li class='nav-item'>
+                <a class='nav-link' href='/site/profile'>Profile</a>
+              </li>
+              <li class='nav-item'>
+                <a class='nav-link' href='/auth/logout'>Logout as [ test@abv.bg
+                  ]</a>
+              </li>
+            {{else}}
+              <!-- Guest users -->
+              <li class='nav-item'>
+                <a class='nav-link' href='/auth/login'>Login</a>
+              </li>
+              <li class='nav-item'>
+                <a class='nav-link' href='/auth/register'>Register</a>
+              </li>
+            {{/if}}
           </ul>
         </div>
       </div>
