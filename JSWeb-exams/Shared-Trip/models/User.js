@@ -10,7 +10,7 @@ const userSchema = new Schema({
   },
   hashedPassword: { type: String, required: true },
   gender: { type: String, required: true },
-  trips: { default: [] },
+  trips: { type: [Types.ObjectId], ref: 'Trip', default: [] },
 });
 
 userSchema.index(
