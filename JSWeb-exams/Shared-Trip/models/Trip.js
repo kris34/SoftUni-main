@@ -1,6 +1,6 @@
 const User = require('./User');
 
-const { Schema, model, Types } = reqire('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const URL_PATTERN = /^https?:\/\/.+$/i;
 
