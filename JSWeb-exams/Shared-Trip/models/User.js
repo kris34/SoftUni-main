@@ -2,13 +2,15 @@ const { Schema, model, Types } = require('mongoose');
 
 //TODO add user properties and validation according to assignment
 const userSchema = new Schema({
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true,
     minlength: [3, 'Username must be at least 3 charakters long!'],
   },
   hashedPassword: { type: String, required: true },
+  gender: { type: String, required: true },
+  trips: { default: [] },
 });
 
 userSchema.index(
