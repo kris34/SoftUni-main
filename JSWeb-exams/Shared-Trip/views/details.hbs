@@ -55,17 +55,19 @@
 
               {{#if trip.hasSeats}}
                 <!-- logged in user with available seats -->
-                <a href='' class='btn btn-join'>Join now,
+                <a href='/site/{{trip._id}}/join' class='btn btn-join'>Join now,
                   {{trip.seats}}
                   seats left!</a>
               {{/if}}
-              
+
               <!-- logged in user and has already joined the trip  -->
-              <span class='btn btn-info'>Already joined. Don't be late!</span>
+              {{#if trip.joined}}
+                <span class='btn btn-info'>Already joined. Don't be late!</span>
+              {{/if}}
               
               {{#if trip.noSeats}}
                 <!-- logged in user with no available seats -->
-                <span class='btn btn-secondary'>No seats available! [0]</span>
+                <span class='btn btn-secondary'>No seats available! </span>
               {{/if}}
             {{/if}}
           </div>

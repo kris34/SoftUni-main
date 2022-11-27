@@ -26,6 +26,7 @@ async function updateUser(id, data) {
 async function joinTrip(tripId, userId) {
   const trip = await Trip.findById(tripId);
   trip.buddies.push(userId);
+  trip.seats--; 
   return trip.save();
 }
 
@@ -35,5 +36,5 @@ module.exports = {
   getTrip,
   getUser,
   updateUser,
-  joinTrip
+  joinTrip,
 };

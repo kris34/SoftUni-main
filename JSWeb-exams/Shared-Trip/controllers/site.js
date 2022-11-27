@@ -5,6 +5,7 @@ const {
   getUser,
   createTrip,
   updateUser,
+  joinTrip,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -79,10 +80,34 @@ siteController.get('/:id/details', async (req, res) => {
     trip.noSeats = true;
   }
 
+  if ((trip.buddies.length = 0)) {
+    trip.noBuddies = true;
+  }
+
   res.render('details', {
     title: 'Trip Details',
     trip,
   });
+});
+
+siteController.get('/:id/join', async (req, res) => {
+  const trip = await getTrip(req.params.id);
+  try {
+    await joinTrip(req.params.id.toString(), req.user._id.toString());
+    trip.joined = true;
+
+    res.render('details', {
+      title: 'Trip Details',
+      trip,
+    });
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('details', {
+      title: 'Trip Details',
+      trip,
+      errors,
+    });
+  }
 });
 
 module.exports = siteController;
