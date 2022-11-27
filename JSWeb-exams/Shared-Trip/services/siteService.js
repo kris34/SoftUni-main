@@ -26,8 +26,18 @@ async function updateUser(id, data) {
 async function joinTrip(tripId, userId) {
   const trip = await Trip.findById(tripId);
   trip.buddies.push(userId);
-  trip.seats--; 
+  trip.seats--;
   return trip.save();
+}
+
+async function getUserEmails(arrayId) {
+  let emails = [];
+  arrayId.map((e) => e.toString());
+  for (let id of arrayId) {
+    const user = await User.findById(id);
+    emails.push(user.email);
+  }
+  return emails;
 }
 
 module.exports = {
@@ -37,4 +47,5 @@ module.exports = {
   getUser,
   updateUser,
   joinTrip,
+  getUserEmails,
 };

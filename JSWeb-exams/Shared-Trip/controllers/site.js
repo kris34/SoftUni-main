@@ -6,6 +6,7 @@ const {
   createTrip,
   updateUser,
   joinTrip,
+  getUserEmails,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -80,9 +81,19 @@ siteController.get('/:id/details', async (req, res) => {
     trip.noSeats = true;
   }
 
-  if ((trip.buddies.length = 0)) {
-    trip.noBuddies = true;
+  if (trip.buddies.length > 0) {
+    trip.hasBuddies = true;
   }
+
+  if (
+    trip.buddies.map((id) => id.toString()).includes(req.user?._id?.toString())
+  ) {
+    trip.joined = true;
+  } else {
+    trip.notJoined = true;
+  }
+
+  trip.emails = (await getUserEmails(trip.buddies)).join(', ');
 
   res.render('details', {
     title: 'Trip Details',
@@ -92,14 +103,15 @@ siteController.get('/:id/details', async (req, res) => {
 
 siteController.get('/:id/join', async (req, res) => {
   const trip = await getTrip(req.params.id);
-  try {
-    await joinTrip(req.params.id.toString(), req.user._id.toString());
-    trip.joined = true;
 
-    res.render('details', {
-      title: 'Trip Details',
-      trip,
-    });
+  try {
+    if (trip.buddies.includes(req.user._id)) {
+      throw new Error('Cannot join twice!');
+    }
+
+    await joinTrip(req.params.id.toString(), req.user._id.toString());
+
+    res.redirect(`/site/${req.params.id}/details`);
   } catch (err) {
     const errors = parseError(err);
     res.render('details', {
