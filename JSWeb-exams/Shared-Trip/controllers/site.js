@@ -1,4 +1,4 @@
-const createTrip = require('../services/siteService');
+const { getAllTrips } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -37,7 +37,7 @@ siteController.post('/create', async (req, res) => {
     }
 
     await createTrip(data);
-    
+
     res.redirect('/');
   } catch (err) {
     const errors = parseError(err);
@@ -47,6 +47,16 @@ siteController.post('/create', async (req, res) => {
       data,
     });
   }
+});
+
+siteController.get('/catalog', async (req, res) => {
+  const trips = await getAllTrips();
+
+  res.render('catalog', {
+    title: 'Catalog',
+    trips,
+    
+  });
 });
 
 module.exports = siteController;
