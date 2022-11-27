@@ -73,6 +73,12 @@ siteController.get('/:id/details', async (req, res) => {
 
   trip.owner = req.user?._id?.toString() == trip.creator._id.toString();
 
+  if (Number(trip.seats) > 0) {
+    trip.hasSeats = true;
+  } else {
+    trip.noSeats = true;
+  }
+
   res.render('details', {
     title: 'Trip Details',
     trip,

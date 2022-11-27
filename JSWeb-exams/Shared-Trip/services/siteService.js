@@ -19,16 +19,21 @@ async function getUser(id) {
 
 async function updateUser(id, data) {
   const existing = await User.findById(id);
-  existing.trips.push(data)
-  return existing.save()
+  existing.trips.push(data);
+  return existing.save();
 }
 
-
+async function joinTrip(tripId, userId) {
+  const trip = await Trip.findById(tripId);
+  trip.buddies.push(userId);
+  return trip.save();
+}
 
 module.exports = {
   createTrip,
   getAllTrips,
   getTrip,
   getUser,
-  updateUser
+  updateUser,
+  joinTrip
 };
