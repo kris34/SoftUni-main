@@ -70,8 +70,13 @@ siteController.get('/catalog', async (req, res) => {
 
 siteController.get('/:id/details', async (req, res) => {
   const trip = await getTrip(req.params.id);
-  console.log(trip);
-  res.render('details');
+
+  trip.owner = req.user?._id?.toString() == trip.creator._id.toString();
+
+  res.render('details', {
+    title: 'Trip Details',
+    trip,
+  });
 });
 
 module.exports = siteController;

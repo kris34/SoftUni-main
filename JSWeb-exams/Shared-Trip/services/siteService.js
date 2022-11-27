@@ -23,6 +23,8 @@ async function updateUser(id, data) {
   return existing.save()
 }
 
+
+
 module.exports = {
   createTrip,
   getAllTrips,
