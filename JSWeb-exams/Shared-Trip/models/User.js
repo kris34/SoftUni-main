@@ -8,9 +8,9 @@ const userSchema = new Schema({
     unique: true,
     minlength: [3, 'Username must be at least 3 charakters long!'],
   },
+  trips: { type: [Types.ObjectId], ref: 'Trip', default: [] },
   hashedPassword: { type: String, required: true },
   gender: { type: String, required: true },
-  trips: { type: [Types.ObjectId], ref: 'Trip', default: [] },
 });
 
 userSchema.index(

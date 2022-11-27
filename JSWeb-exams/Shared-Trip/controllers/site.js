@@ -1,4 +1,11 @@
-const { getAllTrips } = require('../services/siteService');
+const User = require('../models/User');
+const {
+  getAllTrips,
+  getTrip,
+  getUser,
+  createTrip,
+  updateUser,
+} = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -23,6 +30,8 @@ siteController.post('/create', async (req, res) => {
     creator: req.user?._id?.toString(),
   };
 
+  const user = await getUser(req.user?._id.toString());
+
   try {
     if (Object.values(data).some((v) => !v)) {
       throw new Error('All fields required!');
@@ -36,7 +45,8 @@ siteController.post('/create', async (req, res) => {
       throw new Error('Price cannot be lower then $0');
     }
 
-    await createTrip(data);
+    const trip = await createTrip(data);
+    await updateUser(req.user._id, trip._id);
 
     res.redirect('/');
   } catch (err) {
@@ -55,8 +65,13 @@ siteController.get('/catalog', async (req, res) => {
   res.render('catalog', {
     title: 'Catalog',
     trips,
-    
   });
+});
+
+siteController.get('/:id/details', async (req, res) => {
+  const trip = await getTrip(req.params.id);
+  console.log(trip);
+  res.render('details');
 });
 
 module.exports = siteController;
