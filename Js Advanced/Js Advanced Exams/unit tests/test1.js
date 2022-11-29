@@ -28,12 +28,47 @@ describe('Test', () => {
     });
 
     it('inappropriate genre for the age, edge case', () => {
-        expect(bookSelection.isGenreSuitable('Thriller', 12)).to.equal(
-            `Books with Thriller genre are not suitable for kids at 12 age`
-          );
-          expect(bookSelection.isGenreSuitable('Horror', 12)).to.equal(
-            `Books with Horror genre are not suitable for kids at 12 age`
-          );
+      expect(bookSelection.isGenreSuitable('Thriller', 12)).to.equal(
+        `Books with Thriller genre are not suitable for kids at 12 age`
+      );
+      expect(bookSelection.isGenreSuitable('Horror', 12)).to.equal(
+        `Books with Horror genre are not suitable for kids at 12 age`
+      );
     });
   });
+
+  describe('isItAffordable', () => {
+    it('happy path', () => {
+      expect(bookSelection.isItAffordable(1, 2)).to.equal(
+        `Book bought. You have 1$ left`
+      );
+    });
+
+    it('happy path, edge case', () => {
+      expect(bookSelection.isItAffordable(1, 1)).to.equal(
+        `Book bought. You have 0$ left`
+      );
+    });
+
+    it('not enough money', () => {
+      expect(bookSelection.isItAffordable(2, 1)).to.equal(
+        "You don't have enough money"
+      );
+    });
+
+    it('invalid input', () => {
+      expect(() => bookSelection.isItAffordable(2, '1')).to.throw(
+        'Invalid input'
+      );
+      expect(() => bookSelection.isItAffordable('2', '1')).to.throw(
+        'Invalid input'
+      );
+      expect(() => bookSelection.isItAffordable('2', 1)).to.throw(
+        'Invalid input'
+      );
+    });
+  });
+
+
+  
 });
