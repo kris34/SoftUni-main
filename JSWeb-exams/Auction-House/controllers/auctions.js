@@ -39,7 +39,7 @@ auctionsController.post('/create', isGuest(), async (req, res) => {
     }
     await createAuction(auction);
 
-    res.redirect('/auctions/create');
+    res.redirect('/');
   } catch (err) {
     const errors = parseError(err);
     res.render('create', {
