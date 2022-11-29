@@ -3,7 +3,6 @@ class Triathlon {
     this.name = name;
     this.participants = {};
     this.listOfFinalists = [];
-
   }
 
   addParticipant(participant, gender) {
@@ -39,7 +38,7 @@ class Triathlon {
       return `Congratulations, ${participant} finished the whole competition`;
     }
   }
-  
+
   rewarding(participant) {
     let completed = this.listOfFinalists.some(
       (finalist) => finalist.name === participant
