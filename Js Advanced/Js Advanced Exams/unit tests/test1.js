@@ -69,6 +69,58 @@ describe('Test', () => {
     });
   });
 
+  describe('suitableTitles', () => {
+    it('happy path, single match', () => {
+      expect(
+        bookSelection.suitableTitles(
+          [
+            {
+              title: 'aa',
+              genre: 'a',
+            },
+          ],
+          'a'
+        )
+      ).to.deep.equal(['aa']);
+    });
 
+    it('happy path, two matches', () => {
+      expect(
+        bookSelection.suitableTitles(
+          [
+            {
+              title: 'aa',
+              genre: 'a',
+            },
+            {
+              title: 'ab',
+              genre: 'a',
+            },
+          ],
+          'a'
+        )
+      ).to.deep.equal(['aa', 'ab']);
+    });
+
+    it('No matches', () => {
+        expect(
+          bookSelection.suitableTitles(
+            [
+              {
+                title: 'bb',
+                genre: 'b',
+              }
+            ],
+            'a'
+          )
+        ).to.deep.equal([]);
+      });
   
+
+    it("Invalid input", () => { 
+        expect(() => bookSelection.suitableTitles("asd", "asd")).to.throw()
+    })
+
+    
+  });
 });
