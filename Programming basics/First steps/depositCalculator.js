@@ -6,7 +6,7 @@ function depositCalculator(input) {
   let oneYearInterest = depositedAmount * (yearlyInterestRate / 100);
   let oneMonthInterest = oneYearInterest / 12;
   let totalInterestAmount = depositedAmount + oneMonthInterest * depositTerm;
-  console.log(totalInterestAmount);
+  console.log(totalInterestAmount); 
 } 
 
 depositCalculator(["200 ", "3 ", "5.7 "]);
