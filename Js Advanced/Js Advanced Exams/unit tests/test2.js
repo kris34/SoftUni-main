@@ -30,7 +30,7 @@ describe('Test', () => {
 
   describe("sellFlowers", () => { 
     it("works", () => { 
-        expect(flowerShop.sellFlowers(["Rose", "Lily", "Orchid"], 1)).to.equal("Rose / Orchid")
+        expect(flowerShop.sellFlowers(["Rose", "Lily ", "Orchid"], 1)).to.equal("Rose / Orchid")
     })
   })
 
