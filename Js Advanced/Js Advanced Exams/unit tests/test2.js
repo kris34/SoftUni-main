@@ -15,7 +15,7 @@ describe('Test', () => {
   });
 
   describe('checkFlowersAvailable', () => {
-    it('includes All', () => {
+    it('includes All', () => { 
       expect(
         flowerShop.checkFlowersAvailable('rose', ['rose', 'lily'])
       ).to.equal('The rose are available!');
@@ -34,5 +34,5 @@ describe('Test', () => {
     })
   })
 
-  
+
 });
