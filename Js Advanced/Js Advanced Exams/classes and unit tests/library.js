@@ -14,44 +14,41 @@ class LibraryCollection {
   }
 
   payBook(bookName) {
-    let isFound = this.books.some((b) => b.bookName == bookName);
+    let book = this.books.find((b) => b.bookName == bookName);
 
-    if (isFound == false) {
+    if (!book) {
       throw new Error(`${bookName} is not in the collection.`);
     }
 
-    let isPayed = this.books.some((b) => b.payed == true);
-
-    if (isPayed == true) {
+    if (book.payed) {
       throw new Error(`${bookName} has already been paid.`);
     } else {
-      let book = this.books.find((b) => b.bookName == bookName);
       book.payed = true;
-      return `${bookName} has been successfully paid.`;
+      return `${book.bookName} has been successfully paid.`;
     }
   }
 
   removeBook(bookName) {
     let book = this.books.find((b) => b.bookName == bookName);
 
-    if (book == undefined) {
+    if (!book) {
       throw new Error(`The book, you're looking for, is not found.`);
     }
 
-    if (book.payed == false) {
-      throw new Error(
-        `${bookName} need to be paid before removing from the collection.`
-      );
+    if (!book.payed) {
+      throw new Error(`${bookName} need to be paid before removing from the collection.`);
+    }else{ 
+      let index = this.books.indexOf(book);
+      this.books.splice(index, 1);
+      return `${bookName} remove from the collection.`;
     }
 
-    let index = this.books.indexOf(book);
-    this.books.slice(index, 1);
-    return `${bookName} remove from the collection.`;
   }
 
   getStatistics(bookAuthor) {
-    const emptySpots = this.capacity - this.books.length;
-    if (bookAuthor == undefined) {
+    let emptySpots = this.capacity - this.books.length;
+
+    if (!bookAuthor) {
       let result = [`The book collection has ${emptySpots} empty spots left.`];
       let sorted = this.books.sort((a, b) =>
         a.bookName.localeCompare(b.bookName)
@@ -63,19 +60,22 @@ class LibraryCollection {
           }.`
         )
       );
-      return result.join('\n');
+      return result.join('\n').trim();
     } else {
       let book = this.books.find((b) => b.bookAuthor == bookAuthor);
       if (book == undefined) {
-        return `${bookAuthor} is not in the collection.`;
+        throw new Error(`${bookAuthor} is not in the collection.`)
       } else {
         return `${book.bookName} == ${book.bookAuthor} - ${
-          book.payed ? 'Has Paid' : 'Not Paid'
+          book.payed ? 'Has Paid.' : 'Not Paid.'
         }`;
       }
     }
   }
 }
-const library = new LibraryCollection(2);
-console.log(library.addBook('Don Quixote', 'Miguel de Cervantes'));
-console.log(library.getStatistics('asdasd'));
+const library = new LibraryCollection(5);
+library.addBook('Don Quixote', 'Miguel de Cervantes');
+library.payBook('Don Quixote');
+library.addBook('In Search of Lost Time', 'Marcel Proust');
+library.addBook('Ulysses', 'James Joyce');
+console.log(library.getStatistics());
