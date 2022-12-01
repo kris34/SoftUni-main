@@ -24,7 +24,19 @@ function solve() {
     const position = inputs.position.value;
     const eSalary = inputs.eSalary.value;
 
-    table.innerHTML = `<div class="tbl-content">
+    if (
+      firstName == '' ||
+      lastName == '' ||
+      email == '' ||
+      birth == '' ||
+      position == '' ||
+      eSalary == ''
+    ) {
+      return;
+    }
+    let div = document.createElement('div');
+    div.classList.add('tbl-content');
+    let worker = `
      <table
      <tbody id="tbody"
      <tr>
@@ -38,10 +50,17 @@ function solve() {
      </tr>
      </tbody>
      </table>
-     </div>
      `;
+    div.innerHTML = worker;
 
-     
+    table.appendChild(div);
+
+    inputs.firstName.value = '';
+    inputs.lastName.value = '';
+    inputs.email.value = '';
+    inputs.birth.value = '';
+    inputs.position.value = '';
+    inputs.eSalary.value = '';
   }
 }
 solve();
