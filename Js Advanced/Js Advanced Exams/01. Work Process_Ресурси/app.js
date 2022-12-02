@@ -25,7 +25,7 @@ function solve() {
     const eSalary = inputs.eSalary.value;
 
     salary += Number(eSalary);
-    salaryEl.textContent = salary;
+    salaryEl.textContent = salary.toFixed(2);
 
     if (
       firstName == '' ||
@@ -37,27 +37,22 @@ function solve() {
     ) {
       return;
     }
-    let div = document.createElement('div');
-    div.classList.add('tbl-content');
-    let worker = `
-     <table
-     <tbody id="tbody"
-     <tr>
-     <td>${firstName}</td>
+
+    let tr = document.createElement('tr');
+
+    let worker = `<td>${firstName}</td>
      <td>${lastName}</td>
      <td>${email}</td>
      <td>${birth}</td>
      <td>${position}</td>
      <td>${eSalary}</td>
-     <td><button class="fired">Fired</button> <button class="edit">Edit</button></td>
-     </tr>
-     </tbody>
-     </table>
-     `;
-    div.innerHTML = worker;
+     <td><button class="fired">Fired</button> <button class="edit">Edit</button></td>`;
 
-    table.appendChild(div);
-    div.querySelector('.edit').addEventListener('click', onEdit);
+    tr.innerHTML = worker;
+
+    table.appendChild(tr);
+    tr.querySelector('.edit').addEventListener('click', onEdit);
+    tr.querySelector('.fired').addEventListener('click', onFired);
 
     inputs.firstName.value = '';
     inputs.lastName.value = '';
@@ -76,9 +71,17 @@ function solve() {
       inputs.eSalary.value = eSalary;
 
       salary -= Number(eSalary);
-      salaryEl.textContent = salary;
+      salaryEl.textContent = salary.toFixed(2);
 
-      div.remove();
+      tr.remove();
+    }
+
+    function onFired(event) {
+      event.preventDefault();
+
+      salary -= Number(eSalary);
+      salaryEl.textContent = salary.toFixed(2);
+      tr.remove();
     }
   }
 }
