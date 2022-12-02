@@ -24,6 +24,9 @@ function solve() {
     const position = inputs.position.value;
     const eSalary = inputs.eSalary.value;
 
+    salary += Number(eSalary);
+    salaryEl.textContent = salary;
+
     if (
       firstName == '' ||
       lastName == '' ||
@@ -54,6 +57,7 @@ function solve() {
     div.innerHTML = worker;
 
     table.appendChild(div);
+    div.querySelector('.edit').addEventListener('click', onEdit);
 
     inputs.firstName.value = '';
     inputs.lastName.value = '';
@@ -61,6 +65,21 @@ function solve() {
     inputs.birth.value = '';
     inputs.position.value = '';
     inputs.eSalary.value = '';
+
+    function onEdit(event) {
+      event.preventDefault();
+      inputs.firstName.value = firstName;
+      inputs.lastName.value = lastName;
+      inputs.email.value = email;
+      inputs.birth.value = birth;
+      inputs.position.value = position;
+      inputs.eSalary.value = eSalary;
+
+      salary -= Number(eSalary);
+      salaryEl.textContent = salary;
+
+      div.remove();
+    }
   }
 }
 solve();
