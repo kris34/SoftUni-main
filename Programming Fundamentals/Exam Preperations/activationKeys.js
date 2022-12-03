@@ -34,9 +34,9 @@ function solve(arr) {
     let first = string.substr(0, start);
     let second = string.substring(end, string.length);
     string = first + second;
-    console.log(string);
+    console.log(string);  
   }
-  
+
 }
 solve([
   '134softsf5ftuni2020rockz42',
