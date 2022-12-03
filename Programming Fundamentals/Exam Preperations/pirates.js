@@ -17,8 +17,13 @@ function solve(input) {
       };
     }
   }
+  input.shift();
 
-  console.log(result);
+  while (input[0] != 'End') {
+    let tokens = input.shift().split('=>');
+
+    
+  }
 }
 solve([
   'Nassau||95000||1000',
