@@ -15,7 +15,7 @@ function solve(input) {
       console.log(key);
     }
   }
-  console.log();
+  console.log(`Your activation key is: ${key}`);
 
   function contain(string, substring) {
     if (string.includes(substring)) {
