@@ -2,7 +2,11 @@ function solve(arr) {
   let key = arr.shift();
 
   while (arr[0] != 'Generate') {
-    let [command] = arr.shift().split('>>>')[0];
+    let [command, param1, param2, param3] = arr.shift().split('>>>');
+
+    if (command == 'contains') {
+      contains(key, param1);
+    }
   }
 
   function contains(string, substring) {
@@ -13,12 +17,26 @@ function solve(arr) {
     }
   }
 
-  function Flip() { 
-    
+  function flip(string, command, start, end) {
+    let substr = string.substring(start, end);
+    let changed;
+    if (command == 'Upper') {
+      changed = substr.toUpperCase();
+      string = string.replace(substr, changed);
+    } else {
+      changed = substr.toLowerCase();
+      string = string.replace(substr, changed);
+    }
+    console.log(string);
   }
 
-  let test = "test"
-  contains(test, "es")
+  function slice(string, start, end) {
+    let first = string.substr(0, start);
+    let second = string.substring(end, string.length);
+    string = first + second;
+    console.log(string);
+  }
+  
 }
 solve([
   '134softsf5ftuni2020rockz42',
