@@ -9,6 +9,8 @@ function solution() {
     code: document.getElementById('code'),
   };
 
+  let block = document.getElementById('block');
+
   const list = document.getElementById('infoPreview');
 
   document.getElementById('submitBTN').addEventListener('click', onsubmit);
@@ -47,10 +49,39 @@ function solution() {
     document.getElementById('submitBTN').disabled = true;
     document.getElementById('editBTN').disabled = false;
     document.getElementById('continueBTN').disabled = false;
+    document.getElementById('editBTN').addEventListener('click', onEdit);
+    document
+      .getElementById('continueBTN')
+      .addEventListener('click', onContinue);
+    function onContinue() {}
+
+    function onEdit(event) {
+      event.preventDefault();
+
+      inputs.fullName.value = fullName;
+      inputs.email.value = email;
+      inputs.phone.value = phone;
+      inputs.address.value = address;
+      inputs.code.value = code;
+
+      document.getElementById('submitBTN').disabled = false;
+      document.getElementById('editBTN').disabled = true;
+      document.getElementById('continueBTN').disabled = true;
+
+      list.innerHTML = '';
+    }
+
+    function onContinue(event) {
+      event.preventDefault();
+      let h3 = document.createElement('h3');
+      h3.textContent = 'Thank you for your reservation!';
+      block
+    }
   }
 
   function e(element, type, content) {
     let ele = document.createElement(element);
+
     ele.textContent = `${type}: ${content}`;
     return ele;
   }
