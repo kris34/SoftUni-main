@@ -75,7 +75,7 @@ function solution() {
       event.preventDefault();
       let h3 = document.createElement('h3');
       h3.textContent = 'Thank you for your reservation!';
-      block
+      block.replaceChildren(h3);
     }
   }
 
