@@ -50,8 +50,8 @@ function solution() {
   }
 
   function e(element, type, content) {
-    let el = document.createElement(element);
-    el.textContent = `${type}: ${content}`;
-    return el;
+    let ele = document.createElement(element);
+    ele.textContent = `${type}: ${content}`;
+    return ele;
   }
 }
