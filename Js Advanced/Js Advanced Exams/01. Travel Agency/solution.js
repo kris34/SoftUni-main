@@ -53,7 +53,6 @@ function solution() {
     document
       .getElementById('continueBTN')
       .addEventListener('click', onContinue);
-    function onContinue() {}
 
     function onEdit(event) {
       event.preventDefault();
@@ -75,7 +74,8 @@ function solution() {
       event.preventDefault();
       let h3 = document.createElement('h3');
       h3.textContent = 'Thank you for your reservation!';
-      block.replaceChildren(h3);
+      block.innerHTML = '';
+      block.appendChild(h3);
     }
   }
 
