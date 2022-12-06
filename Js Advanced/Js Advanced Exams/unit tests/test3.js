@@ -15,4 +15,14 @@ describe('Test', () => {
       expect(testNumbers.sumNumbers(-1, 2)).to.equal('1.00');
     });
   });
+
+  describe('numberChecker', () => {
+    it('Wrong input', () => {
+      expect(() => testNumbers.numberChecker('a')).to.throw(
+        'The input is not a number!'
+      );
+    });
+
+    it()
+  });
 });
