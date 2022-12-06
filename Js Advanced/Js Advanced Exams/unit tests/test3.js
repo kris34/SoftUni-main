@@ -31,4 +31,10 @@ describe('Test', () => {
       expect(testNumbers.numberChecker('2')).to.equal('The number is even!');
     });
   });
+
+  describe('averageSumArray', () => {
+    it('works', () => {
+      expect(testNumbers.averageSumArray([2, 2, 2, 2])).to.equal(2);
+    });
+  });
 });
