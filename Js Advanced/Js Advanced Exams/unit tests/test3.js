@@ -23,6 +23,12 @@ describe('Test', () => {
       );
     });
 
-    it()
+    it('odd number', () => {
+      expect(testNumbers.numberChecker('1')).to.equal('The number is odd!');
+    });
+
+    it('odd number', () => {
+        expect(testNumbers.numberChecker('1')).to.equal('The number is odd!');
+      });
   });
 });
