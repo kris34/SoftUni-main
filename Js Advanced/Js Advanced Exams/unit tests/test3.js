@@ -27,8 +27,8 @@ describe('Test', () => {
       expect(testNumbers.numberChecker('1')).to.equal('The number is odd!');
     });
 
-    it('odd number', () => {
-        expect(testNumbers.numberChecker('1')).to.equal('The number is odd!');
-      });
+    it('even number', () => {
+      expect(testNumbers.numberChecker('2')).to.equal('The number is even!');
+    });
   });
 });
