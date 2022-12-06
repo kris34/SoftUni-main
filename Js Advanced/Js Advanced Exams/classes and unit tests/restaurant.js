@@ -71,30 +71,29 @@ class Restaurant {
       return result.join('\n');
     }
   }
+
+  makeTheOrder(meal) {
+    if (this.menu.hasOwnProperty(meal) == false) {
+      return `There is not ${meal} yet in our menu, do you want to order something else?`;
+    }
+
+    if (this.menu.hasOwnProperty(meal)) {
+      let currMeal = this.menu[meal];
+      let needed = Object.values(currMeal)[0];
+      
+    }
+  }
 }
 let kitchen = new Restaurant(1000);
-console.log(
-  kitchen.addToMenu(
-    'frozenYogurt',
-    ['Yogurt 1', 'Honey 1', 'Banana 1', 'Strawberries 10'],
-    9.99
-  )
+kitchen.loadProducts([
+  'Yogurt 30 3',
+  'Honey 50 4',
+  'Strawberries 20 10',
+  'Banana 5 1',
+]);
+kitchen.addToMenu(
+  'frozenYogurt',
+  ['Yogurt 1', 'Honey 1', 'Banana 1', 'Strawberries 10'],
+  9.99
 );
-console.log(
-  kitchen.addToMenu(
-    'Pizza',
-    [
-      'Flour 0.5',
-      'Oil 0.2',
-      'Yeast 0.5',
-      'Salt 0.1',
-      'Sugar 0.1',
-      'Tomato sauce 0.5',
-      'Pepperoni 1',
-      'Cheese 1.5',
-    ],
-    15.55
-  )
-);
-
-console.log(kitchen.showTheMenu());
+console.log(kitchen.makeTheOrder('frozenYogurt'));
