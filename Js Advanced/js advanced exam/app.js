@@ -64,11 +64,19 @@ function solve() {
     inputs.guestsNum.value = '';
 
     editBtn.addEventListener('click', onEdit);
-    function onEdit(event){ 
-        event.preventDefault()
-       
-        
+    function onEdit(event) {
+      event.preventDefault();
 
+      inputs.firstName.value = firstName;
+      inputs.lastName.value = lastName;
+      inputs.checkIn.value = checkIn;
+      inputs.checkOut.value = checkOut;
+      inputs.guestsNum.value = guestNum;
+
+      editBtn.disabled = true;
+      continueBtn.disabled = true;
+      document.getElementById('next-btn').disabled = false;
+      lists.ul.innerHTML = '';
     }
   }
 }
