@@ -27,7 +27,7 @@ function solve() {
       lastName == '' ||
       guestNum == '' ||
       checkIn == '' ||
-      checkOut == ' '
+      checkOut == ''
     ) {
       return;
     }
@@ -113,17 +113,25 @@ function solve() {
       lists.ul2.appendChild(li);
 
       confirmBtn.addEventListener('click', onConfirm);
-      cancelBtn.addEventListener("click", onCancel)
+      cancelBtn.addEventListener('click', onCancel);
       function onConfirm(event) {
         event.preventDefault();
         lists.ul2.innerHTML = '';
         document.getElementById('next-btn').disabled = false;
         let h1 = document.getElementById('verification');
         h1.className = 'reservation-confirmed';
-        h1.textContent = 'Confirmed';
+        h1.textContent = 'Confirmed.';
       }
 
-      function onCancel
+      function onCancel(event) {
+        event.preventDefault();
+        event.preventDefault();
+        lists.ul2.innerHTML = '';
+        document.getElementById('next-btn').disabled = false;
+        let h1 = document.getElementById('verification');
+        h1.className = 'reservation-cancelled';
+        h1.textContent = 'Cancelled.';
+      }
     }
   }
 }
