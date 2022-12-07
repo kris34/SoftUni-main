@@ -32,11 +32,35 @@ class OnlineShop {
       currProduct.quantity = diff;
       return `You added ${diff} more from the ${product} products.`;
     }
-
-
   }
 
-  
+  sellProduct(product) {
+    let currProduct = this.products.find((v) => v.product == product);
+
+    if (!currProduct) {
+      throw new Error(`There is no ${product} in the warehouse.`);
+    } else {
+      currProduct.quantity--;
+      let sold = 0;
+      sold++;
+      this.sales.push({ product, sold });
+      return `The ${product} has been successfully sold.`;
+    }
+  }
+
+  revision() {
+    if (this.sales.length == 0) {
+      throw new Error('There are no sales today!');
+    } else {
+      let result = [];
+      result.push(`You sold ${this.sales.length} products today!`);
+      result.push(`Products in the warehouse:`);
+      this.products.forEach((p) =>
+        result.push(`${p.product}-${p.quantity} more left`)
+      );
+      return result.join('\n');
+    }
+  }
 }
 const myOnlineShop = new OnlineShop(500);
 console.log(myOnlineShop.loadingStore('headphones', 10, 200));
