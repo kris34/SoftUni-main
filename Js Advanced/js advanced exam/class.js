@@ -1,0 +1,5 @@
+class OnlineShop {
+  constructor() {
+    
+  }
+}
