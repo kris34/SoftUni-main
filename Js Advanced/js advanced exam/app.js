@@ -31,6 +31,18 @@ function solve() {
     ) {
       return;
     }
+
+    let d1 = new Date(checkIn);
+    let d2 = new Date(checkOut);
+
+    function isBefore(date1, date2) {
+      return date1 < date2;
+    }
+
+    if (isBefore(d1, d2) == false) {
+      return;
+    }
+
     let li = document.createElement('li');
     li.className = 'reservation-content';
     let article = document.createElement('article');
