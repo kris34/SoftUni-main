@@ -11,7 +11,8 @@ function solve() {
 
   document.getElementById('next-btn').addEventListener('click', onSubmit);
   let lists = {
-    ul: document.querySelector('.info-list'),
+    ul1: document.querySelector('.info-list'),
+    ul2: document.querySelector('.confirm-list'),
   };
   function onSubmit(event) {
     event.preventDefault();
@@ -54,7 +55,7 @@ function solve() {
     li.appendChild(article);
     li.appendChild(editBtn);
     li.appendChild(continueBtn);
-    lists.ul.appendChild(li);
+    lists.ul1.appendChild(li);
 
     document.getElementById('next-btn').disabled = true;
     inputs.firstName.value = '';
@@ -76,7 +77,45 @@ function solve() {
       editBtn.disabled = true;
       continueBtn.disabled = true;
       document.getElementById('next-btn').disabled = false;
-      lists.ul.innerHTML = '';
+      lists.ul1.innerHTML = '';
+    }
+
+    continueBtn.addEventListener('click', onContinue);
+
+    function onContinue(event) {
+      event.preventDefault();
+      lists.ul1.innerHTML = '';
+
+      let li = document.createElement('li');
+      li.className = 'reservation-content';
+      let article = document.createElement('article');
+      let h3 = document.createElement('h3');
+      h3.textContent = `Name: ${firstName} ${lastName}`;
+      let p = document.createElement('p');
+      p.textContent = `From date: ${checkIn}`;
+      let p2 = document.createElement('p');
+      p2.textContent = `To date: ${checkOut}`;
+      let p3 = document.createElement('p');
+      p3.textContent = `For ${guestNum} people`;
+      article.appendChild(h3);
+      article.appendChild(p);
+      article.appendChild(p2);
+      article.appendChild(p3);
+      let confirmBtn = document.createElement('button');
+      confirmBtn.className = 'confirm-btn';
+      confirmBtn.textContent = 'Confirm';
+      let cancelBtn = document.createElement('button');
+      cancelBtn.className = 'cancel-btn';
+      cancelBtn.textContent = 'Cancel';
+      li.appendChild(article);
+      li.appendChild(confirmBtn);
+      li.appendChild(cancelBtn);
+      lists.ul2.appendChild(li);
+
+      confirmBtn.addEventListener('click', onConfirm);
+      function onConfirm(event){ 
+        
+      }
     }
   }
 }
