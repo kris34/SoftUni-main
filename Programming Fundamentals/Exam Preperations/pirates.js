@@ -24,10 +24,10 @@ function solve(input) {
     console.log(tokens);
     if (tokens[0] == 'Plunder') {
       result[tokens[1]].population -= tokens[2];
-      result[tokens[1]].gold -= tokens[3];
+      result[tokens[1]].gold -= tokens[3];  
     }
 
-    
+
   }
 }
 solve([
