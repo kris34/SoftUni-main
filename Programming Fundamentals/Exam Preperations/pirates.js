@@ -18,9 +18,14 @@ function solve(input) {
     }
   }
   input.shift();
-
+  console.log(result);
   while (input[0] != 'End') {
     let tokens = input.shift().split('=>');
+    console.log(tokens);
+    if (tokens[0] == 'Plunder') {
+      result[tokens[1]].population -= tokens[2];
+      result[tokens[1]].gold -= tokens[3];
+    }
 
     
   }
