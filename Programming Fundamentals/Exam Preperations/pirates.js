@@ -18,16 +18,33 @@ function solve(input) {
     }
   }
   input.shift();
-  console.log(result);
+
   while (input[0] != 'End') {
     let tokens = input.shift().split('=>');
-    console.log(tokens);
+    let city = tokens[1];
+
     if (tokens[0] == 'Plunder') {
-      result[tokens[1]].population -= tokens[2];
-      result[tokens[1]].gold -= tokens[3];  
+      result[city].population -= tokens[2];
+      result[city].gold -= tokens[3];
+      console.log(
+        `${city} plundered! ${tokens[3]} gold stolen, ${tokens[2]} citizens killed.`
+      );
+      if (result[city].population == 0 || result[city].gold == 0) {
+        console.log(`${city} has been wiped off the map!`);
+        delete result[city];
+      }
+    } else if (tokens[0] == 'Prosper') {
+      if (tokens[2] < 0) {
+        console.log('Gold added cannot be a negative number!');
+        continue;
+      }
+      result[tokens[1]].gold += tokens[2];
+      console.log(
+        `${tokens[2]} gold added to the city treasury. ${tokens[1]} now has ${
+          result[tokens[1].gold]
+        } gold.`
+      );
     }
-
-
   }
 }
 solve([
