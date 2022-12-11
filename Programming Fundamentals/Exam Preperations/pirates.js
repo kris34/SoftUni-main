@@ -46,6 +46,17 @@ function solve(input) {
       );
     }
   }
+
+  let cities = Object.entries(result);
+  if (cities.length == 0) {
+    console.log(
+      'Ahoy, Captain! All targets have been plundered and destroyed!'
+    );
+  } else {
+    for (let city of cities) {
+      console.log(`${city[0]} -> Population: ${city[1].population} citizens, Gold: ${city[1].gold} kg`);
+    }
+  }
 }
 solve([
   'Nassau||95000||1000',
