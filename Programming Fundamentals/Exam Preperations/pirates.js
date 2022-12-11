@@ -34,14 +34,14 @@ function solve(input) {
         delete result[city];
       }
     } else if (tokens[0] == 'Prosper') {
-      if (tokens[2] < 0) {
+      if (Number(tokens[2]) < 0) {
         console.log('Gold added cannot be a negative number!');
         continue;
       }
-      result[tokens[1]].gold += tokens[2];
+      result[city].gold += Number(tokens[2]);
       console.log(
         `${tokens[2]} gold added to the city treasury. ${tokens[1]} now has ${
-          result[tokens[1].gold]
+          result[tokens[1]].gold
         } gold.`
       );
     }
@@ -53,21 +53,22 @@ function solve(input) {
       'Ahoy, Captain! All targets have been plundered and destroyed!'
     );
   } else {
+    console.log(
+      `Ahoy, Captain! There are ${cities.length} wealthy settlements to go to:`
+    );
     for (let city of cities) {
-      console.log(`${city[0]} -> Population: ${city[1].population} citizens, Gold: ${city[1].gold} kg`);
+      console.log(
+        `${city[0]} -> Population: ${city[1].population} citizens, Gold: ${city[1].gold} kg`
+      );
     }
   }
 }
 solve([
-  'Nassau||95000||1000',
-  'San Juan||930000||1250',
-  'Campeche||270000||690',
-  'Port Royal||320000||1000',
-  'Port Royal||100000||2000',
+  'Tortuga||345000||1250',
+  'Santo Domingo||240000||630',
+  'Havana||410000||1100',
   'Sail',
-  'Prosper=>Port Royal=>-200',
-  'Plunder=>Nassau=>94000=>750',
-  'Plunder=>Nassau=>1000=>150',
-  'Plunder=>Campeche=>150000=>690',
+  'Plunder=>Tortuga=>75000=>380',
+  'Prosper=>Santo Domingo=>180',
   'End',
 ]);
