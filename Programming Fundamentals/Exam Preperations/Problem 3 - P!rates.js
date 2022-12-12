@@ -5,7 +5,7 @@ function pirates(input) {
     let tokens = input.shift().split('||');
     let city = tokens[0];
     let people = Number(tokens[1]);
-    let gold = Number(tokens[2]);   
+    let gold = Number(tokens[2]);
     if (result.hasOwnProperty(city)) {
       result[city].gold += gold;
       result[city].people += people;
@@ -17,6 +17,7 @@ function pirates(input) {
     }
   }
   input.shift();
+  console.log(result);
 
   while (input[0] != 'End') {
     let line = input.shift().split('=>');
@@ -25,7 +26,6 @@ function pirates(input) {
       result[line[1]].people -= line[2];
       result[line[1]].gold -= line[3];
       if (result[line[1]].people || result[line[1]].gold <= 0) {
-
       }
     }
   }
