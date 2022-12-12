@@ -18,14 +18,15 @@ function solve(input) {
   function getUsername(string) {
     let result;
     for (let char of string) {
-      if (char != '@') {
+      if (char == '@') {
+        return result;
+      } else {
         result += char;
       }
-      
     }
   }
 
-  console.log(getDomain(email, 3));
+  
 }
 solve([
   'Mike123@somemail.com',
