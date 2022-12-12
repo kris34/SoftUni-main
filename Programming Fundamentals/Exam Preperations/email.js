@@ -8,7 +8,7 @@ function solve(input) {
   }
 
   function makeLower(string) {
-    return string.toLowerCase();
+    return string.toLowerCase(); 
   }
 
   function getDomain(string, count) {
