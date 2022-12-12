@@ -8,14 +8,24 @@ function solve(input) {
   }
 
   function makeLower(string) {
-    return string.toLowerCase(); 
+    return string.toLowerCase();
   }
 
   function getDomain(string, count) {
-    return string.substring(count);
+    return string.slice(-count);
   }
 
-  console.log(getDomain(email));
+  function getUsername(string) {
+    let result;
+    for (let char of string) {
+      if (char != '@') {
+        result += char;
+      }
+      
+    }
+  }
+
+  console.log(getDomain(email, 3));
 }
 solve([
   'Mike123@somemail.com',
