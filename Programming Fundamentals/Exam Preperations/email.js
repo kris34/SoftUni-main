@@ -16,7 +16,7 @@ function solve(input) {
   }
 
   function getUsername(string) {
-    let result;
+    let result = '';
     for (let char of string) {
       if (char == '@') {
         return result;
@@ -26,7 +26,21 @@ function solve(input) {
     }
   }
 
-  
+  function replace(string, char) {
+    let result = '';
+
+    for (let charakter of string) {
+      if (charakter == char) {
+        result += '-';
+      } else {
+        result += charakter;
+      }
+    }
+
+    return result;
+  }
+
+  console.log(replace(email, 'i'));
 }
 solve([
   'Mike123@somemail.com',
