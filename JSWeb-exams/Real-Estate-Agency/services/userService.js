@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const jwt_secret = 'qwer234asdfg34w2r';
 
-async function register(username, password) {
+async function register(username, name, password) {
   const existing = await User.findOne({ username }).collation({
     locale: 'en',
     strength: 2,
@@ -18,6 +18,7 @@ async function register(username, password) {
 
   const user = await User.create({
     username,
+    name,
     hashedPassword,
   });
 

@@ -2,6 +2,7 @@ const { Schema, model, Types } = require('mongoose');
 
 //TODO add user properties and validation according to assignment
 const userSchema = new Schema({
+  name: { type: String, required: true },
   username: {
     type: String,
     required: true,
