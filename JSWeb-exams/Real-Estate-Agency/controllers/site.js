@@ -33,6 +33,7 @@ siteController.post('/create', isGuest(), async (req, res) => {
     const errors = parseError(err);
     res.render('create', {
       title: 'Create',
+      housing,
       errors,
     });
   }
