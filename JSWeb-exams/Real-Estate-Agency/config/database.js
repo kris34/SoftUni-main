@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 //TODO change database according to assignment
-const CONNECTION_STRING = 'mongodb://localhost:27017/skeleton';
+const CONNECTION_STRING = 'mongodb://localhost:27017/realEstate';
 
 module.exports = async (app) => {
   try {
@@ -11,7 +11,6 @@ module.exports = async (app) => {
         useUnifiedTopology: true,
       };
     console.log('Database Connected');
-
   } catch (err) {
     console.error(err.message);
     process.exit(1);
