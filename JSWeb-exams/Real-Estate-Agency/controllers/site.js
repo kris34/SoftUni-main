@@ -1,15 +1,16 @@
+const { isGuest } = require('../middlewares/guards');
 const { createHousing } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
 
-siteController.get('/create', (req, res) => {
+siteController.get('/create', isGuest(), (req, res) => {
   res.render('create', {
     title: 'Create',
   });
 });
 
-siteController.post('/create', async (req, res) => {
+siteController.post('/create', isGuest(), async (req, res) => {
   const housing = {
     name: req.body.name,
     type: req.body.type,
@@ -18,6 +19,7 @@ siteController.post('/create', async (req, res) => {
     image: req.body.image,
     description: req.body.description,
     availablePieces: req.body.availablePieces,
+    owner: req.user?._id,
   };
   try {
     if (Object.values(housing).some((v) => !v)) {
@@ -26,8 +28,7 @@ siteController.post('/create', async (req, res) => {
 
     await createHousing(housing);
 
-    res.redirect('/site/catalog');
-    
+    res.redirect('/site/create');
   } catch (err) {
     const errors = parseError(err);
     res.render('create', {
