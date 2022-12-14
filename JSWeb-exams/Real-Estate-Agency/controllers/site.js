@@ -40,9 +40,11 @@ siteController.post('/create', isGuest(), async (req, res) => {
 });
 
 siteController.get('/catalog', async (req, res) => {
-  const housings = await getAllH
+  const housings = await getAll();
+
   res.render('catalog', {
     title: 'Catalog',
+    housings,
   });
 });
 
