@@ -1,5 +1,5 @@
 const { isGuest } = require('../middlewares/guards');
-const { createHousing } = require('../services/siteService');
+const { createHousing, getAll } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -37,6 +37,13 @@ siteController.post('/create', isGuest(), async (req, res) => {
       errors,
     });
   }
+});
+
+siteController.get('/catalog', async (req, res) => {
+  const housings = await getAllH
+  res.render('catalog', {
+    title: 'Catalog',
+  });
 });
 
 module.exports = siteController;
