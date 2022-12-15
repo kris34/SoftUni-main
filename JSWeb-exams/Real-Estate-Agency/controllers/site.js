@@ -1,5 +1,5 @@
 const { isGuest } = require('../middlewares/guards');
-const { createHousing, getAll } = require('../services/siteService');
+const { createHousing, getAll, getOne } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -48,6 +48,15 @@ siteController.get('/catalog', async (req, res) => {
   });
 });
 
+siteController.get('/:id/details', async (req, res) => {
+  const housing = await getOne(req.params.id);
 
+  res.render('details', {
+    title: 'Details',
+    housing,
+  });
+
+  //res.redirect(`/site/catalog`);
+});
 
 module.exports = siteController;
