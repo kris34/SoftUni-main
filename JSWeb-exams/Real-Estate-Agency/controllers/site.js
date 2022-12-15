@@ -62,11 +62,11 @@ siteController.get('/:id/details', async (req, res) => {
   if (housing.rented.length > 0) {
     housing.hasRenters = true;
   }
-  
-  
 
+  if (housing.rented.filter((r) => r.toString() == req.user._id.toString())) {
+    housing.hasRented = true;
+  }
   //console.log(housing.loggedOwner);
-
   res.render('details', {
     title: 'Details',
     housing,

@@ -36,7 +36,9 @@
                 available
                 {{availablePieces}}
                 housing</a>
-              <p class='alRentHome'>You have already rent this home</p>
+              {{#if hasRented}}
+                <p class='alRentHome'>You have already rent this home</p>
+              {{/if}}
               <!-- logged in user with no available pieces-->
               <p class='no-housing'>No Housing Available!</p>
             {{/if}}
