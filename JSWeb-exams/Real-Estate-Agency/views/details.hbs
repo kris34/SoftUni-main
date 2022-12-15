@@ -17,7 +17,7 @@
               </p>
 
               <!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
-              <p>People rented this housing:{{rented}}</p>
+              <p>People rented this housing:</p>
 
               <!-- If not display: -->
               <p>People rented this housing: There are no tenants yet.</p>
@@ -33,7 +33,9 @@
             {{else}}
               <!-- logged in user with available pieces-->
               <a href='/site/{{_id}}/details/rent' class='rentHome'>Rent a home,
-                available 2 housing</a>
+                available
+                {{availablePieces}}
+                housing</a>
               <p class='alRentHome'>You have already rent this home</p>
               <!-- logged in user with no available pieces-->
               <p class='no-housing'>No Housing Available!</p>

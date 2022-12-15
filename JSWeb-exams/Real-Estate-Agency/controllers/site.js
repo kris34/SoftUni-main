@@ -57,6 +57,13 @@ siteController.get('/:id/details', async (req, res) => {
   const housing = await getOne(req.params.id);
 
   housing.loggedOwner = req.user?._id?.toString() == housing.owner.toString();
+  housing.rentCount = housing.rented.length;
+
+  if (housing.rented.length > 0) {
+    housing.hasRenters = true;
+  }
+  
+  
 
   //console.log(housing.loggedOwner);
 
@@ -69,8 +76,16 @@ siteController.get('/:id/details', async (req, res) => {
 });
 
 siteController.get('/:id/details/rent', async (req, res) => {
-  await rent(req.params.id, req.user._id.toString());
-  res.redirect('/');
+  try {
+    await rent(req.params.id, req.user._id.toString());
+    res.redirect(`/site/${req.params.id}/details`);
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('catalog', {
+      title: 'Catalog',
+      errors,
+    });
+  }
 });
 
 module.exports = siteController;

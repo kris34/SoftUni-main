@@ -15,6 +15,7 @@ async function getOne(id) {
 async function rent(id, userId) {
   const housing = await Housing.findById(id);
   housing.rented.push(userId);
+  housing.availablePieces--;
   return housing.save();
 }
 
