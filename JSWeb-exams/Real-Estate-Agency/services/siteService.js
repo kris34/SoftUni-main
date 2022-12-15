@@ -9,7 +9,7 @@ async function getAll() {
 }
 
 async function getOne(id) {
-  return await Housing.findById(id).populate('owner').lean();
+  return await Housing.findById(id).lean();
 }
 
 module.exports = {

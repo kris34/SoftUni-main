@@ -51,6 +51,11 @@ siteController.get('/catalog', async (req, res) => {
 siteController.get('/:id/details', async (req, res) => {
   const housing = await getOne(req.params.id);
 
+  housing.loggedOwner = req.user?._id?.toString() == housing.owner.toString();
+
+  console.log(housing.loggedOwner);
+
+  
   res.render('details', {
     title: 'Details',
     housing,
