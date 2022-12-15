@@ -12,8 +12,15 @@ async function getOne(id) {
   return await Housing.findById(id).lean();
 }
 
+async function rent(id, userId) {
+  const housing = await Housing.findById(id);
+  housing.rented.push(userId);
+  return housing.save();
+}
+
 module.exports = {
   createHousing,
   getAll,
   getOne,
+  rent,
 };

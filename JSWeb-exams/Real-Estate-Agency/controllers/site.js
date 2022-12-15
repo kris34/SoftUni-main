@@ -1,5 +1,10 @@
 const { isGuest } = require('../middlewares/guards');
-const { createHousing, getAll, getOne } = require('../services/siteService');
+const {
+  createHousing,
+  getAll,
+  getOne,
+  rent,
+} = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -53,15 +58,19 @@ siteController.get('/:id/details', async (req, res) => {
 
   housing.loggedOwner = req.user?._id?.toString() == housing.owner.toString();
 
-  console.log(housing.loggedOwner);
+  //console.log(housing.loggedOwner);
 
-  
   res.render('details', {
     title: 'Details',
     housing,
   });
 
   //res.redirect(`/site/catalog`);
+});
+
+siteController.get('/:id/details/rent', async (req, res) => {
+  await rent(req.params.id, req.user._id.toString());
+  res.redirect('/');
 });
 
 module.exports = siteController;
