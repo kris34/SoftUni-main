@@ -17,10 +17,12 @@
               </p>
 
               <!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
-              <p>People rented this housing:</p>
-
-              <!-- If not display: -->
-              <p>People rented this housing: There are no tenants yet.</p>
+              {{#if rentCount}}
+                <p>People rented this housing: {{usernames}}</p>
+              {{else}}
+                <!-- If not display: -->
+                <p>People rented this housing: There are no tenants yet.</p>
+              {{/if}}
             </div>
           </div>
 

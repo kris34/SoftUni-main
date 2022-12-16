@@ -4,6 +4,7 @@ const {
   getAll,
   getOne,
   rent,
+  getUsernames,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -57,7 +58,7 @@ siteController.get('/:id/details', async (req, res) => {
   const housing = await getOne(req.params.id);
   housing.loggedUser = req.user?._id.toString() != undefined;
   housing.isOwner = req.user?._id?.toString() == housing.owner?.toString();
-  housing.rentCount = housing.rented.length;
+  housing.rentCount = housing.rented.length > 0;
 
   housing.notRented =
     housing.rented.filter((v) => v == req.user?._id).length == 0;
@@ -65,10 +66,10 @@ siteController.get('/:id/details', async (req, res) => {
   housing.noPieces =
     housing.availablePieces == 0 &&
     housing.rented.filter((v) => v == req.user?._id).length == 0;
-  /*  console.log('----------------------');
-  console.log(housing.rented.some((v) => v == req.user._id));
-  console.log(housing); */
 
+  let usernames = await getUsernames(housing.rented);
+  housing.usernames = usernames.join(', ');
+  
   res.render('details', {
     title: 'Details',
     housing,
