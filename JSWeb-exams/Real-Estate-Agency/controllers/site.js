@@ -55,27 +55,32 @@ siteController.get('/catalog', async (req, res) => {
 });
 
 siteController.get('/:id/details', async (req, res) => {
-  const housing = await getOne(req.params.id);
-  housing.loggedUser = req.user?._id.toString() != undefined;
-  housing.isOwner = req.user?._id?.toString() == housing.owner?.toString();
-  housing.rentCount = housing.rented.length > 0;
+  try {
+    const housing = await getOne(req.params.id);
+    housing.loggedUser = req.user?._id.toString() != undefined;
+    housing.isOwner = req.user?._id?.toString() == housing.owner?.toString();
+    housing.rentCount = housing.rented.length > 0;
 
-  housing.notRented =
-    housing.rented.filter((v) => v == req.user?._id).length == 0;
+    housing.notRented =
+      housing.rented.filter((v) => v == req.user?._id).length == 0;
 
-  housing.noPieces =
-    housing.availablePieces == 0 &&
-    housing.rented.filter((v) => v == req.user?._id).length == 0;
+    housing.noPieces =
+      housing.availablePieces == 0 &&
+      housing.rented.filter((v) => v == req.user?._id).length == 0;
 
-  let usernames = await getUsernames(housing.rented);
-  housing.usernames = usernames.join(', ');
-  
-  res.render('details', {
-    title: 'Details',
-    housing,
-  });
+    let usernames = await getUsernames(housing.rented);
+    housing.usernames = usernames.join(', ');
 
-  //res.redirect(`/site/catalog`);
+    res.render('details', {
+      title: 'Details',
+      housing,
+    });
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('404', {
+      title: '404 Page not Found',
+    });
+  }
 });
 
 siteController.get('/:id/details/rent', async (req, res) => {
