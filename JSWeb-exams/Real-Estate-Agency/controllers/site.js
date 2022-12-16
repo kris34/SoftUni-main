@@ -75,8 +75,9 @@ siteController.get('/:id/details', async (req, res) => {
       title: 'Details',
       housing,
     });
+
   } catch (err) {
-    const errors = parseError(err);
+  
     res.render('404', {
       title: '404 Page not Found',
     });
