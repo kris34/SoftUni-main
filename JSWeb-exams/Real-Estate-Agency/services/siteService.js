@@ -40,4 +40,5 @@ module.exports = {
   getOne,
   rent,
   getUsernames,
+  deleteById
 };

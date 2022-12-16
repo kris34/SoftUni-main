@@ -5,6 +5,7 @@ const {
   getOne,
   rent,
   getUsernames,
+  deleteById,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -75,9 +76,7 @@ siteController.get('/:id/details', async (req, res) => {
       title: 'Details',
       housing,
     });
-
   } catch (err) {
-  
     res.render('404', {
       title: '404 Page not Found',
     });
@@ -95,6 +94,11 @@ siteController.get('/:id/details/rent', async (req, res) => {
       errors,
     });
   }
+});
+
+siteController.get('/:id/details/delete', isGuest(), async (req, res) => {
+  await deleteById(req.params.id);
+  res.redirect('/');
 });
 
 module.exports = siteController;
