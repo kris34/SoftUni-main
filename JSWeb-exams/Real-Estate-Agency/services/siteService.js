@@ -34,11 +34,26 @@ async function deleteById(id) {
   return await Housing.findByIdAndDelete(id);
 }
 
+async function editHousing(data, id) {
+  let housing = await Housing.findById(id);
+
+  housing.name = data.name;
+  housing.city = data.city;
+  housing.type = data.type;
+  housing.year = data.year;
+  housing.image = data.image;
+  housing.description = data.description;
+  housing.availablePieces = data.availablePieces;
+
+  return housing.save();
+}
+
 module.exports = {
   createHousing,
   getAll,
   getOne,
   rent,
   getUsernames,
-  deleteById
+  deleteById,
+  editHousing,
 };

@@ -6,6 +6,7 @@ const {
   rent,
   getUsernames,
   deleteById,
+  editHousing,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -99,6 +100,30 @@ siteController.get('/:id/details/rent', async (req, res) => {
 siteController.get('/:id/details/delete', isGuest(), async (req, res) => {
   await deleteById(req.params.id);
   res.redirect('/');
+});
+
+siteController.get('/:id/details/edit', isGuest(), async (req, res) => {
+  const housing = await getOne(req.params.id);
+
+  res.render('edit', {
+    title: 'Update housing',
+    housing,
+  });
+});
+
+siteController.post('/:id/details/edit', async (req, res) => {
+  let housing = await getOne(req.params.id);
+  try {
+    await editHousing(req.body, req.params.id);
+    res.redirect(`/site/${req.params.id}/details`);
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('edit', {
+      title: 'Edit',
+      errors,
+      housing,
+    });
+  }
 });
 
 module.exports = siteController;
