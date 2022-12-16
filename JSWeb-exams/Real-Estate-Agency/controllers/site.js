@@ -1,4 +1,4 @@
-const { isGuest } = require('../middlewares/guards');
+const { isGuest, hasUser } = require('../middlewares/guards');
 const {
   createHousing,
   getAll,
@@ -84,7 +84,7 @@ siteController.get('/:id/details', async (req, res) => {
   }
 });
 
-siteController.get('/:id/details/rent', async (req, res) => {
+siteController.get('/:id/details/rent', hasUser(), async (req, res) => {
   try {
     await rent(req.params.id, req.user._id);
     res.redirect(`/site/${req.params.id}/details`);
@@ -111,7 +111,7 @@ siteController.get('/:id/details/edit', isGuest(), async (req, res) => {
   });
 });
 
-siteController.post('/:id/details/edit', async (req, res) => {
+siteController.post('/:id/details/edit', isGuest(), async (req, res) => {
   let housing = await getOne(req.params.id);
   try {
     await editHousing(req.body, req.params.id);
