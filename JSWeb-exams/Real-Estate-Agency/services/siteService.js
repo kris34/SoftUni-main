@@ -27,8 +27,11 @@ async function getUsernames(arr) {
     const user = await User.findById(el);
     usernames.push(user.username);
   }
-
   return usernames;
+}
+
+async function deleteById(id) {
+  return await Housing.findByIdAndDelete(id);
 }
 
 module.exports = {
@@ -36,5 +39,5 @@ module.exports = {
   getAll,
   getOne,
   rent,
-  getUsernames
+  getUsernames,
 };
