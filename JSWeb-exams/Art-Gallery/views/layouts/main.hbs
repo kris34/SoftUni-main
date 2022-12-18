@@ -26,12 +26,15 @@
         <ul class='menu'>
           <li><a href='/site/catalog'>Gallery</a></li>
           <!-- Logged users -->
-          <li><a href='/site/create'>Create Publication</a></li>
-          <li><a href='/site/profile'>Profile</a></li>
-          <li><a href='/auth/logout'>Logout</a></li>
-          <!-- Guest users -->
-          <li><a href='/auth/login'>Login</a></li>
-          <li><a href='/auth/register'>Register</a></li>
+          {{#if username}}
+            <li><a href='/site/create'>Create Publication</a></li>
+            <li><a href='/site/profile'>Profile</a></li>
+            <li><a href='/auth/logout'>Logout</a></li>
+          {{else}}
+            <!-- Guest users -->
+            <li><a href='/auth/login'>Login</a></li>
+            <li><a href='/auth/register'>Register</a></li>
+          {{/if}}
         </ul>
 
       </nav>
