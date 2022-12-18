@@ -9,6 +9,8 @@ const userSchema = new Schema({
     minlength: [3, 'Username must be at least 3 charakters long!'],
   },
   hashedPassword: { type: String, required: true },
+  address: { type: String, required: true },
+  myPublications: { default: [] },
 });
 
 userSchema.index(
