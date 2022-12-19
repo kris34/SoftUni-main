@@ -5,3 +5,12 @@ siteController.get('create', (req, res) => {
     title: 'Create',
   });
 });
+
+siteController.post("create", async (req,res) => { 
+    const data = { 
+      title: req.body.title,
+
+    }
+})
+
+

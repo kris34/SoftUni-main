@@ -10,7 +10,7 @@ const userSchema = new Schema({
   },
   hashedPassword: { type: String, required: true },
   address: { type: String, required: true },
-  myPublications: { default: [] },
+  myPublications: { type: [Types.ObjectId], ref: 'Painting', default: [] },
 });
 
 userSchema.index(

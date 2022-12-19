@@ -11,4 +11,4 @@ const paintingSchema = new Schema({
 
 const Painting = new model('Painting', paintingSchema);
 
-module.exports = paintingSchema;
+module.exports = Painting;
