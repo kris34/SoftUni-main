@@ -23,14 +23,13 @@ siteController.post('/create', async (req, res) => {
       throw new Error('All fields required!');
     }
 
-    if (data.certificate != 'Yes' || data.certificate != 'No') {
+    if (data.certificate != 'Yes' && data.certificate != 'No') {
       throw new Error('Certificate can only be Yes or No!');
     }
 
     await createPainting(data);
 
     res.redirect('/site/catalog');
-    
   } catch (err) {
     const errors = parseError(err);
     console.log(errors);
