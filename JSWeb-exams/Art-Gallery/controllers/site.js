@@ -1,3 +1,4 @@
+const { createPainting } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -21,6 +22,15 @@ siteController.post('/create', async (req, res) => {
     if (Object.values(data).some((v) => !v)) {
       throw new Error('All fields required!');
     }
+
+    if (data.certificate != 'Yes' || data.certificate != 'No') {
+      throw new Error('Certificate can only be Yes or No!');
+    }
+
+    await createPainting(data);
+
+    res.redirect('/site/catalog');
+    
   } catch (err) {
     const errors = parseError(err);
     console.log(errors);
