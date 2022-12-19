@@ -15,4 +15,5 @@ async function getAll() {
 module.exports = {
   createPainting,
   getOne,
+  getAll,
 };
