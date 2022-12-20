@@ -1,3 +1,4 @@
+const { isGuest } = require('../middlewares/guards');
 const User = require('../models/User');
 const {
   createPainting,
@@ -10,13 +11,13 @@ const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
 
-siteController.get('/create', (req, res) => {
+siteController.get('/create', isGuest(), (req, res) => {
   res.render('create', {
     title: 'Create',
   });
 });
 
-siteController.post('/create', async (req, res) => {
+siteController.post('/create', isGuest(), async (req, res) => {
   const data = {
     title: req.body.title,
     technique: req.body.technique,
@@ -35,10 +36,8 @@ siteController.post('/create', async (req, res) => {
     }
 
     const painting = await createPainting(data);
-    // await addPostToUser(req.user._id, painting._id);
-    const user = await User.findById(req.user._id);
-    user.myPublications.push(painting._id);
-    user.save();
+    await addPostToUser(req.user._id, painting._id);
+
     res.redirect('/site/catalog');
   } catch (err) {
     const errors = parseError(err);
@@ -72,9 +71,11 @@ siteController.get('/:id/details', async (req, res) => {
   });
 });
 
-siteController.get('/:id/share', async (req, res) => {
+siteController.get('/:id/share', isGuest(), async (req, res) => {
   await sharePost(req.user._id, req.params.id);
   res.redirect(`/site/${req.params.id}/details`);
 });
+
+
 
 module.exports = siteController;
