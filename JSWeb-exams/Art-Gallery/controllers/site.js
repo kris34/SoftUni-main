@@ -51,7 +51,9 @@ siteController.get('/catalog', async (req, res) => {
 
 siteController.get('/:id/details', async (req, res) => {
   const painting = await getOne(req.params.id);
-console.log(painting);
+
+  painting.owner = req.user?._id.toString() == painting.author._id.toString();
+  
   res.render('details', {
     title: 'Painting Details',
     painting,
