@@ -1,4 +1,9 @@
-const { createPainting, getAll, getOne } = require('../services/siteService');
+const {
+  createPainting,
+  getAll,
+  getOne,
+  sharePost,
+} = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -53,11 +58,18 @@ siteController.get('/:id/details', async (req, res) => {
   const painting = await getOne(req.params.id);
 
   painting.owner = req.user?._id.toString() == painting.author._id.toString();
-  
+  painting.notShared =
+    painting.shared.map((id) => id.toString()).includes(req.user?._id) == false;
+
   res.render('details', {
     title: 'Painting Details',
     painting,
   });
+});
+
+siteController.get('/:id/share', async (req, res) => {
+  await sharePost(req.user._id, req.params.id);
+  res.redirect(`/site/${req.params.id}/details`);
 });
 
 module.exports = siteController;
