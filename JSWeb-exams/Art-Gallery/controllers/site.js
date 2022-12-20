@@ -76,6 +76,13 @@ siteController.get('/:id/share', isGuest(), async (req, res) => {
   res.redirect(`/site/${req.params.id}/details`);
 });
 
-
+siteController.get('/profile', async (req, res) => {
+  const user = await User.findById(req.user._id).lean();
+  console.log(user);
+  res.render('profile', {
+    title: 'Profile',
+    user,
+  });
+});
 
 module.exports = siteController;
