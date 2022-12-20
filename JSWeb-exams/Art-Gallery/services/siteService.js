@@ -36,6 +36,24 @@ async function getUserPosts(userId) {
   return titlesArr.join(', ');
 }
 
+async function getSharedPosts(userId) {
+  const posts = await getAll();
+  let idArr = [];
+
+  for (let post of posts) {
+    post.shared.forEach((u) => (u == userId ? idArr.push(post._id) : ''));
+  }
+
+  let result = [];
+
+  for (let id of idArr) {
+    let post = await getOne(id);
+    result.push(post.title);
+  }
+
+  return result.join(', ');
+}
+
 module.exports = {
   createPainting,
   getOne,
@@ -43,4 +61,5 @@ module.exports = {
   sharePost,
   addPostToUser,
   getUserPosts,
+  getSharedPosts,
 };

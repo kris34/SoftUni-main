@@ -6,17 +6,20 @@
       <article class='profile-card-info'>
         <h2>Username: {{user.username}}</h2>
         <h3>Address: {{user.address}}</h3>
-        <!--If the user has shared publications, separate their titles with a comma and a space (, )-->
-        <h4>Titles of shared posts by the user: Painting is everything</h4>
-        <!--If not display:-->
-        <!--<h4>Titles of shared posts by the user: Not yet.</h4>-->
 
+        {{#if user.sharedPosts}}
+          <!--If the user has shared publications, separate their titles with a comma and a space (, )-->
+          <h4>Titles of shared posts by the user: {{user.sharedPosts}}</h4>
+          <!--If not display:-->
+        {{else}}
+          <h4>Titles of shared posts by the user: Not yet.</h4>
+        {{/if}}
         <!--If the user has created their own publications, separate their titles with a comma and a space (, )-->
         {{#if user.createdPosts}}
           <h4>Titles of which the user is the author: {{user.createdPosts}}</h4>
           <!--If not display:-->
         {{else}}
-          <!--<h4>Titles of which the user is the author: Not yet.</h4>-->
+          <h4>Titles of which the user is the author: Not yet.</h4>
         {{/if}}
       </article>
 
