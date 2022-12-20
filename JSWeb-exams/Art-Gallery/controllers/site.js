@@ -1,4 +1,4 @@
-const { createPainting, getAll } = require('../services/siteService');
+const { createPainting, getAll, getOne } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -46,6 +46,15 @@ siteController.get('/catalog', async (req, res) => {
   res.render('catalog', {
     title: 'Catalog',
     paintings,
+  });
+});
+
+siteController.get('/:id/details', async (req, res) => {
+  const painting = await getOne(req.params.id);
+console.log(painting);
+  res.render('details', {
+    title: 'Painting Details',
+    painting,
   });
 });
 
