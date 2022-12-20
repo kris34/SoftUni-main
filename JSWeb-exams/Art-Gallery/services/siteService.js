@@ -25,10 +25,22 @@ async function addPostToUser(userId, postId) {
   return user.save();
 }
 
+async function getUserPosts(userId) {
+  const user = await User.findById(userId);
+  let titlesArr = [];
+  for (let el of user.myPublications) {
+    const post = await Painting.findById(el);
+    titlesArr.push(post.title);
+  }
+
+  return titlesArr.join(', ');
+}
+
 module.exports = {
   createPainting,
   getOne,
   getAll,
   sharePost,
-  addPostToUser
+  addPostToUser,
+  getUserPosts,
 };

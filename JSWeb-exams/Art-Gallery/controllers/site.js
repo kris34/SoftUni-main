@@ -6,6 +6,7 @@ const {
   getOne,
   sharePost,
   addPostToUser,
+  getUserPosts,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -78,7 +79,9 @@ siteController.get('/:id/share', isGuest(), async (req, res) => {
 
 siteController.get('/profile', async (req, res) => {
   const user = await User.findById(req.user._id).lean();
-  console.log(user);
+  user.hasPosts = 
+  user.createdPosts = await getUserPosts(user._id);
+
   res.render('profile', {
     title: 'Profile',
     user,
