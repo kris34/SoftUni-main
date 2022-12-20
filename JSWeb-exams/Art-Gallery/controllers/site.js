@@ -1,8 +1,10 @@
+const User = require('../models/User');
 const {
   createPainting,
   getAll,
   getOne,
   sharePost,
+  addPostToUser,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -32,8 +34,11 @@ siteController.post('/create', async (req, res) => {
       throw new Error('Certificate can only be Yes or No!');
     }
 
-    await createPainting(data);
-
+    const painting = await createPainting(data);
+    // await addPostToUser(req.user._id, painting._id);
+    const user = await User.findById(req.user._id);
+    user.myPublications.push(painting._id);
+    user.save();
     res.redirect('/site/catalog');
   } catch (err) {
     const errors = parseError(err);

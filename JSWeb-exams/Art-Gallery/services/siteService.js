@@ -1,4 +1,5 @@
 const Painting = require('../models/Painting');
+const User = require('../models/User');
 
 async function createPainting(data) {
   return await Painting.create(data);
@@ -18,9 +19,16 @@ async function sharePost(userId, postId) {
   return painting.save();
 }
 
+async function addPostToUser(userId, postId) {
+  const user = await User.findById(userId);
+  user.myPublications.push(postId);
+  return user.save();
+}
+
 module.exports = {
   createPainting,
   getOne,
   getAll,
   sharePost,
+  addPostToUser
 };
