@@ -1,5 +1,5 @@
 <section id='editPage'>
-  <form id='editForm' action='/site/{{_id}}/edit' method='post'>
+  <form id='editForm' action='/site/{{toy._id}}/edit' method='post'>
     <label for='title'>Title:</label>
     <input
       type='text'
@@ -28,7 +28,7 @@
     <input
       type='text'
       id='description'
-      name='toy.description'
+      name='description'
       placeholder='Description...'
       value='{{toy.description}}'
     />

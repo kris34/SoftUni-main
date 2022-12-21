@@ -4,6 +4,7 @@ const {
   getAll,
   getToy,
   buyToy,
+  editToy,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -62,7 +63,7 @@ siteController.get('/:id/details', async (req, res) => {
     toy.isOwner = toy.owner._id == req.user?._id?.toString();
     toy.notOwner = toy.owner._id != req.user?._id?.toString();
     toy.hasBought = toy.list.some((u) => u == req.user?._id?.toString());
-    
+
     res.render('details', {
       title: 'Details Page',
       toy,
@@ -97,6 +98,24 @@ siteController.get('/:id/edit', isGuest(), async (req, res) => {
       title: 'Edit Page',
       toy,
     });
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('edit', {
+      title: 'Edit Page',
+      toy,
+      errors,
+    });
+  }
+});
+
+siteController.post('/:id/edit', isGuest(), async (req, res) => {
+  const toy = await getToy(req.params.id);
+  const data = req.body;
+  console.log(data);
+  try {
+    await editToy(data, req.params.id);
+
+    res.redirect(`/site/${req.params.id}/details`);
   } catch (err) {
     const errors = parseError(err);
     res.render('edit', {
