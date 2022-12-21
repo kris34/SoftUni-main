@@ -1,19 +1,45 @@
-
-
-        <section id="editPage">
-            <form id='editForm' action="#" method="">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="" placeholder="Title..." value="Christmas ornament">
-                <label for="charity">For Charity:</label>
-                <input type="text" id="charity" name="" placeholder="For Charity..." value="Red Cross">
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="" placeholder="Price..." value="76.00">
-                <label for="description">Description:</label>
-                <input type="text" id="description" name=""
-                    placeholder="Description..." value="Golden Needle Designs Felt Ornaments Sew-in-the-Hoop Machine Embroidery Designs - The Felt Ornament embroidery designs are sew-in-the-hoop with a very small amount of hand stitching required. Hand stitching is used to sew the opening closed after adding polyester fiberfill. Set includes 12 ornament designs. The designs do fit in the 4x4 hoops.">
-                <label for="category">Category:</label>
-                <input type="text" id="category" name="" placeholder="Category..." value="Ornaments">
-                <input type="submit" class="edit" value="Edit Toy Offer">
-            </form>
-        </section>
-
+<section id='editPage'>
+  <form id='editForm' action='/site/{{_id}}/edit' method='post'>
+    <label for='title'>Title:</label>
+    <input
+      type='text'
+      id='title'
+      name='title'
+      placeholder='Title...'
+      value='{{toy.title}}'
+    />
+    <label for='charity'>For Charity:</label>
+    <input
+      type='text'
+      id='charity'
+      name='charity'
+      placeholder='For Charity...'
+      value='{{toy.charity}}'
+    />
+    <label for='price'>Price:</label>
+    <input
+      type='number'
+      id='price'
+      name='price'
+      placeholder='Price...'
+      value='{{toy.price}}'
+    />
+    <label for='description'>Description:</label>
+    <input
+      type='text'
+      id='description'
+      name='toy.description'
+      placeholder='Description...'
+      value='{{toy.description}}'
+    />
+    <label for='category'>Category:</label>
+    <input
+      type='text'
+      id='category'
+      name='category'
+      placeholder='Category...'
+      value='{{toy.category}}'
+    />
+    <input type='submit' class='edit' value='Edit Toy Offer' />
+  </form>
+</section>

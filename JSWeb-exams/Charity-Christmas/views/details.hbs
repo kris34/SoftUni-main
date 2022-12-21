@@ -20,7 +20,7 @@
         <!--If user is owner-->
         {{#if toy.isOwner}}
           <a href='/site/{{toy._id}}/edit' class='edit-btn'>Edit</a>
-          <a href='/site/{{_id}}/delete' class='delete-btn'>Delete</a>
+          <a href='/site/{{toy._id}}/delete' class='delete-btn'>Delete</a>
         {{/if}}
         <!--If user is not the owner and is bought this toy-->
         {{#if toy.hasBought}}

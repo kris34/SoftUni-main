@@ -56,21 +56,55 @@ siteController.get('/catalog', async (req, res) => {
 });
 
 siteController.get('/:id/details', async (req, res) => {
-  const toy = await getToy(req.params.id);
+  try {
+    const toy = await getToy(req.params.id);
 
-  toy.isOwner = toy.owner._id == req.user?._id?.toString();
-  toy.notOwner = toy.owner._id != req.user?._id?.toString();
-  toy.hasBought = toy.list.some((u) => u == req.user?._id?.toString());
-
-  res.render('details', {
-    title: 'Details Page',
-    toy,
-  });
+    toy.isOwner = toy.owner._id == req.user?._id?.toString();
+    toy.notOwner = toy.owner._id != req.user?._id?.toString();
+    toy.hasBought = toy.list.some((u) => u == req.user?._id?.toString());
+    
+    res.render('details', {
+      title: 'Details Page',
+      toy,
+    });
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('404', {
+      title: 'Page not found!',
+      errors,
+    });
+  }
 });
 
 siteController.get('/:id/buy', isGuest(), async (req, res) => {
-  await buyToy(req.user._id, req.params.id);
-  res.redirect('/');
+  try {
+    await buyToy(req.user._id, req.params.id);
+    res.redirect(`/site/${req.params.id}/details`);
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('404', {
+      title: 'Page not Found',
+      errors,
+    });
+  }
+});
+
+siteController.get('/:id/edit', isGuest(), async (req, res) => {
+  const toy = await getToy(req.params.id);
+
+  try {
+    res.render('edit', {
+      title: 'Edit Page',
+      toy,
+    });
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('edit', {
+      title: 'Edit Page',
+      toy,
+      errors,
+    });
+  }
 });
 
 module.exports = siteController;
