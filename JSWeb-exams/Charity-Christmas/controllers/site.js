@@ -140,4 +140,10 @@ siteController.get('/:id/delete', isGuest(), async (req, res) => {
   }
 });
 
+siteController.get('/search', isGuest(), (req, res) => {
+  res.render('search', {
+    title: 'Search Page',
+  });
+});
+
 module.exports = siteController;
