@@ -1,68 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<section class="search">
+  <h1>Search</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Charity Christmas</title>
-    <link rel="stylesheet" href="./css/styles.css">
-</head>
+  <form class="search-form" action="#" method="">
+    <input
+      type="text"
+      class="search-title"
+      name=""
+      placeholder="Search Title..."
+    />
+    <input
+      type="text"
+      class="search-charity"
+      name=""
+      placeholder="Search Charity..."
+    />
+    <button type="submit" class="btn-search">Search</button>
+  </form>
 
-<body>
+  <!--If there are matches after search-->
+  <div class="search-result">
+    <div class="search-list">
+      <a href="#" class="added-toys-in-market">
+        <img src="./image/picture1.jpg" class="picture-added-toys" />
+        <h3>Snowy pine Wooden tree toy</h3>
+        <span>Price: $33.00</span>
+      </a>
 
-    <div id="container">
-
-        <nav>
-            <ul>
-                <!--For all users-->
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Catalog</a></li>
-                <!--For loggin users-->
-                <li><a href="#">Create Toy</a></li>
-                <li><a href="#">Search</a></li>
-                <li><a href="#">Logout</a></li>
-                <!--For guest user-->
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-
-            </ul>
-
-        </nav>
-
-        <section class="search">
-            <h1>Search</h1>
-
-            <form class="search-form" action="#" method="">
-                <input type="text" class="search-title" name="" placeholder="Search Title...">
-                <input type="text" class="search-charity" name="" placeholder="Search Charity...">
-                <button type="submit" class="btn-search">Search</button>
-            </form>
-
-            <!--If there are matches after search-->
-            <div class="search-result">
-                <div class="search-list">
-                    <a href="#" class="added-toys-in-market">
-                        <img src="./image/picture1.jpg" class="picture-added-toys">
-                        <h3>Snowy pine Wooden tree toy</h3>
-                        <span>Price: $33.00</span>
-                    </a>
-
-                    <a href="#" class="added-toys-in-market">
-                        <img src="./image/picture2.jpg" class="picture-added-toys">
-                        <h3>Christmas felt set Christmas ornament</h3>
-                        <span>Price: $76.00</span>
-                    </a>
-                </div>
-
-            </div>
-            <!--If there are no matches-->
-            <!-- <div class="no-match">
+      <a href="#" class="added-toys-in-market">
+        <img src="./image/picture2.jpg" class="picture-added-toys" />
+        <h3>Christmas felt set Christmas ornament</h3>
+        <span>Price: $76.00</span>
+      </a>
+    </div>
+  </div>
+  <!--If there are no matches-->
+  <!-- <div class="no-match">
                 <p>No match was found!</p>
             </div> -->
-        </section>
-
-        <footer>@SoftUni - JS Back-end - Charity Christmas 2022</footer>
-    </div>
-
-</body>
-
-</html>
+</section>
