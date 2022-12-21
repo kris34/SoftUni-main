@@ -140,7 +140,7 @@ siteController.post('/:id/edit', isGuest(), async (req, res) => {
 
     await editToy(data, req.params.id);
 
-    res.redirect(`/site/catalog`);
+    res.redirect(`/site/${req.params.id}/details`);
   } catch (err) {
     const errors = parseError(err);
     res.render('edit', {
