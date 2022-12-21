@@ -1,29 +1,15 @@
-
-
-        <section id="viewCatalog" class="background-img">
-            <!--If there are one or more toys-->
-            <div class="added-toys">
-                <a href="#" class="added-toys-in-market">
-                    <img src="./image/picture1.jpg" class="picture-added-toys">
-                    <h3>Snowy pine Wooden tree toy</h3>
-                    <span>Price: $33.00</span>
-                </a>
-
-                <a href="#" class="added-toys-in-market">
-                    <img src="./image/picture2.jpg" class="picture-added-toys">
-                    <h3>Christmas felt set Christmas ornament</h3>
-                    <span>Price: $76.00</span>
-                </a>
-
-                <a href="#" class="added-toys-in-market">
-                    <img src="./image/picture3.jpg" class="picture-added-toys">
-                    <h3>Funny Christmas Tree</h3>
-                    <span>Price: $26.00</span>
-                </a>
-            </div>
-
-            <!--If there are no toys in catalog yet-->
-            <!-- <div class="guest">
-                There are no toys found...
-            </div> -->
-        </section>
+<section id='viewCatalog' class='background-img'>
+  <!--If there are one or more toys-->
+  {{#if toys}}
+    <div class='added-toys'>
+      {{#each toys}}
+      {{> toyCard}}
+      {{/each}}
+    </div>
+  {{else}}
+    <!--If there are no toys in catalog yet-->
+    <div class='guest'>
+      There are no toys found...
+    </div>
+  {{/if}}
+</section>

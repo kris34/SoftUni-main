@@ -1,7 +1,11 @@
+const { getAll } = require('../services/siteService');
+
 const homeController = require('express').Router();
 
 homeController.get('/', (req, res) => {
-  res.render('home');
+  res.render('home', {
+    title: 'Home Page',
+  });
 });
 
 module.exports = homeController;
