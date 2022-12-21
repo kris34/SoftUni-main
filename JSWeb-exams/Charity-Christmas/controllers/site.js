@@ -112,8 +112,32 @@ siteController.get('/:id/edit', isGuest(), async (req, res) => {
 siteController.post('/:id/edit', isGuest(), async (req, res) => {
   const toy = await getToy(req.params.id);
   const data = req.body;
-  console.log(data);
+  //console.log(data);
   try {
+    if (Number(data.price) < 0) {
+      throw new Error('Price cannot be negative!');
+    }
+
+    if (Object.values(data).some((v) => !v)) {
+      throw new Error('All fields required!');
+    }
+
+    if (data.description.length < 10) {
+      throw new Error('Description must be at least 10 charakters long!');
+    }
+
+    if (data.charity.length < 2) {
+      throw new Error('Charity must be at least 2 charakters long!');
+    }
+
+    if (data.title.length < 10) {
+      throw new Error('Title must be at least 10 charakters long!');
+    }
+
+    if (data.category.length < 5) {
+      throw new Error('Category must be at least 5 charakters long!');
+    }
+
     await editToy(data, req.params.id);
 
     res.redirect(`/site/catalog`);
