@@ -18,6 +18,7 @@ siteController.post('/create', async (req, res) => {
     description: req.body.description,
     category: req.body.category,
     imageUrl: req.body.imageUrl,
+    owner: req.user._id,
   };
 
   try {
@@ -28,7 +29,6 @@ siteController.post('/create', async (req, res) => {
     if (Number(data.price) < 0) {
       throw new Error('Price cannot be negative!');
     }
-
     const toy = await createToy(data);
 
     res.redirect('/site/catalog');
@@ -49,5 +49,9 @@ siteController.get('/catalog', async (req, res) => {
     toys,
   });
 });
+
+siteController.get("/:id/details", async (req,res) => { 
+    
+})
 
 module.exports = siteController;
