@@ -79,7 +79,19 @@ siteController.get('/:id/details', async (req, res) => {
 });
 
 siteController.get('/:id/buy', isGuest(), async (req, res) => {
+  const toy = await getToy(req.params.id);
+
   try {
+    if (toy.owner == req.user?._id) {
+      res.redirect(`/site/${req.params.id}/details`);
+      return;
+    }
+
+    if (toy.list.some((id) => id == req.user?._id)) {
+      res.redirect(`/site/${req.params.id}/details`);
+      return;
+    }
+
     await buyToy(req.user._id, req.params.id);
     res.redirect(`/site/${req.params.id}/details`);
   } catch (err) {
@@ -95,6 +107,11 @@ siteController.get('/:id/edit', isGuest(), async (req, res) => {
   const toy = await getToy(req.params.id);
 
   try {
+    if (toy.owner != req.user?._id) {
+      res.redirect(`/site/${req.params.id}/details`);
+      return;
+    }
+
     res.render('edit', {
       title: 'Edit Page',
       toy,
@@ -152,7 +169,14 @@ siteController.post('/:id/edit', isGuest(), async (req, res) => {
 });
 
 siteController.get('/:id/delete', isGuest(), async (req, res) => {
+  const toy = await getToy(req.params.id);
+
   try {
+    if (toy.owner != req.user?._id) {
+      res.redirect(`/site/${req.params.id}/details`);
+      return;
+    }
+
     await deleteToy(req.params.id);
     res.redirect(`/site/catalog`);
   } catch (err) {
