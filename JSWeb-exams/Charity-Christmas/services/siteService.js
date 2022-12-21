@@ -30,10 +30,15 @@ async function editToy(data, id) {
   existing.save();
 }
 
+async function deleteToy(id) {
+  return await Toy.findByIdAndDelete(id);
+}
+
 module.exports = {
   createToy,
   getAll,
   getToy,
   buyToy,
   editToy,
+  deleteToy
 };

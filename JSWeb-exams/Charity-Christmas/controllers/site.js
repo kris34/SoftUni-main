@@ -5,6 +5,7 @@ const {
   getToy,
   buyToy,
   editToy,
+  deleteToy,
 } = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
@@ -115,12 +116,25 @@ siteController.post('/:id/edit', isGuest(), async (req, res) => {
   try {
     await editToy(data, req.params.id);
 
-    res.redirect(`/site/${req.params.id}/details`);
+    res.redirect(`/site/catalog`);
   } catch (err) {
     const errors = parseError(err);
     res.render('edit', {
       title: 'Edit Page',
       toy,
+      errors,
+    });
+  }
+});
+
+siteController.get('/:id/delete', isGuest(), async (req, res) => {
+  try {
+    await deleteToy(req.params.id);
+    res.redirect(`/site/catalog`);
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('404', {
+      title: 'Page not Found',
       errors,
     });
   }
