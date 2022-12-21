@@ -82,7 +82,7 @@ siteController.get('/:id/buy', isGuest(), async (req, res) => {
   const toy = await getToy(req.params.id);
 
   try {
-    if (toy.owner == req.user?._id) {
+    if (toy.owner._id == req.user?._id) {
       res.redirect(`/site/${req.params.id}/details`);
       return;
     }
@@ -153,6 +153,11 @@ siteController.post('/:id/edit', isGuest(), async (req, res) => {
 
     if (data.category.length < 5) {
       throw new Error('Category must be at least 5 charakters long!');
+    }
+
+    if (toy.owner != req.user?._id) {
+      res.redirect(`/site/${req.params.id}/details`);
+      return;
     }
 
     await editToy(data, req.params.id);
