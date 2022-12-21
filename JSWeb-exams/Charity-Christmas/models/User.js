@@ -6,9 +6,18 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    minlength: [3, 'Username must be at least 3 charakters long!'],
+    minlength: [4, 'Username must be at least 3 charakters long!'],
   },
-  hashedPassword: { type: String, required: true },
+  email: {
+    type: String,
+    required: true,
+    minlength: [10, 'Email should be at least 10 charakters long!'],
+  },
+  hashedPassword: {
+    type: String,
+    required: true,
+    minlength: [4, 'Password must be at least 4 charakters long!'],
+  },
 });
 
 userSchema.index(
