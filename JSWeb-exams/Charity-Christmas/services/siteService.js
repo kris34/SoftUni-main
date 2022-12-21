@@ -12,8 +12,15 @@ async function getAll() {
   return await Toy.find({}).lean();
 }
 
+async function buyToy(userId, toyId) {
+  const toy = await Toy.findById(toyId);
+  toy.list.push(userId);
+  toy.save();
+}
+
 module.exports = {
   createToy,
   getAll,
   getToy,
+  buyToy
 };

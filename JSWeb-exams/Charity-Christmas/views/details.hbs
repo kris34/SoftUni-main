@@ -12,12 +12,20 @@
     {{#if email}}
       <div class='buttons'>
         <!--If user is not owner of the toy post-->
-        <a href='/site/buy' class='buy-btn'>Buy</a>
+        {{#unless toy.hasBought}}
+          {{#if toy.notOwner}}
+            <a href='/site/{{toy._id}}/buy' class='buy-btn'>Buy</a>
+          {{/if}}
+        {{/unless}}
         <!--If user is owner-->
-        <a href='/site/{{_id}}/edit' class='edit-btn'>Edit</a>
-        <a href='/site/{{_id}}/delete' class='delete-btn'>Delete</a>
+        {{#if toy.isOwner}}
+          <a href='/site/{{toy._id}}/edit' class='edit-btn'>Edit</a>
+          <a href='/site/{{_id}}/delete' class='delete-btn'>Delete</a>
+        {{/if}}
         <!--If user is not the owner and is bought this toy-->
-        <p><span class='buy'>Thank You For Your Purchase :)</span></p>
+        {{#if toy.hasBought}}
+          <p><span class='buy'>Thank You For Your Purchase :)</span></p>
+        {{/if}}
       </div>
     {{/if}}
   </div>

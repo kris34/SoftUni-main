@@ -1,5 +1,10 @@
 const { isGuest } = require('../middlewares/guards');
-const { createToy, getAll, getToy } = require('../services/siteService');
+const {
+  createToy,
+  getAll,
+  getToy,
+  buyToy,
+} = require('../services/siteService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -53,10 +58,19 @@ siteController.get('/catalog', async (req, res) => {
 siteController.get('/:id/details', async (req, res) => {
   const toy = await getToy(req.params.id);
 
+  toy.isOwner = toy.owner._id == req.user?._id?.toString();
+  toy.notOwner = toy.owner._id != req.user?._id?.toString();
+  toy.hasBought = toy.list.some((u) => u == req.user?._id?.toString());
+
   res.render('details', {
     title: 'Details Page',
     toy,
   });
+});
+
+siteController.get('/:id/buy', isGuest(), async (req, res) => {
+  await buyToy(req.user._id, req.params.id);
+  res.redirect('/');
 });
 
 module.exports = siteController;
