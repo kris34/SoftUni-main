@@ -1,5 +1,6 @@
 const { register, login } = require('../services/userService');
 const { parseError } = require('../util/parser');
+const validator = require('validator');
 
 const authController = require('express').Router();
 
@@ -11,7 +12,11 @@ authController.get('/register', (req, res) => {
 
 authController.post('/register', async (req, res) => {
   try {
-    if (req.body.username == '' || req.body.password == '' || req.body.email == '') {
+    if (
+      req.body.username == '' ||
+      req.body.password == '' ||
+      req.body.email == ''
+    ) {
       throw new Error('All fields are required!');
     }
 
@@ -19,7 +24,15 @@ authController.post('/register', async (req, res) => {
       throw new Error('Passwords dont match!');
     }
 
-    const token = await register(req.body.username, req.body.email, req.body.password);
+    if (validator.isEmail(req.body.email) == false) {
+      throw new Error('Invalid email!');
+    }
+
+    const token = await register(
+      req.body.username,
+      req.body.email,
+      req.body.password
+    );
     //TODO check assignment to see if register creates session
     res.cookie('token', token);
     res.redirect('/'); //TODO replace with redirect by assignment
