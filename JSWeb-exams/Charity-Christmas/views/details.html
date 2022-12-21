@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Charity Christmas</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+
+    <div id="container">
+
+        <nav>
+            <ul>
+                <!--For all users-->
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Catalog</a></li>
+                <!--For loggin users-->
+                <li><a href="#">Create Toy</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Logout</a></li>
+                <!--For guest user-->
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Register</a></li>
+
+            </ul>
+
+        </nav>
+
+        <section id="detailsPage">
+            <div id="detailsInfo">
+                <h1>Title: Funny Christmas Tree</h1>
+                <div class="info"><img src="./image/picture3.jpg"></div>
+                <div class="info">
+                    <h3>CHARITY: Red Cross</h3>
+                    <h3>CATEGORY: Christmas Tree</h3>
+                    <h3>DESCRIPTION: Here we have funny and naughty Christmas tree she will be as remarkable new year's table decoration and funny toy.</h3>
+                    <h2>PRICE: $26.00</h2>
+                </div>
+                <!--If there is user logged in-->
+                <div class="buttons">
+                    <!--If user is not owner of the toy post-->
+                    <a href="#" class="buy-btn">Buy</a>
+                    <!--If user is owner-->
+                    <a href="#" class="edit-btn">Edit</a>
+                    <a href="#" class="delete-btn">Delete</a>
+                    <!--If user is not the owner and is bought this toy-->
+                    <p><span class="buy">Thank You For Your Purchase :)</span></p>
+                </div>
+            </div>
+        </section>
+
+        <footer>@SoftUni - JS Back-end - Charity Christmas 2022</footer>
+    </div>
+
+</body>
+
+</html>
