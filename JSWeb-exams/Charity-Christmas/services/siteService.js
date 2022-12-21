@@ -18,11 +18,22 @@ async function buyToy(userId, toyId) {
   toy.save();
 }
 
+async function editToy(data, id) {
+  const existing = await Toy.findById(id);
 
+  existing.title = data.title;
+  existing.charity = data.charity;
+  existing.price = data.price;
+  existing.description = data.description;
+  existing.category = data.category;
+
+  existing.save();
+}
 
 module.exports = {
   createToy,
   getAll,
   getToy,
-  buyToy
+  buyToy,
+  editToy,
 };
