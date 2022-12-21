@@ -1,21 +1,46 @@
 <html lang='en'>
+
   <head>
     <meta charset='UTF-8' />
-    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <title>{{title}}</title>
+    <title>Charity Christmas</title>
+    <link rel='stylesheet' href='/static/css/styles.css' />
   </head>
+
   <body>
-    <a href='/auth/login'>Login</a>
-    <a href='/auth/register'>Register</a>
-    <a href='/auth/logout'>Logout</a>
-    {{#if errors}}
-      <div>
-        {{#each errors}}
-          <p>{{this}}</p>
-        {{/each}}
-      </div>
-    {{/if}}
-    {{{body}}}
+    <!-- In case of error, you should display div with class "errorContainer" -->
+    <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
+
+    <!-- <div>
+        <div class="errorContainer">
+            <p>Error</p>
+        </div>
+    </div> -->
+
+    <div id='container'>
+
+      <nav>
+        <ul>
+          <!--For all users-->
+          <li><a href='/'>Home</a></li>
+          <li><a href='/site/catalog'>Catalog</a></li>
+          <!--For loggin users-->
+          <li><a href='/site/create'>Create Toy</a></li>
+          <li><a href='/site/search'>Search</a></li>
+          <li><a href='/auth/logout'>Logout</a></li>
+          <!--For guest user-->
+          <li><a href='/auth/login'>Login</a></li>
+          <li><a href='/auth/register'>Register</a></li>
+
+        </ul>
+
+      </nav>
+      <main>
+        {{{body}}}
+      </main>
+
+      <footer>@SoftUni - JS Back-end - Charity Christmas 2022</footer>
+    </div>
+
   </body>
+
 </html>
