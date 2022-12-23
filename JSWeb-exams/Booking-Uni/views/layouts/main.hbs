@@ -1,44 +1,45 @@
 
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
-<head>
-    <meta charset="UTF-8">
-    <title>BookingUni</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<nav>
-    <div>
-            <div class="notification loadingBox">
-                Loading …
-            </div>
-            <div class="notification infoBox">
-                <span>Info</span>
-            </div>
-            <div class="notification errorBox">
-                {{#if errors}}
-                {{#each errors}}
-                <span>{{this}}</span>
-                {{/each}}
-                {{/if}}
-            </div>
+  <head>
+    <meta charset='UTF-8' />
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/static/css/style.css' />
+  </head>
+
+  <body>
+
+    <div id='container'>
+      {{#if errors}}
+        <div>
+          <div class='notification errorBox'>
+            {{#each errors}}
+              <span>{{this}}</span>
+            {{/each}}
+          </div>
         </div>
-    <div class="left-container">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/site/create">Add +</a></li>
-        </ul>
-    </div>
-    <div class="right-container">
-        {{#if user}}
-        <a href="/site/profile" class="log-out">{{name}}</a>
-        <a href="/auth/logout" class="log-out">Logout</a>
-        {{else}}
-        <a href="/auth/login" class="login">Login</a>
-        <a href="/auth/register" class="register">Register</a>
+      {{/if}}
+
+      <nav>
+        <div class='left-container'>
+          <ul>
+            <li><a href='/'>Home</a></li>
+            {{#if email}}
+              <li><a href='/site/create'>Add +</a></li>
+            {{else}}
+              <li><a href='/auth/login'>Login</a></li>
+              <li><a href='/auth/register'>Register</a></li>
+            {{/if}}
+          </ul>
+        </div>
+        {{#if email}}
+          <div class='right-container'>
+            <a href='/profile' class='log-out'>{{email}}</a>
+            <a href='/auth/logout' class='log-out'>Logout</a>
+          </div>
         {{/if}}
-    </div>
-</nav>
+
+      </nav>
 
       {{{body}}}
 
