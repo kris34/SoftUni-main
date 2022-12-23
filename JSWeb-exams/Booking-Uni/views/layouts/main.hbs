@@ -1,27 +1,44 @@
-<html lang='en'>
 
-  <head>
-    <meta charset='UTF-8' />
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
     <title>BookingUni</title>
-    <link rel='stylesheet' href='../static/css/style.css' />
-  </head>
-
-  <body>
-
-    <div id='container'>
-
-      <nav>
-        <div class='left-container'>
-          <ul>
-            <li><a href=''>Home</a></li>
-            <li><a href=''>Add +</a></li>
-          </ul>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<nav>
+    <div>
+            <div class="notification loadingBox">
+                Loading …
+            </div>
+            <div class="notification infoBox">
+                <span>Info</span>
+            </div>
+            <div class="notification errorBox">
+                {{#if errors}}
+                {{#each errors}}
+                <span>{{this}}</span>
+                {{/each}}
+                {{/if}}
+            </div>
         </div>
-        <div class='right-container'>
-          <a href='' class='log-out'>{{name}}</a>
-          <a href='' class='log-out'>Logout</a>
-        </div>
-      </nav>
+    <div class="left-container">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/site/create">Add +</a></li>
+        </ul>
+    </div>
+    <div class="right-container">
+        {{#if user}}
+        <a href="/site/profile" class="log-out">{{name}}</a>
+        <a href="/auth/logout" class="log-out">Logout</a>
+        {{else}}
+        <a href="/auth/login" class="login">Login</a>
+        <a href="/auth/register" class="register">Register</a>
+        {{/if}}
+    </div>
+</nav>
 
       {{{body}}}
 
