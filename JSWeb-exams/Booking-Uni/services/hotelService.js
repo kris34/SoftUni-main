@@ -14,4 +14,6 @@ async function getAll() {
 
 module.exports = {
   createHotel,
+  getOne,
+  getAll,
 };
