@@ -8,7 +8,9 @@ async function getOne(id) {
   return await Hotel.findById(id).populate('owner').lean();
 }
 
-async func
+async function getAll() {
+  return await Hotel.find({}).populate('owner').lean();
+}
 
 module.exports = {
   createHotel,
