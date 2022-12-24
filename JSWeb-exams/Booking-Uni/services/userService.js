@@ -9,7 +9,7 @@ async function register(email, username, password) {
     locale: 'en',
     strength: 2,
   });
-  
+
   const existingUsername = await User.findOne({ username }).collation({
     locale: 'en',
     strength: 2,
@@ -36,14 +36,14 @@ async function register(email, username, password) {
   return createSession(user);
 }
 
-async function login(email, password) {
-  const user = await User.findOne({ email }).collation({
+async function login(username, password) {
+  const user = await User.findOne({ username }).collation({
     locale: 'en',
     strength: 2,
   });
 
   if (!user) {
-    throw new Error('Incorrect email or password!');
+    throw new Error('Incorrect username or password!');
   }
   const hasMatch = await bcrypt.compare(password, user.hashedPassword);
 
