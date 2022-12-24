@@ -1,10 +1,39 @@
+const { isGuest } = require('../middlewares/guards');
+const { createHotel } = require('../services/hotelService');
+const { parseError } = require('../util/parser');
+
 const siteController = require('express').Router();
 
-siteController.get('/create', (req, res) => {
+siteController.get('/create', isGuest(), (req, res) => {
   res.render('create', {
     title: 'Create Page',
   });
 });
 
+siteController.post('/create', async (req, res) => {
+  const data = {
+    name: req.body.name,
+    city: req.body.city,
+    freeRooms: req.body.freeRooms,
+    imageUrl: req.body.imageUrl,
+    owner: req.user._id,
+  };
 
-module.exports = siteController
+  try {
+    if (Object.values(data).some((v) => !v)) {
+      throw new Error('All fields required!');
+    }
+
+    await createHotel(data);
+
+    res.redirect('/');
+  } catch (err) {
+    const errors = parseError(err);
+    res.render('create', {
+      title: 'Create Page',
+      errors,
+    });
+  }
+});
+
+module.exports = siteController;
