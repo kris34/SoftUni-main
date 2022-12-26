@@ -1,5 +1,5 @@
 const { isGuest } = require('../middlewares/guards');
-const { createHotel } = require('../services/hotelService');
+const { createHotel, getOne } = require('../services/hotelService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -36,6 +36,13 @@ siteController.post('/create', async (req, res) => {
   }
 });
 
+siteController.get('/:id/details', async (req, res) => {
+  const hotel = await getOne(req.params.id);
 
+  res.render('details', {
+    title: 'Details Page',
+    hotel,
+  });
+});
 
 module.exports = siteController;

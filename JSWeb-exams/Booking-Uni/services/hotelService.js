@@ -12,6 +12,8 @@ async function getAll() {
   return await Hotel.find({}).populate('owner').lean();
 }
 
+
+
 module.exports = {
   createHotel,
   getOne,
