@@ -1,5 +1,5 @@
 const { isGuest } = require('../middlewares/guards');
-const { createHotel, getOne } = require('../services/hotelService');
+const { createHotel, getOne, getUser } = require('../services/hotelService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -24,7 +24,10 @@ siteController.post('/create', async (req, res) => {
       throw new Error('All fields required!');
     }
 
-    await createHotel(data);
+    const user = await getUser(req.user?._id);
+    const hotel = await createHotel(data);
+    user.offered.push(hotel._id);
+    user.save();
 
     res.redirect('/');
   } catch (err) {
