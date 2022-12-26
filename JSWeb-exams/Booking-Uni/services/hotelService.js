@@ -15,10 +15,11 @@ async function getAll() {
 
 async function bookHotel(userId, hotelId) {
   const hotel = await Hotel.findById(hotelId);
-
+  const user = await User.findById(userId);
+  user.booked.push(hotelId);
   hotel.bookedUsers.push(userId);
 
-  hotel.save();
+  return user.save(), hotel.save();
 }
 
 async function getUser(id) {
@@ -30,5 +31,5 @@ module.exports = {
   getOne,
   getAll,
   bookHotel,
-  getUser
+  getUser,
 };
