@@ -39,7 +39,8 @@ siteController.post('/create', async (req, res) => {
 siteController.get('/:id/details', async (req, res) => {
   const hotel = await getOne(req.params.id);
 
-  
+  hotel.isOwner = hotel.owner._id.toString() == req.user?._id?.toString();
+  hotel.isBoked = hotel.bookedUsers.includes(req.user?._id?.toString());
 
   res.render('details', {
     title: 'Details Page',
