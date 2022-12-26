@@ -39,6 +39,8 @@ siteController.post('/create', async (req, res) => {
 siteController.get('/:id/details', async (req, res) => {
   const hotel = await getOne(req.params.id);
 
+  
+
   res.render('details', {
     title: 'Details Page',
     hotel,
