@@ -48,7 +48,10 @@ siteController.get('/:id/details', async (req, res) => {
   const hotel = await getOne(req.params.id);
 
   hotel.isOwner = hotel.owner._id.toString() == req.user?._id?.toString();
-  hotel.isBooked = hotel.bookedUsers.includes(req.user?._id?.toString());
+  hotel.isBooked = hotel.bookedUsers.some((v) => v == req.user._id);
+  hotel.freeRooms--;
+
+  //console.log(hotel.bookedUsers.some((v) => v == req.user._id));
 
   res.render('details', {
     title: 'Details Page',
