@@ -25,7 +25,7 @@ async function bookHotel(userId, hotelId) {
 }
 
 async function getUser(id) {
-  return await User.findById(id);
+  return await User.findById(id).lean();
 }
 
 module.exports = {
