@@ -1,5 +1,10 @@
 const { isGuest } = require('../middlewares/guards');
-const { createHotel, getOne, getUser } = require('../services/hotelService');
+const {
+  createHotel,
+  getOne,
+  getUser,
+  bookHotel,
+} = require('../services/hotelService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -43,7 +48,7 @@ siteController.get('/:id/details', async (req, res) => {
   const hotel = await getOne(req.params.id);
 
   hotel.isOwner = hotel.owner._id.toString() == req.user?._id?.toString();
-  hotel.isBoked = hotel.bookedUsers.includes(req.user?._id?.toString());
+  hotel.isBooked = hotel.bookedUsers.includes(req.user?._id?.toString());
 
   res.render('details', {
     title: 'Details Page',
@@ -51,6 +56,15 @@ siteController.get('/:id/details', async (req, res) => {
   });
 });
 
+siteController.get('/:id/book', async (req, res) => {
+  try {
+    await bookHotel(req.user?._id, req.params.id);
 
+    res.redirect(`/site/${req.params.id}/details`);
+  } catch (err) {
+    const errors = parseError(err);
+    console.log(errors);
+  }
+});
 
 module.exports = siteController;

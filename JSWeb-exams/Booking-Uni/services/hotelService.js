@@ -16,6 +16,7 @@ async function getAll() {
 async function bookHotel(userId, hotelId) {
   const hotel = await Hotel.findById(hotelId);
   const user = await User.findById(userId);
+  console.log(user);
   user.booked.push(hotelId);
   hotel.bookedUsers.push(userId);
 
