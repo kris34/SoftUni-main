@@ -19,6 +19,7 @@ async function bookHotel(userId, hotelId) {
   console.log(user);
   user.booked.push(hotelId);
   hotel.bookedUsers.push(userId);
+  hotel.freeRooms--;
 
   return user.save(), hotel.save();
 }

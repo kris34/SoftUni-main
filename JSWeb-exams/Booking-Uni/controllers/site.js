@@ -49,8 +49,7 @@ siteController.get('/:id/details', async (req, res) => {
 
   hotel.isOwner = hotel.owner._id.toString() == req.user?._id?.toString();
   hotel.isBooked = hotel.bookedUsers.some((v) => v == req.user._id);
-  hotel.freeRooms--;
-
+ 
   //console.log(hotel.bookedUsers.some((v) => v == req.user._id));
 
   res.render('details', {
