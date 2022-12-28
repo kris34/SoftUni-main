@@ -1,12 +1,27 @@
 const Hotel = require('../models/hotel');
 const User = require('../models/User');
 
-async function createHotel(data) {
-  return await Hotel.create(data);
+async function createHotel(data, userID) {
+  const user = await User.findById(userID);
+  const hotel = await Hotel.create(data);
+  user.offered.push(hotel._id);
+
+  return user.save();
 }
 
 async function getOne(id) {
   return await Hotel.findById(id).populate('owner').lean();
+}
+
+async function getUserHotels(idArr) {
+  let result = [];
+
+  for (let id of idArr) {
+    let hotel = await Hotel.findById(id).lean();
+    result.push(hotel.name);
+  }
+
+  return result.join(', ');
 }
 
 async function getAll() {
@@ -34,4 +49,5 @@ module.exports = {
   getAll,
   bookHotel,
   getUser,
+  getUserHotels,
 };

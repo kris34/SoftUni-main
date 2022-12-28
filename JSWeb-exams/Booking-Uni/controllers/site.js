@@ -4,6 +4,8 @@ const {
   getOne,
   getUser,
   bookHotel,
+  getAll,
+  getUserHotels,
 } = require('../services/hotelService');
 const { parseError } = require('../util/parser');
 
@@ -29,10 +31,7 @@ siteController.post('/create', isGuest(), async (req, res) => {
       throw new Error('All fields required!');
     }
 
-    const user = await getUser(req.user?._id);
-    const hotel = await createHotel(data);
-    user.offered.push(hotel._id);
-    user.save();
+    await createHotel(data, req.user?._id);
 
     res.redirect('/');
   } catch (err) {
@@ -45,10 +44,10 @@ siteController.post('/create', isGuest(), async (req, res) => {
 });
 
 siteController.get('/:id/details', async (req, res) => {
-  const hotel = await getOne(req.params.id);
+  const hotel = await getOne(req.params.id); 
 
   hotel.isOwner = hotel.owner._id.toString() == req.user?._id?.toString();
-  hotel.isBooked = hotel.bookedUsers.some((v) => v == req.user._id);
+  hotel.isBooked = hotel.bookedUsers.some((v) => v == req.user?._id);
 
   //console.log(hotel.bookedUsers.some((v) => v == req.user._id));
 
@@ -83,13 +82,17 @@ siteController.get('/:id/book', isGuest(), async (req, res) => {
   }
 });
 
-siteController.get('/profile', async (req, res) => {
+siteController.get('/profile', isGuest(), async (req, res) => {
   const user = await getUser(req.user._id);
+
+  const hotels = await getUserHotels(user.booked);
 
   res.render('profile', {
     title: 'User Profile',
     user,
+    hotels,
   });
 });
 
 module.exports = siteController;
+ 

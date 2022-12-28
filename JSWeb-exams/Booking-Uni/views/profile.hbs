@@ -11,14 +11,16 @@
     <div class='flex'>
       <p>Email: </p>
       <p>{{user.email}}</p>
-    </div>
-    <div class='flex'>
-      <p>Reservations: </p>
-      <p>
-        <span>Hilton Toronto, </span>
-        <span>Auckland Inn, </span>
-        <span>Hotel Berlin, </span>
-      </p>
-    </div>
+    </div> 
+    {{#if hotels}}
+      <div class='flex'>
+        <p>Reservations: </p>
+        <p>
+          {{#each hotels}}
+            <span>{{this}} </span>
+          {{/each}}
+        </p>
+      </div>
+    {{/if}}
   </div>
 </section>
