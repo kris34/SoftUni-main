@@ -11,16 +11,14 @@
     <div class='flex'>
       <p>Email: </p>
       <p>{{user.email}}</p>
-    </div> 
-    {{#if hotels}}
-      <div class='flex'>
-        <p>Reservations: </p>
-        <p>
-          {{#each hotels}}
-            <span>{{this}} </span>
-          {{/each}}
-        </p>
-      </div>
-    {{/if}}
+    </div>
+    <div class='flex'>
+      <p>Reservations: </p>
+      <p>
+        {{#each bookings}}
+          <span>{{name}}, </span>
+        {{/each}}
+      </p>
+    </div>
   </div>
 </section>

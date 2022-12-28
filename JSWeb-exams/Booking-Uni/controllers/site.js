@@ -1,4 +1,5 @@
 const { isGuest } = require('../middlewares/guards');
+const User = require('../models/User');
 const {
   createHotel,
   getOne,
@@ -6,6 +7,7 @@ const {
   bookHotel,
   getAll,
   getUserHotels,
+  getUserBookings,
 } = require('../services/hotelService');
 const { parseError } = require('../util/parser');
 
@@ -44,7 +46,7 @@ siteController.post('/create', isGuest(), async (req, res) => {
 });
 
 siteController.get('/:id/details', async (req, res) => {
-  const hotel = await getOne(req.params.id); 
+  const hotel = await getOne(req.params.id);
 
   hotel.isOwner = hotel.owner._id.toString() == req.user?._id?.toString();
   hotel.isBooked = hotel.bookedUsers.some((v) => v == req.user?._id);
@@ -83,16 +85,14 @@ siteController.get('/:id/book', isGuest(), async (req, res) => {
 });
 
 siteController.get('/profile', isGuest(), async (req, res) => {
-  const user = await getUser(req.user._id);
+  const user = await User.findById(req.user?._id).lean();
 
-  const hotels = await getUserHotels(user.booked);
-
+  const bookings = await getUserBookings(req.user?._id);
   res.render('profile', {
     title: 'User Profile',
     user,
-    hotels,
+    bookings,
   });
 });
 
 module.exports = siteController;
- 

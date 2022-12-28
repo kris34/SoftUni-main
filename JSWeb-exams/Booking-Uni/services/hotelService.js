@@ -13,15 +13,8 @@ async function getOne(id) {
   return await Hotel.findById(id).populate('owner').lean();
 }
 
-async function getUserHotels(idArr) {
-  let result = [];
-
-  for (let id of idArr) {
-    let hotel = await Hotel.findById(id).lean();
-    result.push(hotel.name);
-  }
-
-  return result.join(', ');
+async function getUserBookings(id) {
+  return await Hotel.find({ bookedUsers: id }).lean();
 }
 
 async function getAll() {
@@ -49,5 +42,5 @@ module.exports = {
   getAll,
   bookHotel,
   getUser,
-  getUserHotels,
+  getUserBookings,
 };
