@@ -129,6 +129,12 @@ siteController.post('/:id/edit', async (req, res) => {
 });
 
 siteController.get('/:id/delete', isGuest(), async (req, res) => {
+  const hotel = await getOne(req.params.id);
+  if (req.user?._id != hotel.owner._id) {
+    res.redirect(`/site/${req.params.id}/details`);
+    return;
+  }
+
   await deleteHotel(req.params.id);
 
   res.redirect('/');
