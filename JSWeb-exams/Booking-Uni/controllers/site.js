@@ -8,6 +8,7 @@ const {
   getAll,
   getUserHotels,
   getUserBookings,
+  updateHotel,
 } = require('../services/hotelService');
 const { parseError } = require('../util/parser');
 
@@ -64,13 +65,13 @@ siteController.get('/:id/book', isGuest(), async (req, res) => {
     const hotel = await getOne(req.params.id);
 
     if (req.user?._id == hotel.owner._id) {
-      throw new Error('Cannot book your own hotel!');
+      // throw new Error('Cannot book your own hotel!');
       res.redirect(`/site/${req.params.id}/details`);
       return;
     }
 
     if (hotel.bookedUsers.some((v) => v == req.user._id)) {
-      throw new Error('Cannot book twice!');
+      //  throw new Error('Cannot book twice!');
       res.redirect(`/site/${req.params.id}/details`);
       return;
     }
@@ -93,6 +94,37 @@ siteController.get('/profile', isGuest(), async (req, res) => {
     user,
     bookings,
   });
+});
+
+siteController.get('/:id/edit', isGuest(), async (req, res) => {
+  const hotel = await getOne(req.params.id);
+
+  if (hotel.owner._id != req.user._id) {
+    res.redirect(`/site/${req.params.id}/details`);
+    return;
+  }
+
+  res.render('edit', {
+    title: 'Edit Hotel',
+    hotel,
+  });
+});
+
+siteController.post('/:id/edit', async (req, res) => {
+  const data = req.body;
+
+  try {
+    await updateHotel(data, req.params.id);
+
+    res.redirect(`/site/${req.params.id}/details`);
+  } catch (err) {
+    const errors = parseError(err);
+    
+    res.render("edit", { 
+      title: "Edit Page",
+      
+    })
+  }
 });
 
 module.exports = siteController;

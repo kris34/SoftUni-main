@@ -36,6 +36,17 @@ async function getUser(id) {
   return await User.findById(id).lean();
 }
 
+async function updateHotel(data, id) {
+  const hotel = await Hotel.findById(id);
+
+  hotel.name = data.name;
+  hotel.city = data.city;
+  hotel.imageUrl = data.imageUrl;
+  hotel.freeRooms = data.freeRooms;
+
+  return hotel.save();
+}
+
 module.exports = {
   createHotel,
   getOne,
@@ -43,4 +54,5 @@ module.exports = {
   bookHotel,
   getUser,
   getUserBookings,
+  updateHotel
 };
