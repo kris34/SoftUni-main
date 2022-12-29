@@ -9,6 +9,7 @@ const {
   getUserHotels,
   getUserBookings,
   updateHotel,
+  deleteHotel,
 } = require('../services/hotelService');
 const { parseError } = require('../util/parser');
 
@@ -111,20 +112,26 @@ siteController.get('/:id/edit', isGuest(), async (req, res) => {
 });
 
 siteController.post('/:id/edit', async (req, res) => {
-  const data = req.body;
+  const hotel = req.body;
 
   try {
-    await updateHotel(data, req.params.id);
+    await updateHotel(hotel, req.params.id);
 
     res.redirect(`/site/${req.params.id}/details`);
   } catch (err) {
     const errors = parseError(err);
-    
-    res.render("edit", { 
-      title: "Edit Page",
-      
-    })
+    res.render('edit', {
+      title: 'Edit Page',
+      hotel,
+      errors,
+    });
   }
+});
+
+siteController.get('/:id/delete', isGuest(), async (req, res) => {
+  await deleteHotel(req.params.id);
+
+  res.redirect('/');
 });
 
 module.exports = siteController;

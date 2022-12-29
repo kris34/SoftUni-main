@@ -47,6 +47,10 @@ async function updateHotel(data, id) {
   return hotel.save();
 }
 
+async function deleteHotel(id) {
+  return await Hotel.findByIdAndDelete(id);
+}
+
 module.exports = {
   createHotel,
   getOne,
@@ -54,5 +58,6 @@ module.exports = {
   bookHotel,
   getUser,
   getUserBookings,
-  updateHotel
+  updateHotel,
+  deleteHotel
 };
