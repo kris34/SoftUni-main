@@ -9,7 +9,7 @@ const userSchema = new Schema({
     unique: true,
     minlength: [3, 'Username must be at least 3 charakters long!'],
   },
-  hashedPassword: { type: String, required: true },
+  hashedPassword: { type: String, required: true, minlength: [5, "Password cannot be shorter than 5 charakters!"] },
   booked: { type: [Types.ObjectId], ref: 'Hotel', default: [] },
   offered: { type: [Types.ObjectId], ref: 'Hotel', default: [] },
 });
