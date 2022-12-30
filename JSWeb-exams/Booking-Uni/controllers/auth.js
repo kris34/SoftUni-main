@@ -1,5 +1,6 @@
 const { register, login } = require('../services/userService');
 const { parseError } = require('../util/parser');
+const validator = require('validator');
 
 const authController = require('express').Router();
 
@@ -21,6 +22,10 @@ authController.post('/register', async (req, res) => {
 
     if (req.body.password != req.body.repass) {
       throw new Error('Passwords dont match!');
+    }
+    
+    if (validator.isEmail(req.body.email) == false) {
+      throw new Error('Invalid email!');
     }
 
     const token = await register(
