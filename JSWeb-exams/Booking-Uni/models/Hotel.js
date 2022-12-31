@@ -29,3 +29,5 @@ const hotelSchema = new Schema({
 const Hotel = new model('Hotel', hotelSchema);
 
 module.exports = Hotel;
+
+
