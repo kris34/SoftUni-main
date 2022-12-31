@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('./middlewares/cors');
 const mongoose = require('mongoose');
+const authController = require('./controllers/authController');
 
 const connectionString = 'mongodb://localhost:27017/furniture';
 
-start()
+start();
 
 async function start() {
   await mongoose.connect(connectionString);
@@ -19,5 +20,9 @@ async function start() {
     res.json({ message: 'REST service operational' });
   });
 
+  app.use('/users', authController);
+
+
+  
   app.listen(3030, () => console.log('Rest service operational'));
 }

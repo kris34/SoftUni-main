@@ -15,13 +15,19 @@ async function register(email, password) {
 
   const user = await User.create({
     email,
-    hashedPassword: bcrypt.hash(password, 10),
+    hashedPassword: await bcrypt.hash(password, 10),
   });
 
-  return createToken(user);
-};
+  return {
+    _id: user._id,
+    email: user.email,
+    accessToken: createToken(user),
+  };
+}
 
 async function login(email, password) {}
+
+async function logout() {}
 
 function createToken(user) {
   const payload = {
@@ -33,3 +39,12 @@ function createToken(user) {
 
   return token;
 }
+
+function parseToken(token) {}
+
+module.exports = {
+  register,
+  login,
+  logout,
+  parseToken,
+};
