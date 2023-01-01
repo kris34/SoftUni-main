@@ -1,4 +1,4 @@
-const { register, login } = require('../services/userService');
+const { register, login, logout } = require('../services/userService');
 const { body, validationResult } = require('express-validator');
 const { parseError } = require('../util/parser');
 
@@ -42,7 +42,8 @@ authController.post('/login', async (req, res) => {
 });
 
 authController.get('/logout', async (req, res) => {
-  const token = req.headers['X-authorization'];
+  const token = req.token;
+  console.log(token);
   await logout(token);
   res.status(204).end();
 });
