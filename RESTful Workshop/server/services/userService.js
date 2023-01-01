@@ -59,7 +59,13 @@ function createToken(user) {
   };
 }
 
-function parseToken(token) {}
+function parseToken(token) {
+  if (tokenBlacklist.has(token)) {
+    throw new Error('Token is blacklisted');
+  }
+
+  return jwt.verify(token, secret);
+}
 
 module.exports = {
   register,
