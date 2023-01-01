@@ -34,8 +34,9 @@ authController.post('/login', async (req, res) => {
     const token = await login(req.body.email, req.body.password);
     res.json(token);
   } catch (error) {
+    const message = parseError(error);
     res.status(401).json({
-      message: error.message,
+      message,
     });
   }
 });
