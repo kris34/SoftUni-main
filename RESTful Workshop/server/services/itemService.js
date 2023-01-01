@@ -4,6 +4,10 @@ async function getAll() {
   return Item.find({});
 }
 
+async function getByUserId(userId) {
+  return Item.find({ _ownerId: userId });
+}
+
 async function getById(id) {
   return Item.findById(id);
 }
@@ -27,11 +31,12 @@ async function update(id, item) {
 }
 
 async function deleteById(id) {
-  return Item.findOneAndDelete(id);
+  return Item.findByIdAndDelete(id);
 }
 
 module.exports = {
   getAll,
+  getByUserId,
   getById,
   create,
   update,
