@@ -1,4 +1,4 @@
-class User {
+class Person {
   private name: string;
 
   constructor(name: string) {
@@ -10,5 +10,7 @@ class User {
   }
 }
 
-const user = new User('Peter');
-console.log(user.sayHello());
+const userGreeting = new Person('Peter');
+console.log(userGreeting.sayHello());
+
+export {};
