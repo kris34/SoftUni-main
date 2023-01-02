@@ -27,12 +27,51 @@ function printCar(car: ICar) {
   );
 }
 
-printCar({
+/* printCar({
   make: 'alfa romeo',
   model: 'GT',
   year: '2007',
   mileage: 250000,
   specs: { radio: 'sony' },
-});
+}); */
+
+interface SquareConfig {
+  color: string;
+  width: number;
+}
+
+function createSquare(config: SquareConfig) {
+  let newSquare = { color: 'white', area: 100 };
+  if (config.color) {
+    newSquare.color = config.color;
+  }
+  if (config.width) {
+    newSquare.area = config.width * config.width;
+  }
+  return newSquare;
+}
+let mySquare = createSquare({ color: 'black', width: 100 });
+//console.log(mySquare);
+
+class Data {
+  method: string;
+  uri: string;
+  version: string;
+  message: string;
+  response: string;
+  fulfilled: boolean;
+
+  constructor(method: string, uri: string, version: string, message: string) {
+    this.method = method;
+    (this.uri = uri), (this.version = version);
+    this.message = message;
+    this.response
+    this.fulfilled = false;
+  }
+}
+
+let myData = new Data('GET', 'http://google.com', 'HTTP/1.1', '');
+
+console.log(myData);
 
 export {};
