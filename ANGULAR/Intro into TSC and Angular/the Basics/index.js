@@ -1,0 +1,15 @@
+"use strict";
+exports.__esModule = true;
+var people_1 = require("./people");
+var junior = new people_1.Junior('Gosho', 20);
+junior.work();
+junior.work();
+junior.work();
+var senior = new people_1.Senior('Ivaylo', 30);
+senior.work();
+senior.work();
+senior.work();
+var menager = new people_1.Menager('Milen', 40);
+menager.work();
+menager.work();
+menager.work();
