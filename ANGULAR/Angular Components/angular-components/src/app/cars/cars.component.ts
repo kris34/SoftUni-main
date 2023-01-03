@@ -15,10 +15,12 @@ export class CarsComponent {
     },
     { make: 'VW', price: 6000 },
   ];
-
+  
+  showPrice = true;
   constructor() {}
 
-  buyCar() {
+  showPriceOnClick() {
+    this.showPrice = !this.showPrice;
     console.log('Car bought');
   }
 }
