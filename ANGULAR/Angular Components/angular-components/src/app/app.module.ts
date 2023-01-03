@@ -3,16 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
+import { CarsComponent } from './cars/cars.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ListComponent
-  ],
+  //Template specific items
+  declarations: [AppComponent, ListComponent, CarsComponent],
   imports: [
-    BrowserModule
+    BrowserModule, //includes common module
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [], //used for dependency injection
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
