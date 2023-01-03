@@ -15,13 +15,17 @@ export class CarsComponent {
     },
     { make: 'VW', price: 6000 },
   ];
-  
+
   showPrice = true;
   constructor() {}
 
+  changeTitleHandler(title: string) {
+    this.shopTitle = title;
+  }
+
   showPriceOnClick(event: MouseEvent) {
     console.log(event);
-    
+
     this.showPrice = !this.showPrice;
     console.log('Car bought');
   }

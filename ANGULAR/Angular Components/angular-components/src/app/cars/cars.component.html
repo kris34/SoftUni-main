@@ -4,6 +4,8 @@
   <ng-container *ngIf="!showPrice">Show</ng-container>
   Price
 </button>
+<input #titleInput type="text" />
+<button (click)="changeTitleHandler(titleInput.value)">Change title</button>
 <div id="container">
   <ul>
     <li *ngFor="let car of cars" class="list-item">
