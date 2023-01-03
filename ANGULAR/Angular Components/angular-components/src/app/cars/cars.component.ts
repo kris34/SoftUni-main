@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./cars.component.scss'],
 })
 export class CarsComponent {
-  shopTitle = 'Simeonovo car dealership';
+  shopTitle: string = 'Simeonovo car dealership';
 
   cars: string[];
 
