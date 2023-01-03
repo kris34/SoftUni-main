@@ -8,12 +8,12 @@ export class ArticleData {
     for (let i = 0; i < data.length; i++) {
       articles[i] = new Article(
         data[i].title,
-        data[i].author,
         data[i].description,
+        data[i].author,
         data[i].imageUrl
       );
-      
     }
+
     return articles;
   }
 }
