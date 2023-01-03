@@ -1,7 +1,9 @@
 <p id="title">{{ shopTitle }}</p>
 
-<ul>
-  <li *ngFor="let car of cars">
-    <ng-container>{{ car }}</ng-container>
-  </li>
-</ul>
+<div id="container">
+  <ul>
+    <li *ngFor="let car of cars">
+      <ng-container>{{ car.make }}: price {{ car.price }}  <button (click)="buyCar()">BUY</button></ng-container>
+    </li>
+  </ul>
+</div>

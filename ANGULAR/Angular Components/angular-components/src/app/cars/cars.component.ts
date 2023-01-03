@@ -8,9 +8,17 @@ import { Component } from '@angular/core';
 export class CarsComponent {
   shopTitle: string = 'Simeonovo car dealership';
 
-  cars: string[];
+  cars = [
+    {
+      make: 'Audi',
+      price: 5000,
+    },
+    { make: 'VW', price: 6000 },
+  ];
 
-  constructor() {
-    this.cars = ['Audi', 'VW', 'Alfa Romeo', 'Yotota'];
+  constructor() {}
+
+  buyCar() {
+    console.log('Car bought');
   }
 }
