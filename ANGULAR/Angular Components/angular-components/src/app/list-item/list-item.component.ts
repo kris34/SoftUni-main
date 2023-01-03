@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+export interface ICustomEvent {
+  test: number;
+}
 
 @Component({
   selector: 'app-list-item',
@@ -6,9 +10,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./list-item.component.scss'],
 })
 export class ListItemComponent {
-
   @Input() car!: { make: string; price: number };
   @Input() showPrice!: boolean;
 
+  @Output() customEvent = new EventEmitter<ICustomEvent>();
+
   constructor() {}
+
+  selectClickHandler() {
+    this.customEvent.emit({ test: 123 });
+  }
 }

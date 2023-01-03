@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ICustomEvent } from '../list-item/list-item.component';
 
 @Component({
   selector: 'app-cars',
@@ -13,7 +14,10 @@ export class CarsComponent {
       make: 'Audi',
       price: 5000,
     },
-    { make: 'VW', price: 6000 },
+    {
+       make: 'VolksWagen',
+       price: 6000
+    },
   ];
 
   showPrice = true;
@@ -24,9 +28,10 @@ export class CarsComponent {
   }
 
   showPriceOnClick(event: MouseEvent) {
-    console.log(event);
-
     this.showPrice = !this.showPrice;
-    console.log('Car bought');
+  }
+
+  customEventHandler($event: ICustomEvent) {
+    console.log($event);
   }
 }
