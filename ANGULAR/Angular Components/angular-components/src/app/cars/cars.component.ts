@@ -19,7 +19,9 @@ export class CarsComponent {
   showPrice = true;
   constructor() {}
 
-  showPriceOnClick() {
+  showPriceOnClick(event: MouseEvent) {
+    console.log(event);
+    
     this.showPrice = !this.showPrice;
     console.log('Car bought');
   }

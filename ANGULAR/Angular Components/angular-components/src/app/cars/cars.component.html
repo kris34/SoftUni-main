@@ -1,14 +1,13 @@
 <p id="title">{{ shopTitle }}</p>
-<button (click)="showPriceOnClick()">
+<button (click)="showPriceOnClick($event)">
   <ng-container *ngIf="showPrice">Hide</ng-container>
   <ng-container *ngIf="!showPrice">Show</ng-container>
   Price
 </button>
 <div id="container">
   <ul>
-    <li *ngFor="let car of cars">
-      <span>{{ car.make }}</span
-      >: <span *ngIf="showPrice">{{ car.price }}</span>
+    <li *ngFor="let car of cars" class="list-item">
+      <app-list-item [car]="car" [showPrice]="showPrice"></app-list-item>
     </li>
   </ul>
 </div>
