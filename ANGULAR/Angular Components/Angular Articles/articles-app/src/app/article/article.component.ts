@@ -14,11 +14,26 @@ export class ArticleComponent {
   articleDescLen: number;
   showReadMoreBtn: boolean = true;
   showHideBtn: boolean = false;
-  iamgeIsShown: boolean = false;
+  imageIsShown: boolean = false;
   imageButtonTitle: string = 'Show Image';
 
   constructor() {
     this.articleDescLen = 0;
     this.descToShow = '';
   }
+
+  readMore() {
+    this.articleDescLen += this.symbols;
+
+    if (this.articleDescLen > this.articleDesc.length) {
+      this.showHideBtn = true;
+      this.showReadMoreBtn = false;
+    } else {
+      this.descToShow = this.articleDesc.substring(0, this.articleDescLen);
+    }
+  }
+
+  hideDesc() {}
+
+  toggleImage() {}
 }
