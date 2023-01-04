@@ -7,6 +7,8 @@ import { CARS } from 'src/models/mock-cars';
   templateUrl: './car.component.html',
   styleUrls: ['./car.component.scss'],
 })
+
+
 export class CarComponent {
   cars = CARS;
 

@@ -9,12 +9,4 @@
   </li>
 </ul>
 
-<div *ngIf="selectedCar">
-    <h2>{{selectedCar.make | uppercase}} Details</h2>
-    <div>Model: {{selectedCar.model}}</div>
-    <div>id: {{selectedCar.id}}</div>
-    <div>
-      <label for="car-make">Hero name: </label>
-      <input id="car-make" [(ngModel)]="selectedCar.id" placeholder="make">
-    </div>
-  </div>
+<app-car-detail [car]="selectedCar"></app-car-detail>
