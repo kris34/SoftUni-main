@@ -7,6 +7,7 @@ import { ArticleData } from '../data/data';
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
 })
+
 export class ArticlesComponent implements OnInit {
   articles: Article[] | undefined;
   constructor() {}

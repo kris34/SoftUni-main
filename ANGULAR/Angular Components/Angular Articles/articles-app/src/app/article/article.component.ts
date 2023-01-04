@@ -6,7 +6,7 @@ import { Article } from 'models/article.model';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss'],
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent {
   private symbols: number = 250;
   @Input() article!: Article;
   @Input() articleDesc!: string;
@@ -21,7 +21,6 @@ export class ArticleComponent implements OnInit {
     this.articleDescLen = 0;
     this.descToShow = '';
   }
-  ngOnInit(): void {}
   readMore() {
     this.articleDescLen += this.symbols;
 
@@ -36,7 +35,7 @@ export class ArticleComponent implements OnInit {
   toggleImage() {
     this.imageIsShown = !this.imageIsShown;
     this.imageButtonTitle =
-      this.imageButtonTitle === 'Show Image' ? 'Hide Image' : 'Show Image';
+    this.imageButtonTitle === 'Show Image' ? 'Hide Image' : 'Show Image';
   }
 
   hideDesc() {
