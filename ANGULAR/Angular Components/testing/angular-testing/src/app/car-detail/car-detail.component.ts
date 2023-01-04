@@ -6,6 +6,7 @@ import { ICar } from 'src/models/carInterface';
   templateUrl: './car-detail.component.html',
   styleUrls: ['./car-detail.component.scss'],
 })
+
 export class CarDetailComponent {
   @Input() car?: ICar;
 }

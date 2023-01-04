@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ICar } from 'src/models/carInterface';
 import { CARS } from 'src/models/mock-cars';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,8 @@ import { CARS } from 'src/models/mock-cars';
 export class CarService {
   constructor() {}
 
-  getCars(): ICar[] {
-    return CARS;
+  getCars(): Observable<ICar[]> {
+    const cars = of(CARS);
+    return cars;
   }
 }

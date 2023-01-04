@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ICar } from 'src/models/carInterface';
 import { CarService } from '../car.service';
 
@@ -7,14 +7,22 @@ import { CarService } from '../car.service';
   templateUrl: './car.component.html',
   styleUrls: ['./car.component.scss'],
 })
-export class CarComponent {
-  cars: ICar[] = [];
-
+export class CarComponent implements OnInit {
   selectedCar?: ICar;
+
+  cars: ICar[] = [];
 
   constructor(private carService: CarService) {}
 
   onSelect(car: ICar): void {
     this.selectedCar = car;
+  }
+
+  ngOnInit(): void {
+    this.getCars();
+  }
+
+  getCars(): void {
+    this.carService.getCars().subscribe((cars) => (this.cars = cars));
   }
 }
