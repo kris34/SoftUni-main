@@ -1,9 +1,20 @@
 <h1>My Cars</h1>
 
-<h2>{{ car.make | uppercase }} Details:</h2>
-<div><span>Model: </span>{{ car.model }}</div>
-<div><span>id: </span>{{ car.id }}</div>
-<div>
-  <label for="make">Car Make</label>
-  <input id="make" [(ngModel)]="car.make" placeholder="make" />
-</div>
+<ul class="cars">
+  <li *ngFor="let car of cars">
+    <button (click)="onSelect(car)">
+      <span> id: {{ car.id }}</span>
+      <span> {{ car.make }}</span>
+    </button>
+  </li>
+</ul>
+
+<div *ngIf="selectedCar">
+    <h2>{{selectedCar.make | uppercase}} Details</h2>
+    <div>Model: {{selectedCar.model}}</div>
+    <div>id: {{selectedCar.id}}</div>
+    <div>
+      <label for="car-make">Hero name: </label>
+      <input id="car-make" [(ngModel)]="selectedCar.id" placeholder="make">
+    </div>
+  </div>
