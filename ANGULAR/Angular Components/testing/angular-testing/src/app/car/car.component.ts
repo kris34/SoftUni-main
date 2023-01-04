@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ICar } from 'src/models/carInterface';
 
 @Component({
   selector: 'app-car',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./car.component.scss'],
 })
 export class CarComponent {
-  car = 'Alfa';
+  car: ICar = {
+    make: 'Audi',
+    model: 'A4',
+    id: 1,
+  };
+
+  constructor() {}
+  
 }
