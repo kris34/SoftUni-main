@@ -7,6 +7,7 @@ import { CarService } from '../car.service';
   templateUrl: './car.component.html',
   styleUrls: ['./car.component.scss'],
 })
+
 export class CarComponent implements OnInit {
   selectedCar?: ICar;
 
@@ -23,6 +24,9 @@ export class CarComponent implements OnInit {
   }
 
   getCars(): void {
-    this.carService.getCars().subscribe((cars) => (this.cars = cars));
+    this.carService.getCars().subscribe((x) => (this.cars = x));
   }
+
+  //create a car variable which has a type of an interface
+  //create the getCars method which INJECTS the cars from the mock-cars through the car service to the cars variable
 }

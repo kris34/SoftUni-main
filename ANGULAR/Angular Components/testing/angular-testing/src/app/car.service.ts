@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ICar } from 'src/models/carInterface';
-import { CARS } from 'src/models/mock-cars';
 import { Observable, of } from 'rxjs';
+import { CARS } from 'src/models/mock-cars';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class CarService {
   constructor() {}
 
@@ -14,3 +15,9 @@ export class CarService {
     return cars;
   }
 }
+
+//create GET method
+//get the cars from the mock service with an interface from the interface file
+
+
+
