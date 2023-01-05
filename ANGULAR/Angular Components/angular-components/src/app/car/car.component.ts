@@ -17,6 +17,9 @@ export class CarComponent implements OnInit {
   }
 
   getCars() {
-    this.carService.getCars().subscribe((x) => (this.cars = x));
+    this.carService.getCars().subscribe({
+      next: (x) => (this.cars = x),
+      complete: () => console.log('Completed'),
+    });
   }
 }
