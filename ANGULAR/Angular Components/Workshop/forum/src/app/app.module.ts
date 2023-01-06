@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,7 +10,7 @@ import { ThemeListComponent } from './theme-list/theme-list.component';
 
 @NgModule({
   declarations: [AppComponent, RecentPostsComponent, ThemeListComponent],
-  imports: [BrowserModule, AppRoutingModule, CoreModule],
+  imports: [BrowserModule, AppRoutingModule, CoreModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
