@@ -12,7 +12,7 @@ export class RecentPostsComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.apiService.loadPosts().subscribe((v) => {
+    this.apiService.loadPosts(5).subscribe((v) => {
       console.log(v);
     });
   }
