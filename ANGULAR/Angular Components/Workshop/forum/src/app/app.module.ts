@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { RecentPostsComponent } from './recent-posts/recent-posts.component';
 import { ThemeListComponent } from './theme-list/theme-list.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
-  declarations: [AppComponent, RecentPostsComponent, ThemeListComponent],
+  declarations: [AppComponent, RecentPostsComponent, ThemeListComponent, MainComponent],
   imports: [BrowserModule, AppRoutingModule, CoreModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

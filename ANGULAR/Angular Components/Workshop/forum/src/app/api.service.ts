@@ -10,10 +10,12 @@ export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
   loadThemes() {
-    return this.httpClient.get(apiURL + `/themes`);
+    return this.httpClient.get(`${apiURL}/themes`);
   }
 
-  loadPosts() {
-    return this.httpClient.get(apiURL + `/posts`);
+  loadPosts(limit?: number) {
+    return this.httpClient.get(
+      `${apiURL}/posts${limit ? `?limit=${limit}` : ``}`
+    );
   }
 }
