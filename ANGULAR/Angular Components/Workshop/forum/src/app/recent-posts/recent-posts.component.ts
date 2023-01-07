@@ -7,13 +7,16 @@ import { ApiService } from '../api.service';
   styleUrls: ['./recent-posts.component.scss'],
 })
 export class RecentPostsComponent implements OnInit {
-
-  
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.apiService.loadPosts(5).subscribe((v) => {
-      console.log(v);
+    this.apiService.loadPosts(5).subscribe({
+      next: (v) => {
+        console.log(v);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 }
