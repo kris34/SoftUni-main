@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IPost } from 'src/interfaces/posts';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -7,12 +8,15 @@ import { ApiService } from '../api.service';
   styleUrls: ['./recent-posts.component.scss'],
 })
 export class RecentPostsComponent implements OnInit {
+  posts: IPost[] | null = null;
+
+
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.apiService.loadPosts(5).subscribe({
       next: (v) => {
-        console.log(v);
+        this.posts = v
       },
       error: (err) => {
         console.log(err);
