@@ -5,7 +5,7 @@ import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
-    UserListComponent
+    UserListComponent,
   ],
   imports: [
     CommonModule
