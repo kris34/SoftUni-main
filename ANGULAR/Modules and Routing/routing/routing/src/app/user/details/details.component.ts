@@ -20,6 +20,10 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.params['id'];
 
-    console.log(id);
+    this.api.getOneUser(id).subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+    });
   }
 }
