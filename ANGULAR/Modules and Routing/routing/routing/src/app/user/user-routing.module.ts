@@ -4,13 +4,18 @@ import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
   {
-    path: "users",
-    component: ListComponent
-  }
+    path: 'users',
+    children: [
+      {
+        path: 'user-list',
+        component: ListComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {}
