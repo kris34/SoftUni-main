@@ -19,4 +19,10 @@ export class ListComponent implements OnInit {
       },
     });
   }
+
+  showDetails(){ 
+
+  }
+
+  
 }
