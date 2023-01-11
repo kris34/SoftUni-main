@@ -1,4 +1,4 @@
 <h2>User List</h2>
 <div *ngFor="let user of users">
-    {{ user.name }}   <a [routerLink]="['/users/details', user.id]" class="details">Details</a>
+    {{ user.name }}  <li><a [routerLink]="['/users/details', user.id]" class="details">Details</a></li> 
 </div>

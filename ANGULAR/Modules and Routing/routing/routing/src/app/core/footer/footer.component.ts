@@ -16,4 +16,6 @@ export class FooterComponent {
   goToUrl(): void {
     this.document.location.href = 'https://stackoverflow.com';
 }
+
+
 }
