@@ -3,24 +3,32 @@
     <div class="logo-wrap">
       <p class="logo"><span class="logo">SoftUni Forum</span></p>
     </div>
-    <div class="mini-navbar" >
-      <ul *ngIf="!isLoggedIn">
-        <li>
-          <a routerLink="/auth/login">Login</a>
-        </li>
-        <li>
-          <a routerLink="/auth/register">Register</a>
-        </li>
-      </ul>
+    <div class="mini-navbar">
+      <ng-template #loggedOutTemplate>
+        <ul>
+          <li>
+            <a routerLink="/auth/login">Login</a>
+          </li>
+          <li>
+            <a routerLink="/auth/register">Register</a>
+          </li>
+        </ul>
+      </ng-template>
 
-      <ul *ngIf="isLoggedIn">
-        <li>
-          <a routerLink="/auth/profile">{{user?.firstName}}'s Profile</a>
-        </li>
-        <li>
-          <a routerLink="/auth/logout">Logout</a>
-        </li>
-      </ul>
+      <ng-template #loggedInTemplate>
+        <ul>
+          <li>
+            <a routerLink="/auth/profile">{{ user?.firstName }}'s Profile</a>
+          </li>
+          <li>
+            <a routerLink="/auth/logout">Logout</a>
+          </li>
+        </ul>
+      </ng-template>
+
+      <ng-container
+        *ngTemplateOutlet="isLoggedIn ? loggedInTemplate : loggedOutTemplate"
+      ></ng-container>
     </div>
   </div>
   <nav>
