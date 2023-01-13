@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/not-found',
+    redirectTo: 'not-found',
   },
 ];
 
