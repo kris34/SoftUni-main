@@ -8,10 +8,11 @@ import { CoreModule } from './core/core.module';
 import { RecentPostsComponent } from './recent-posts/recent-posts.component';
 import { ThemeListComponent } from './theme-list/theme-list.component';
 import { MainComponent } from './main/main.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent, RecentPostsComponent, ThemeListComponent, MainComponent],
-  imports: [BrowserModule, AppRoutingModule, CoreModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, CoreModule, HttpClientModule, AuthModule],
   providers: [],
   bootstrap: [AppComponent],
 })
