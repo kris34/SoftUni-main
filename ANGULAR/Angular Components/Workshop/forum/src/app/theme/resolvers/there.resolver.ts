@@ -20,7 +20,7 @@ export class ThemeResolver implements Resolve<ITheme | null> {
   ): ITheme | null | Observable<ITheme> | Promise<ITheme> {
     const themeID = route.params['id'];
     if (!themeID) {
-      this.router.navigate('/theme/recent');
+      this.router.navigate(['/theme/recent']);
       return null;
     }
     return this.api.loadTheme(themeID);
