@@ -5,10 +5,18 @@ import { ThemeRoutingModule } from './theme-routing-module';
 import { SharedModule } from '../shared/shared.module';
 import { NewThemeComponent } from './new-theme/new-theme.component';
 import { ThemeDetailsComponent } from './theme-details/theme-details.component';
+import { MainComponent } from './main/main.component';
+import { RecentPostsComponent } from './recent-posts/recent-posts.component';
 
 @NgModule({
-  declarations: [ThemeListComponent, NewThemeComponent, ThemeDetailsComponent],
+  declarations: [
+    ThemeListComponent,
+    NewThemeComponent,
+    ThemeDetailsComponent,
+    MainComponent,
+    RecentPostsComponent,
+  ],
   imports: [CommonModule, ThemeRoutingModule, SharedModule],
-  exports: [ThemeListComponent],
+  exports: [ThemeListComponent, MainComponent],
 })
 export class ThemeModule {}
