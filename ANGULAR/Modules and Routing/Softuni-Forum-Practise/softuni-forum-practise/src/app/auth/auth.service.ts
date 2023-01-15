@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
+import { IUser } from '../shared/interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AithService {
+export class AuthService {
+  user: IUser | null = null;
 
-  constructor() { }
+  get isLoggedIn() {
+    return this.user != null;
+  }
+
+  
+  constructor() {}
 }
