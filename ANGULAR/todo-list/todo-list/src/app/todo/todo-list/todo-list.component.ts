@@ -14,7 +14,11 @@ export class TodoListComponent {
   todo = '';
 
   addTask(value: { todo: string }, form: NgForm) {
+     if(!value.todo){ 
+      return
+     }
+     
     this.tasks.push(value.todo);
-    form.reset()
+    form.reset();
   }
 }
