@@ -9,5 +9,5 @@
 
 
 <div *ngFor="let task of tasks">
-  <li>{{ task }} <button>Delete</button></li>
+  <li>{{ task }} <button (click)="removeTask(task)">Delete</button></li>
 </div>

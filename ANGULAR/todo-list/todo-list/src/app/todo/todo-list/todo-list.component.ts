@@ -14,11 +14,15 @@ export class TodoListComponent {
   todo = '';
 
   addTask(value: { todo: string }, form: NgForm) {
-     if(!value.todo){ 
-      return
-     }
-     
+    if (!value.todo) {
+      return;
+    }
+
     this.tasks.push(value.todo);
     form.reset();
+  }
+
+  removeTask(task: string) {
+    this.tasks = this.tasks.filter((t) => t != task);
   }
 }
