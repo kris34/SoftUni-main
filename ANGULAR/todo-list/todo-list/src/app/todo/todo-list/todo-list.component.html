@@ -1,11 +1,9 @@
-<h2 class="title">Kris's //TODO List</h2>
-<div class="container">
-  <input type="text" placeholder="Enter Task" #task />
-</div>
+<h2>My //TODO List</h2>
 <div>
-  <button (click)="addTask(task.value)">Add Task</button>
+  <input type="text" name="todo" placeholder="enter task here" id="" #todo />
+  <button (click)="addTask(todo.value)">Submit</button>
 </div>
-<h3>Current Tasks</h3>
+
 <div *ngFor="let task of tasks">
   <li>{{ task }}</li>
 </div>

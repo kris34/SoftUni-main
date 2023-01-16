@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TodoService } from '../todo.service';
 
 @Component({
@@ -12,9 +12,7 @@ export class TodoListComponent {
   constructor(private service: TodoService) {}
 
   addTask(task: string) {
-    this.tasks.push(task);
-    console.log(this.tasks);
+     this.tasks?.push(task);
+     task = ""
   }
-
-  
 }
