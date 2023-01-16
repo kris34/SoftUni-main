@@ -1,7 +1,7 @@
 <h2>My //TODO List</h2>
-<form #todoForm="ngForm" (ngSubmit)="addTask(todoForm.value)">
+<form #todoForm="ngForm" (ngSubmit)="addTask(todoForm.value, todoForm)">
   <div>
-    <input type="text" id="todo" name="todo" placeholder="enter task here" ngModel />
+    <input type="text" id="todo" name="todo" placeholder="enter task here" [ngModel]="todo" />
     <button >Submit</button>
   </div>
 </form>
