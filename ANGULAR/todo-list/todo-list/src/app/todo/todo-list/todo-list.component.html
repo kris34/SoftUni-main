@@ -1,8 +1,10 @@
 <h2>My //TODO List</h2>
-<div>
-  <input type="text" [(ngModel)]="todo" placeholder="enter task here"  />
-  <button (click)="addTask()">Submit</button>
-</div>
+<form #todoForm="ngForm" (ngSubmit)="addTask(todoForm.value)">
+  <div>
+    <input type="text" id="todo" name="todo" placeholder="enter task here" ngModel />
+    <button >Submit</button>
+  </div>
+</form>
 
 <div *ngFor="let task of tasks">
   <li>{{ task }}</li>

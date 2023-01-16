@@ -8,12 +8,11 @@ import { TodoService } from '../todo.service';
 })
 export class TodoListComponent {
   tasks: string[] = [];
-  todo: string = '';
 
   constructor(private service: TodoService) {}
 
-  addTask() {
-    this.tasks?.push(this.todo);
-    this.todo = '';
+  addTask(value: { todo: string }) {
+    this.tasks?.push(value.todo);
+    
   }
 }
