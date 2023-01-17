@@ -5,19 +5,15 @@ import { RegisterComponent } from './register/register.component';
 import { AuthRoutingMoudle } from './auth-routing-module';
 import { LogoutComponent } from './logout/logout.component';
 import { ProfileComponent } from './profile/profile.component';
-
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
-  imports: [
-    CommonModule,
-    AuthRoutingMoudle
-  ]
+  imports: [CommonModule, AuthRoutingMoudle, FormsModule],
 })
-export class AuthModule { }
+export class AuthModule {}

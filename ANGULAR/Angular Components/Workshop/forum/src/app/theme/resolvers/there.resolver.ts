@@ -12,7 +12,8 @@ import { ITheme } from 'src/app/shared/interfaces/themes';
 @Injectable({
   providedIn: 'root',
 })
-export class ThemeResolver implements Resolve<ITheme | null> {
+
+export class ThemeResolver implements Resolve<ITheme| null> {
   constructor(private api: ApiService, private router: Router) {}
   resolve(
     route: ActivatedRouteSnapshot,
