@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TodoService } from '../todo.service';
 
@@ -15,6 +9,7 @@ import { TodoService } from '../todo.service';
 })
 export class TodoListComponent {
   tasks: string[] = [];
+  completedTasks: string[] = [];
 
   constructor(private service: TodoService) {}
 
@@ -36,6 +31,7 @@ export class TodoListComponent {
 
   removeTask(task: string) {
     this.tasks = this.tasks.filter((t) => t != task);
+    this.completedTasks.push(task);
     this.count--;
   }
 }
