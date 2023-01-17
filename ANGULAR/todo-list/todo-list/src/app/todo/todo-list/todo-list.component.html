@@ -1,8 +1,16 @@
-<h2>My //TODO List {{count}}</h2>
+<h2>My //TODO List</h2>
+<p>Current Todo's: {{ count }}</p>
 <form #todoForm="ngForm" (ngSubmit)="addTask(todoForm.value, todoForm)">
   <div>
-    <input #inputTodo type="text" id="todo" name="todo" placeholder="enter task here" [ngModel]="todo" />
-    <button >Submit</button>
+    <input
+      #inputTodo
+      type="text"
+      id="todo"
+      name="todo"
+      placeholder="enter task here"
+      [ngModel]="todo"
+    />
+    <button>Submit</button>
   </div>
 </form>
 <div *ngFor="let task of tasks">

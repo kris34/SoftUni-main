@@ -29,12 +29,13 @@ export class TodoListComponent {
     if (!value.todo) {
       return;
     }
-   this.count++;
+    this.count++;
     this.tasks.push(value.todo);
     form.reset();
   }
 
   removeTask(task: string) {
     this.tasks = this.tasks.filter((t) => t != task);
+    this.count--;
   }
 }
