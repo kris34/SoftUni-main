@@ -14,12 +14,12 @@
   </div>
 </form>
 <div *ngFor="let task of tasks">
-  <li>{{ task }} <button (click)="removeTask(task)">Delete</button></li>
+  <li>{{ task }} <button (click)="removeTask(task)">Mark as Complete</button></li>
 </div>
 
 <div>
   <h3>Completed Tasks</h3>
   <div *ngFor="let task of completedTasks">
-    <li>{{ task }}</li>
+    <li class="li">{{ task }}</li>
   </div>
 </div>

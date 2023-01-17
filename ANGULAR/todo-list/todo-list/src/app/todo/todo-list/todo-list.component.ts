@@ -24,8 +24,12 @@ export class TodoListComponent {
     if (!value.todo) {
       return;
     }
-    this.count++;
+
+    if (this.tasks.includes(value.todo)) {
+      return;
+    }
     this.tasks.push(value.todo);
+    this.count++;
     form.reset();
   }
 
@@ -34,4 +38,6 @@ export class TodoListComponent {
     this.completedTasks.push(task);
     this.count--;
   }
+
+  
 }
