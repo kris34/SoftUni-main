@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TodoService } from '../todo.service';
 
@@ -11,13 +17,19 @@ export class TodoListComponent {
   tasks: string[] = [];
 
   constructor(private service: TodoService) {}
-  todo = '';
 
-  addTask(value: { todo: string }, form: NgForm) {
+  todo: string = '';
+
+  @Input() count: number = 0;
+
+  addTask(value: { todo: string; id: number }, form: NgForm) {
+    let id = 0;
+    value.id = id;
+
     if (!value.todo) {
       return;
     }
-
+   this.count++;
     this.tasks.push(value.todo);
     form.reset();
   }

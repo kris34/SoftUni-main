@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [TodoListComponent],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ],
   exports: [TodoListComponent],
 })
 export class TodoModule {}

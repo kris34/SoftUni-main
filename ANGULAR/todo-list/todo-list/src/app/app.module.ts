@@ -7,7 +7,7 @@ import { TodoModule } from './todo/todo.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, TodoModule],
+  imports: [BrowserModule, AppRoutingModule, TodoModule,],
   providers: [],
   bootstrap: [AppComponent],
 })
