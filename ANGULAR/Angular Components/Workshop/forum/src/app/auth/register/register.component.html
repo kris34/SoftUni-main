@@ -14,12 +14,8 @@
       <label for="email"><span><i class="fas fa-envelope"></i></span></label>
       <input type="email" formControlName="email" id="email" placeholder="john.doe@gmail.com" />
     </p>
-    <p class="error">
-      Email is required!
-    </p>
-    <p class="error">
-      Email is not valid!
-    </p>
+    <p class="error">Email is required!</p>
+    <p class="error">Email is not valid!</p>
 
     <!-- telephone -->
     <p class="field field-icon">
@@ -31,28 +27,24 @@
     </p>
 
     <ng-container formGroupName="pass">
-     
       <!-- password -->
       <p class="field field-icon">
         <label for="password"><span><i class="fas fa-lock"></i></span></label>
         <input type="password" formControlName="password" id="password" placeholder="******" />
       </p>
-      <p class="error">
-        Password is required!
-      </p>
-      <p class="error">
-        Password must be at least 4 characters!
-      </p>
-  
+      <p class="error">Password is required!</p>
+      <p class="error">Password must be at least 4 characters!</p>
       <!-- rePassword -->
       <p class="field field-icon">
         <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
-        <input type="password" formControlName="repass" id="rePassword" placeholder="******" />
+        <input type="password" formControlName="rePassword" id="rePassword" placeholder="******" />
       </p>
-      <!--     <!-- <p class="error">Repeat Password does not match password!</p> -->
-      -->
+      <p *ngIf="form.get('pass')?.errors?.['sameValueGroupValidator'] && form.get('pass')?.get('rePassword')?.touched"
+        class="error">
+        Repeat Password does not match password!
+      </p>
     </ng-container>
- 
+
     <button disabled>Create Account</button>
 
     <p class="text-center">
