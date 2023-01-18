@@ -7,16 +7,24 @@
       <label for="username"><span><i class="fas fa-user"></i></span></label>
       <input class="input-error" type="text" formControlName="username" id="username" placeholder="Johny" />
     </p>
-    <p class="error">Username is required!</p>
+    <p class="error" *ngIf="form.get('username')?.errors?.['required'] &&form.get('username')?.touched">
+      Username is required!
+    </p>
 
     <!-- email -->
     <p class="field field-icon">
       <label for="email"><span><i class="fas fa-envelope"></i></span></label>
       <input type="email" formControlName="email" id="email" placeholder="john.doe@gmail.com" />
     </p>
-    <p class="error">Email is required!</p>
-    <p class="error">Email is not valid!</p>
 
+    <ng-container *ngIf="form.get('email')?.touched">
+      <p class="error" *ngIf="form.get('email')?.errors?.['required']">
+        Email is required!
+      </p>
+      <p class="error" *ngIf="form.get('email')?.errors?.['appEmailValidator']">
+        Email is not valid!
+      </p>
+    </ng-container>
     <!-- telephone -->
     <p class="field field-icon">
       <label for="tel"><span><i class="fas fa-phone"></i></span></label>
