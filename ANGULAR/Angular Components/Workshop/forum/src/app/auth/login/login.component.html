@@ -13,14 +13,20 @@
             </p>
 
             <p class="error" *ngIf="emailInput.errors?.['appEmailValidator']">
-                Email is not valid!</p>
-        </ng-container>
+                Email is not valid!
+            </p>
+        </ng-container >
+
         <p class="field field-icon">
             <label for="password"><span><i class="fas fa-lock"></i></span></label>
-            <input type="password" ngModel name="password" id="password" placeholder="******" />
+            <input type="password" #passwordInput="ngModel" ngModel required minlength="5" name="password" id="password" placeholder="******" />
         </p>
-        <p class="error">Password is required!</p>
-        <p class="error">Password must be at least 4 characters!</p>
+
+        <ng-container *ngIf="passwordInput.touched">
+            <p class="error" *ngIf="passwordInput.errors?.['required']">Password is required!</p>
+            <p class="error" *ngIf="passwordInput.errors?.['minlength']">Password must be at least 4 characters!</p>
+        </ng-container>
+
         <button>Login</button>
         <p class="text-center">
             Have an account?
