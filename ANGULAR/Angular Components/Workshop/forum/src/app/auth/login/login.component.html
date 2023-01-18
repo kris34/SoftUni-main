@@ -3,16 +3,17 @@
         <h2>Login Form</h2>
         <p class="field field-icon">
             <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-            <input #emailInput="ngModel" class="input-error" ngModel required type="email" name="email" id="email"
-                placeholder="john.doe@gmail.com" />
+            <input #emailInput="ngModel" class="input-error" ngModel required [appEmail]="['bg', 'com']" type="email"
+                name="email" id="email" placeholder="john.doe@gmail.com" />
         </p>
-        {{ emailInput.errors | json }}
 
         <ng-container *ngIf="emailInput.touched">
             <p class="error" *ngIf="emailInput.errors?.['required']">
                 Email is required!
             </p>
-            <p class="error">Email is not valid!</p>
+
+            <p class="error" *ngIf="emailInput.errors?.['appEmailValidator']">
+                Email is not valid!</p>
         </ng-container>
         <p class="field field-icon">
             <label for="password"><span><i class="fas fa-lock"></i></span></label>
