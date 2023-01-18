@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +9,18 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
-  constructor(private router: Router){ 
+  form = this.fb.group({ 
+    username: [],
+    email: [],
+    tel: [],
+    pass: this.fb.group({ 
+      password: [],
+      repass: []
+    }),
+    validators: []
+  })
+
+  constructor(private fb: FormBuilder){ 
 
   }
 

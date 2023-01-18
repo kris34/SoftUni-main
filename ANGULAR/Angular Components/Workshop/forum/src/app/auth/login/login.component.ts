@@ -16,10 +16,14 @@ export class LoginComponent {
   ) {}
 
   loginHandler(form: NgForm): void {
-  /*   this.authService.user = {
+    if (form.invalid) {
+      return;
+    }
+    
+    this.authService.user = {
       username: 'John',
     } as any;
- */
+
     const returnUrl =
       this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.router.navigate([returnUrl]);
