@@ -13,6 +13,7 @@ export class RegisterComponent {
     username: [],
     email: [],
     tel: [],
+    ext: [],
     pass: this.fb.group({ 
       password: [],
       repass: []
