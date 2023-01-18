@@ -27,7 +27,7 @@
             <p class="error" *ngIf="passwordInput.errors?.['minlength']">Password must be at least 4 characters!</p>
         </ng-container>
 
-        <button>Login</button>
+        <button [disabled]="form.invalid">Login</button>
         <p class="text-center">
             Have an account?
             <a href="#">Register</a>
