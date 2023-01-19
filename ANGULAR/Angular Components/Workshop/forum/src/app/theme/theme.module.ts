@@ -7,6 +7,7 @@ import { NewThemeComponent } from './new-theme/new-theme.component';
 import { ThemeDetailsComponent } from './theme-details/theme-details.component';
 import { MainComponent } from './main/main.component';
 import { RecentPostsComponent } from './recent-posts/recent-posts.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { RecentPostsComponent } from './recent-posts/recent-posts.component';
     MainComponent,
     RecentPostsComponent,
   ],
-  imports: [CommonModule, ThemeRoutingModule, SharedModule],
+  imports: [CommonModule, ThemeRoutingModule, SharedModule, FormsModule, ReactiveFormsModule],
   exports: [ThemeListComponent, MainComponent],
 })
 export class ThemeModule {}
