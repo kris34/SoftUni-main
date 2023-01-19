@@ -33,15 +33,20 @@
       </select>
       <input type="text" formControlName="tel" id="tel" placeholder="885 888 888" />
     </p>
-
+    <!-- password -->
     <ng-container formGroupName="pass">
-      <!-- password -->
       <p class="field field-icon">
         <label for="password"><span><i class="fas fa-lock"></i></span></label>
         <input type="password" formControlName="password" id="password" placeholder="******" />
       </p>
-      <p class="error">Password is required!</p>
-      <p class="error">Password must be at least 4 characters!</p>
+      <ng-container *ngIf="form.get('pass')?.get('password')?.touched">
+        <p class="error" *ngIf="form.get('pass')?.get('password')?.errors?.['required']">
+          Password is required!
+        </p>
+        <p class="error" *ngIf="form.get('pass')?.get('password')?.errors?.['minlength']">
+          Password must be at least 5 characters!
+        </p>
+      </ng-container>
       <!-- rePassword -->
       <p class="field field-icon">
         <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
