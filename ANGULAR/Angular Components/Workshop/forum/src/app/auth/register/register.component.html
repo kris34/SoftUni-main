@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="register" action="" method="post">
+<form [formGroup]="form" class="register" (ngSubmit)="registerHandler()">
   <fieldset>
     <h2>Registration Form</h2>
 
@@ -58,11 +58,11 @@
       </p>
     </ng-container>
 
-    <button disabled>Create Account</button>
+    <button [disabled]="form.invalid">Create Account</button>
 
     <p class="text-center">
       Have an account?
-      <a href="#">Log In</a>
+      <a routerLink="/auth/login">Log In</a>
     </p>
   </fieldset>
 </form>

@@ -12,7 +12,7 @@ export class RegisterComponent {
   domains = appEmailDomains
 
   form = this.fb.group({
-    username: ['', [Validators.required]],
+    username: ['', [Validators.required, Validators.minLength(5)]],
     email: ['', [Validators.required , appEmailValidator(this.domains)]],
     tel: [],
     ext: [],
@@ -28,4 +28,9 @@ export class RegisterComponent {
   });
 
   constructor(private fb: FormBuilder) {}
+
+  registerHandler(){ 
+    console.log(this.form.value);
+    
+  }
 }
