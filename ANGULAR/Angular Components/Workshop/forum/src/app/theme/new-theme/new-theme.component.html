@@ -3,8 +3,9 @@
         <span>New Theme</span>
     </div>
     <!--ReactiveForm-->
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="createThemeHandler()">
         <div class="new-theme-title">
+            <!-- theme title control -->
             <label for="themeName">Title <span class="red">*</span></label>
             <input type="text" formControlName="themeTitle" id="themeName" />
             <!-- themeName validators container -->
@@ -18,14 +19,21 @@
             </ng-container>
         </div>
         <div class="new-theme-content">
+            <!-- new theme control -->
             <label for="postText">Post <span class="red">*</span></label>
             <textarea type="text" formControlName="themeContent" id="postText" rows="8" class="height"></textarea>
-            <p class="error">The field with your post is required.</p>
-            <p class="error">Post must be at least 10 characters long.</p>
+                <!-- new theme validators container -->
+            <ng-container *ngIf="form.get('themeContent')?.touched">
+                <p class="error" *ngIf="form.get('themeContent')?.errors?.['required']"
+                >The field with your post is required.</p>
+                <p class="error"
+                *ngIf="form.get('themeContent')?.errors?.['minlength']"
+                >Post must be at least 10 characters long.</p>
+            </ng-container>
         </div>
         <div class="new-theme-buttons">
             <button class="cancel">Cancel</button>
-            <button class="public">Post</button>
+            <button [disabled]="form.invalid" class="public">Post</button>
         </div>
     </form>
 </div>
