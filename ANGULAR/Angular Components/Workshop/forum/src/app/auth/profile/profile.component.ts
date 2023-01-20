@@ -12,13 +12,15 @@ import { AuthService } from '../auth.service';
 })
 export class ProfileComponent {
 
+  showEditMode  = false
+
   get user() { 
     const {username, email , tel: telephone} = this.auth.user!
-    const [ext, tel] = telephone.split(" ")
+    const [ext, ...tel] = telephone.split(" ")
     return { 
        username,
        email,
-       tel,
+       tel: tel.join(' '),
        ext
     }
   }
@@ -31,7 +33,28 @@ export class ProfileComponent {
   })
 
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(private fb: FormBuilder, private auth: AuthService) {
+    this.form.setValue(this.user)
+  }
+
+  toggleEditMode(): void{ 
+    this.showEditMode = !this.showEditMode
+  }
+
+  saveProfile(): void { 
+    if(this.form.invalid){ 
+      return
+    }
+
+    const {username, email, ext, tel } = this.form.value
+
+    this.auth.user = { 
+      username, email, tel: ext + ' ' + tel
+    } as any
+
+    this.toggleEditMode()
+    
+  }
 
   
 }
