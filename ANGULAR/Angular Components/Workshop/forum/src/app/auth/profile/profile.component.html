@@ -1,42 +1,46 @@
-<div class="profile"><img src="./profile.png" alt="default user">
+<div class="profile">
+    <img src="./profile.png" alt="default user" />
     <form [formGroup]="form" (ngSubmit)="saveProfile()">
-    <h3>User Info:</h3>
-    <!-- User info -->
-    <div class="flex">
-        <p>Username: </p>
-        <p>
-            <input *ngIf="showEditMode" type="text" formControlName="username">
-            <ng-container *ngIf="!showEditMode">{{user.username}}</ng-container></p>
-    </div>
-    <!-- Email -->
-    <div class="flex">
-        <p>Email: </p>
-        <p>
-            <input *ngIf="showEditMode" type="text" formControlName="email">
-            <ng-container *ngIf="!showEditMode">{{user.email}}</ng-container>
-        </p>
-    </div>
-    <!-- Phone -->
-    <div class="flex">
-        <p>Phone: </p>
-        <p>
-            <ng-container  *ngIf="showEditMode">
-                <label for="tel"><span><i class="fas fa-phone"></i></span></label>
-                <select name="select-tel" id="select-tel" class="tel" formControlName="ext">
-                  <option value="00359">+359</option>
-                </select>
-                <input type="text" formControlName="tel" id="tel" placeholder="885 888 888" />
-            </ng-container>
-            <ng-container *ngIf="!showEditMode">
-                <p>{{user.ext}} {{user.tel}}</p>
-            </ng-container>
-        </p>
-       
-       
-    </div>
-    <button class="edit-button"(click)="showEditMode ? undefined : toggleEditMode()" [type]="showEditMode ? 'submit' : 'button'">
-        <ng-container *ngIf="showEditMode">Save</ng-container>
-        <ng-container *ngIf="!showEditMode">Edit</ng-container>
-    </button>
-</form>
+        <h3>User Info:</h3>
+        <!-- User info -->
+        <div class="flex">
+            <p>Username:</p>
+            <p>
+                <input *ngIf="showEditMode" type="text" formControlName="username" />
+                <ng-container *ngIf="!showEditMode">{{ user.username }}</ng-container>
+            </p>
+        </div>
+        <!-- Email -->
+        <div class="flex">
+            <p>Email:</p>
+            <p>
+                <input *ngIf="showEditMode" type="text" formControlName="email" />
+                <ng-container *ngIf="!showEditMode">{{ user.email }}</ng-container>
+            </p>
+        </div>
+        <!-- Phone -->
+        <div class="flex">
+            <p>Phone:</p>
+            <p>
+                <ng-container *ngIf="showEditMode">
+                    <label for="tel"><span><i class="fas fa-phone"></i></span></label>
+                    <select name="select-tel" id="select-tel" class="tel" formControlName="ext">
+                        <option value="00359">+359</option>
+                    </select>
+                    <input type="text" formControlName="tel" id="tel" placeholder="885 888 888" />
+                </ng-container>
+                <ng-container *ngIf="!showEditMode">
+                    <p>{{ user.ext }} {{ user.tel }}</p>
+                </ng-container>
+            </p>
+        </div>
+
+        <ng-template #edit>
+            <button class="edit-button" type="submit">Save</button>
+        </ng-template>
+        <ng-template #noneEdit>
+            <button class="edit-button" type="button" (click)="toggleEditMode()">Edit</button>
+        </ng-template>
+        <ng-container *ngTemplateOutlet="showEditMode ? edit : noneEdit"></ng-container>
+    </form>
 </div>
