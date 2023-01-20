@@ -6,7 +6,15 @@
         <div class="flex">
             <p>Username:</p>
             <p>
-                <input *ngIf="showEditMode" type="text" formControlName="username" />
+                <ng-container *ngIf="showEditMode">
+                    <input  type="text" formControlName="username" />
+                    <p class="error" *ngIf=" form.get('username')?.touched && form.get('username')?.errors?.['required']  ">
+                        Username is required!
+                      </p>
+                      <p class="error" *ngIf="form.get('username')?.errors?.['minlength']">
+                        Username must be atleast 5 characters!
+                      </p>
+                </ng-container>
                 <ng-container *ngIf="!showEditMode">{{ user.username }}</ng-container>
             </p>
         </div>
@@ -14,7 +22,18 @@
         <div class="flex">
             <p>Email:</p>
             <p>
-                <input *ngIf="showEditMode" type="text" formControlName="email" />
+                <ng-container *ngIf="showEditMode">
+                    <input  type="text" formControlName="email" />
+                <ng-container *ngIf="form.get('email')?.touched">
+                    <p class="error" *ngIf="form.get('email')?.errors?.['required']">
+                      Email is required!
+                    </p>
+                    <p class="error" *ngIf="form.get('email')?.errors?.['appEmailValidator']">
+                      Email is not valid!
+                    </p>
+                  </ng-container>
+                </ng-container>
+                
                 <ng-container *ngIf="!showEditMode">{{ user.email }}</ng-container>
             </p>
         </div>
