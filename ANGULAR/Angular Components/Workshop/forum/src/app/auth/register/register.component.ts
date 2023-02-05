@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { appEmailDomains } from 'src/app/shared/constants';
-import { appEmailValidator, sameValueGroupValidator } from 'src/app/shared/validators';
+import {
+  appEmailValidator,
+  sameValueGroupValidator,
+} from 'src/app/shared/validators';
 
 @Component({
   selector: 'app-register',
@@ -9,16 +12,16 @@ import { appEmailValidator, sameValueGroupValidator } from 'src/app/shared/valid
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  domains = appEmailDomains
+  domains = appEmailDomains;
 
   form = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(5)]],
-    email: ['', [Validators.required , appEmailValidator(this.domains)]],
+    email: ['', [Validators.required, appEmailValidator(this.domains)]],
     tel: [],
     ext: [],
     pass: this.fb.group(
       {
-        password: ["", [Validators.required, Validators.minLength(5)]],
+        password: ['', [Validators.required, Validators.minLength(5)]],
         rePassword: [],
       },
       {
@@ -29,8 +32,9 @@ export class RegisterComponent {
 
   constructor(private fb: FormBuilder) {}
 
-  registerHandler(){ 
-    console.log(this.form.value);
-    
+  registerHandler() {
+    if (this.form.invalid) {
+      return; 
+    }
   }
 }
