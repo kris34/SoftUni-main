@@ -11,7 +11,7 @@ import { ThemeModule } from './theme/theme.module';
 import { appInterceptorProvider } from './app.interceptor';
 
 @NgModule({
-  declarations: [AppComponent ],
+  declarations: [AppComponent],
   imports: [
     ThemeModule,
     BrowserModule,
@@ -20,9 +20,7 @@ import { appInterceptorProvider } from './app.interceptor';
     CoreModule,
     HttpClientModule,
   ],
-  providers: [
-    appInterceptorProvider
-  ],
+  providers: [appInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
