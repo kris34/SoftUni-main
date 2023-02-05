@@ -14,7 +14,23 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  register(username: string, email: string, password: string, rePassword: string){ 
-   return this.http.post<any>('/api/register', { username, email, password, rePassword})
+  register(
+    username: string,
+    email: string,
+    password: string,
+    rePassword: string,
+    tel: string
+  ) {
+    return this.http.post<any>('/api/register', {
+      username,
+      email,
+      password,
+      rePassword,
+      tel,
+    });
+  }
+
+  login(username: string, password: string) {
+    return this.http.post<any>('/api/login', { username, password });
   }
 }
