@@ -21,7 +21,7 @@ export class AuthService {
     rePassword: string,
     tel: string
   ) {
-    return this.http.post<any>('/api/register', {
+    return this.http.post<IUser>('/api/register', {
       username,
       email,
       password,
@@ -30,7 +30,7 @@ export class AuthService {
     });
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>('/api/login', { username, password });
+  login(email: string, password: string) {
+    return this.http.post<any>('/api/login', { email, password });
   }
 }

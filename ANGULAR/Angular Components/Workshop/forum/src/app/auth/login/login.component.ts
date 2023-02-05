@@ -13,7 +13,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private auth: AuthService
   ) {}
   domains = appEmailDomains;
 
@@ -22,10 +22,15 @@ export class LoginComponent {
       return;
     }
 
-    this.authService.user = {
-      username: 'John',
-    } as any;
+    const { email, password } = form.value;
 
+    this.auth
+      .login(email!, password! || undefined)
+      .subscribe((user) => {
+        /*  this.auth.user = user;
+       this.router.navigate(["/theme/recent"]) */
+        this.router.navigate(['/themes/recent ']);
+      });
     const returnUrl =
       this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.router.navigate([returnUrl]);

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { appEmailDomains } from 'src/app/shared/constants';
 import {
   appEmailValidator,
@@ -31,7 +32,7 @@ export class RegisterComponent {
     ),
   });
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router ) {}
 
   registerHandler() {
     if (this.form.invalid) {
@@ -47,6 +48,10 @@ export class RegisterComponent {
 
     this.auth
       .register(username!, email!, password!, rePassword!, tel! || undefined)
-      .subscribe((res) => console.log(res));
+      .subscribe((user) => {
+       /*  this.auth.user = user;
+       this.router.navigate(["/theme/recent"]) */
+       this.router.navigate(["/auth/login"])
+      });
   }
 }
