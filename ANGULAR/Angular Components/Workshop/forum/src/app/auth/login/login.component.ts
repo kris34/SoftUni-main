@@ -24,13 +24,10 @@ export class LoginComponent {
 
     const { email, password } = form.value;
 
-    this.auth
-      .login(email!, password! || undefined)
-      .subscribe((user) => {
-        /*  this.auth.user = user;
-       this.router.navigate(["/theme/recent"]) */
-        this.router.navigate(['/themes/recent ']);
-      });
+    this.auth.login(email!, password! || undefined).subscribe((user) => {
+      this.auth.user = user;
+      this.router.navigate(['/theme/recent']);
+    });
     const returnUrl =
       this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.router.navigate([returnUrl]);

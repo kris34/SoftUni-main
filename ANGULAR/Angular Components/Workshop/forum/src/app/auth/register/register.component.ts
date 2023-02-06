@@ -32,7 +32,11 @@ export class RegisterComponent {
     ),
   });
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router ) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   registerHandler() {
     if (this.form.invalid) {
@@ -49,9 +53,9 @@ export class RegisterComponent {
     this.auth
       .register(username!, email!, password!, rePassword!, tel! || undefined)
       .subscribe((user) => {
-       /*  this.auth.user = user;
-       this.router.navigate(["/theme/recent"]) */
-       this.router.navigate(["/auth/login"])
+        this.auth.user = user;
+        this.router.navigate(['/theme/recent']);
+        //this.router.navigate(['/auth/login']);
       });
   }
 }
