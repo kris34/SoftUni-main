@@ -33,4 +33,8 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http.post<any>('/api/login', { email, password });
   }
+
+  getProfile(){ 
+    return this.http.get<IUser>('/api/users/profile')
+  }
 }

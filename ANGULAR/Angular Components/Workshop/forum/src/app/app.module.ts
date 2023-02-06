@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { ThemeModule } from './theme/theme.module';
 import { appInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, AuthenticateComponent],
@@ -20,6 +21,7 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
+    SharedModule
   ],
   providers: [appInterceptorProvider],
   bootstrap: [AppComponent],
