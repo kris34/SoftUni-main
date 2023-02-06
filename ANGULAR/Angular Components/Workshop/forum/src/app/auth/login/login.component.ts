@@ -25,7 +25,6 @@ export class LoginComponent {
     const { email, password } = form.value;
 
     this.auth.login(email!, password! || undefined).subscribe((user) => {
-      this.auth.user = user;
       this.router.navigate(['/theme/recent']);
     });
     const returnUrl =

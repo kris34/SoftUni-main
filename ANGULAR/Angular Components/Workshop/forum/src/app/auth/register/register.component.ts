@@ -53,7 +53,6 @@ export class RegisterComponent {
     this.auth
       .register(username!, email!, password!, rePassword!, tel! || undefined)
       .subscribe((user) => {
-        this.auth.user = user;
         this.router.navigate(['/theme/recent']);
         //this.router.navigate(['/auth/login']);
       });
