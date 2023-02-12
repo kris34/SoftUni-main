@@ -11,9 +11,10 @@ import { ThemeModule } from './theme/theme.module';
 import { appInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { SharedModule } from './shared/shared.module';
+import { ErrorComponent } from './home/error/error.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthenticateComponent],
+  declarations: [AppComponent, AuthenticateComponent, ErrorComponent],
   imports: [
     ThemeModule,
     BrowserModule,
