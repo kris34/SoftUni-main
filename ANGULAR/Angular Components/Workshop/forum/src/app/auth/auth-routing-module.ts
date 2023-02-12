@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
+import { ErrorComponent } from '../core/error/error.component';
 import { AuthActivate } from '../shared/guards/auth.activate';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -37,6 +38,10 @@ const routes: Routes = [
     data: {
       loginReq: true,
     },
+  },
+  {
+    path: 'error',
+    component: ErrorComponent,
   },
 ];
 

@@ -6,9 +6,11 @@ import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
+import { ErrorComponent } from './error/error.component';
+
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, PageNotFoundComponent, HomeComponent],
+  declarations: [HeaderComponent, FooterComponent, PageNotFoundComponent, HomeComponent, ErrorComponent],
   imports: [CommonModule, RouterModule, SharedModule],
   exports: [HeaderComponent, FooterComponent, PageNotFoundComponent, HomeComponent],
 })

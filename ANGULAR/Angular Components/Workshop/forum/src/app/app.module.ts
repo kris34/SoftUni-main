@@ -11,10 +11,11 @@ import { ThemeModule } from './theme/theme.module';
 import { appInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { SharedModule } from './shared/shared.module';
-import { ErrorComponent } from './home/error/error.component';
+import { APP_ERROR } from './shared/constants';
+import { BehaviorSubject } from 'rxjs';
 
 @NgModule({
-  declarations: [AppComponent, AuthenticateComponent, ErrorComponent],
+  declarations: [AppComponent, AuthenticateComponent, ],
   imports: [
     ThemeModule,
     BrowserModule,
@@ -24,7 +25,11 @@ import { ErrorComponent } from './home/error/error.component';
     HttpClientModule,
     SharedModule
   ],
-  providers: [appInterceptorProvider],
+  providers: [appInterceptorProvider,
+  { 
+    provide: APP_ERROR,
+    useValue: new BehaviorSubject(null)
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
