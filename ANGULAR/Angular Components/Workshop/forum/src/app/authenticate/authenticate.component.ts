@@ -4,23 +4,23 @@ import { AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-authenticate',
   templateUrl: './authenticate.component.html',
-  styleUrls: ['./authenticate.component.scss'],
+  styleUrls: ['./authenticate.component.scss']
 })
 export class AuthenticateComponent implements OnInit {
+
   isAuthenticating = true;
 
-  constructor(private auth: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.auth.getProfile().subscribe({
-      next: (user) => {
-        this.auth.user = user;
+    this.authService.getProfile().subscribe({
+      next: () => {
         this.isAuthenticating = false;
       },
       error: () => {
-        this.auth.user = null;
         this.isAuthenticating = false;
-      },
-    });
+      }
+    })
   }
+
 }
