@@ -5,9 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { MainComponent } from './theme/main/main.component';
-import { AuthModule } from './auth/auth.module';
-import { ThemeModule } from './theme/theme.module';
 import { appInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { SharedModule } from './shared/shared.module';
@@ -17,9 +14,8 @@ import { BehaviorSubject } from 'rxjs';
 @NgModule({
   declarations: [AppComponent, AuthenticateComponent, ],
   imports: [
-    ThemeModule,
+    
     BrowserModule,
-    AuthModule,
     AppRoutingModule,
     CoreModule,
     HttpClientModule,

@@ -6,25 +6,19 @@ import { ThemeDetailsComponent } from './theme-details/theme-details.component';
 
 const routes: Routes = [
   {
-    path: 'theme',
-    children: [
-       {
-        path: 'recent',
-        component: MainComponent,
-      }, 
-      {
-        path: "new",
-        component: NewThemeComponent
-      },
-      { 
-        path: "details/:id",
-        resolve: { 
-          theme: ThemeResolver
-        },
-        component: ThemeDetailsComponent
-      }
-     
-    ],
+    path: 'recent',
+    component: MainComponent,
+  },
+  {
+    path: 'new',
+    component: NewThemeComponent,
+  },
+  {
+    path: 'details/:id',
+    resolve: {
+      theme: ThemeResolver,
+    },
+    component: ThemeDetailsComponent,
   },
 ];
 
