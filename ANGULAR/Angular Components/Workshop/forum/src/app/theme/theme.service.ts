@@ -38,4 +38,6 @@ export class ThemeService {
   deleteTheme(themeId: string, postId: string) {
     return this.http.delete<ITheme>('/api/delete' + themeId + '/post' + postId);
   }
+
+  
 }

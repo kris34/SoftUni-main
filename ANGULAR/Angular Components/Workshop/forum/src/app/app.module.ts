@@ -10,23 +10,23 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { SharedModule } from './shared/shared.module';
 import { APP_ERROR } from './shared/constants';
 import { BehaviorSubject } from 'rxjs';
-import { ElapesdTimePipe } from './pipes/elapesd-time.pipe';
 
 @NgModule({
-  declarations: [AppComponent, AuthenticateComponent, ElapesdTimePipe, ],
+  declarations: [AppComponent, AuthenticateComponent],
   imports: [
-    
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
   ],
-  providers: [appInterceptorProvider,
-  { 
-    provide: APP_ERROR,
-    useValue: new BehaviorSubject(null)
-  }],
+  providers: [
+    appInterceptorProvider,
+    {
+      provide: APP_ERROR,
+      useValue: new BehaviorSubject(null),
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
