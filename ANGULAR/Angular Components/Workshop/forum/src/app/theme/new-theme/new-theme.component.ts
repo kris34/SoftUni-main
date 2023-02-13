@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ThemeService } from '../theme.service';
 
 @Component({
   selector: 'app-new-theme',
@@ -9,13 +11,24 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class NewThemeComponent {
   form = this.fb.group({
     themeTitle: ['', [Validators.minLength(5), Validators.required]],
-    themeContent: ['', [Validators.minLength(10),Validators.required ]]
+    themeContent: ['', [Validators.minLength(10), Validators.required]],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: ThemeService,
+    private router: Router
+  ) {}
 
-  createThemeHandler(): void { 
-     console.log(this.form.value);
-     
+  createThemeHandler() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    const { themeTitle, themeContent } = this.form.value;
+
+    this.service.createTheme(themeTitle!, themeContent!).subscribe((theme) => {
+      this.router.navigate(['/theme/recent']);
+    });
   }
 }

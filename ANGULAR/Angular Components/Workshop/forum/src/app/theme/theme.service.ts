@@ -24,7 +24,7 @@ export class ThemeService {
   createTheme(name: string, text: string) {
     return this.http.post<ITheme>('/api/themes', {
       themeName: name,
-      themeText: text,
+      postText: text,
     });
   }
 
@@ -39,5 +39,5 @@ export class ThemeService {
     return this.http.delete<ITheme>('/api/delete' + themeId + '/post' + postId);
   }
 
-  
+
 }
