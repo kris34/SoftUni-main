@@ -9,6 +9,6 @@ import { ShortenPipe } from './shorten.pipe';
 @NgModule({
   declarations: [WelcomeMessageComponent, AppEmailDirective, LoaderComponent, ShortenPipe],
   imports: [CommonModule, RouterModule],
-  exports: [WelcomeMessageComponent, AppEmailDirective, LoaderComponent ],
+  exports: [WelcomeMessageComponent, AppEmailDirective, LoaderComponent, ShortenPipe ],
 })
 export class SharedModule {}
