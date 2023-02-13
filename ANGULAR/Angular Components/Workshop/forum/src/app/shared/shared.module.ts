@@ -4,9 +4,10 @@ import { WelcomeMessageComponent } from './welcome-message/welcome-message.compo
 import { RouterModule } from '@angular/router';
 import { AppEmailDirective,  } from './validators/app-email-directive';
 import { LoaderComponent } from './loader/loader.component';
+import { ShortenPipe } from './shorten.pipe';
 
 @NgModule({
-  declarations: [WelcomeMessageComponent, AppEmailDirective, LoaderComponent],
+  declarations: [WelcomeMessageComponent, AppEmailDirective, LoaderComponent, ShortenPipe],
   imports: [CommonModule, RouterModule],
   exports: [WelcomeMessageComponent, AppEmailDirective, LoaderComponent ],
 })
