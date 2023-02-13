@@ -15,4 +15,13 @@ export class ThemeService {
   getTheme(id: string) {
     return this.http.get<ITheme>('/api/themes/' + id);
   }
+
+  createTheme(name: string, text: string) {
+    return this.http.post<ITheme>('/api/themes', {
+      themeName: name,
+      themeText: text,
+    });
+  }
+
+  
 }
