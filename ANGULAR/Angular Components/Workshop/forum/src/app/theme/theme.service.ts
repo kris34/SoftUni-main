@@ -23,5 +23,12 @@ export class ThemeService {
     });
   }
 
+  updateTheme(id: string, name: string, text: string) {
+    return this.http.put<ITheme>('/api/themes' + id, {
+      themeName: name,
+      themeText: text,
+    });
+  }
+
   
 }
