@@ -3,15 +3,16 @@ import { Injectable } from '@angular/core';
 import { ITheme } from '../shared/interfaces/themes';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getAllThemes(){ 
-  return this.http.get<ITheme[]>('/api/themes')
+  getAllThemes() {
+    return this.http.get<ITheme[]>('/api/themes');
   }
 
-  ge
+  getTheme(id: string) {
+    return this.http.get<ITheme>('/api/themes/' + id);
+  }
 }
