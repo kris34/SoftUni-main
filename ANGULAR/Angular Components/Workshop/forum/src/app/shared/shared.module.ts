@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
 import { AppEmailDirective } from './validators/app-email-directive';
 import { LoaderComponent } from './loader/loader.component';
 import { ShortenPipe } from './pipes/shorten.pipe';
-import { ShortenTimePipe } from './pipes/elapsed-time.pipe';
+import { ElapsedTimePipe } from './pipes/elapsed-time.pipe';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ShortenTimePipe } from './pipes/elapsed-time.pipe';
     AppEmailDirective,
     LoaderComponent,
     ShortenPipe,
-    ShortenTimePipe,
+    ElapsedTimePipe,
+    
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -21,6 +23,7 @@ import { ShortenTimePipe } from './pipes/elapsed-time.pipe';
     AppEmailDirective,
     LoaderComponent,
     ShortenPipe,
+    ElapsedTimePipe
   ],
 })
 export class SharedModule {}

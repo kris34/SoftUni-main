@@ -1,8 +1,8 @@
-import { ShortenTimePipe } from './elapsed-time.pipe';
+import { ElapsedTimePipe } from './elapsed-time.pipe';
 
-describe('ShortenTimePipe', () => {
+describe('ElapsedTimePipe', () => {
   it('create an instance', () => {
-    const pipe = new ShortenTimePipe();
+    const pipe = new ElapsedTimePipe();
     expect(pipe).toBeTruthy();
   });
 });
