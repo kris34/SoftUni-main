@@ -8,7 +8,12 @@ import { ITheme } from '../shared/interfaces/themes';
 export class ThemeService {
   constructor(private http: HttpClient) {}
 
-  getAllThemes() {
+  getAllThemes(maxCount?: number) {
+    let url = '/api/themes';
+
+    if (maxCount) {
+      url += '?limit=5';
+    }
     return this.http.get<ITheme[]>('/api/themes');
   }
 
@@ -30,5 +35,7 @@ export class ThemeService {
     });
   }
 
-  
+  deleteTheme(themeId: string, postId: string) {
+    return this.http.delete<ITheme>('/api/delete' + themeId + '/post' + postId);
+  }
 }
