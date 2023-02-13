@@ -10,9 +10,10 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { SharedModule } from './shared/shared.module';
 import { APP_ERROR } from './shared/constants';
 import { BehaviorSubject } from 'rxjs';
+import { ElapesdTimePipe } from './pipes/elapesd-time.pipe';
 
 @NgModule({
-  declarations: [AppComponent, AuthenticateComponent, ],
+  declarations: [AppComponent, AuthenticateComponent, ElapesdTimePipe, ],
   imports: [
     
     BrowserModule,
