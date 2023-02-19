@@ -1,21 +1,39 @@
 <html lang='en'>
+
   <head>
     <meta charset='UTF-8' />
-    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <title>{{title}}</title>
+    <title>Express Exam</title>
+    <link href='../static/css/style.css' type='text/css' rel='stylesheet' />
   </head>
+
   <body>
-    <a href='/auth/login'>Login</a>
-    <a href='/auth/register'>Register</a>
-    <a href='/auth/logout'>Logout</a>
-    {{#if errors}}
-      <div>
-        {{#each errors}}
-          <p>{{this}}</p>
-        {{/each}}
-      </div>
-    {{/if}}
-    {{{body}}}
+    <div class='container'>
+      <nav>
+        <a>Theater</a>
+        <ul>
+          <li><a href='#'>Home </a></li>
+          <li><a href='#'>Logout</a></li>
+          <li><a href='#'>Login</a></li>
+          <li><a href='#'>Register</a></li>
+        </ul>
+      </nav>
+
+      <section class='notifications error'>
+        <p>Message...</p>
+      </section>
+
+      <main>
+        {{{body}}}
+
+      </main>
+
+      <footer>
+        <div>© 2020
+          <a href='https://softuni.bg/courses/js-back-end'>JS Back-End</a>
+        </div>
+      </footer>
+
+    </div>
   </body>
+
 </html>
