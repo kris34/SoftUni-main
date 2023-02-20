@@ -1,15 +1,15 @@
- <main>
-            <form action="/" method="">
-                <h2>Login</h2>
-                <div>
-                    <label for="username">Username:</label>
-                    <input type="text" placeholder="Username" value="">
-                </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" placeholder="Password" value="">
-                </div>
+<main>
+  <form action='/auth/login' method='post'>
+    <h2>Login</h2>
+    <div>
+      <label for='username'>Username:</label>
+      <input type='text' placeholder='Username' name='username' />
+    </div>
+    <div>
+      <label for='password'>Password:</label>
+      <input type='password' placeholder='Password' name='password' />
+    </div>
 
-                <button class="btn" type="submit">Login</button>
-            </form>
-        </main>
+    <button class='btn' type='submit'>Login</button>
+  </form>
+</main>
