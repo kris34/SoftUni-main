@@ -8,19 +8,27 @@
 
   <body>
     <div class='container'>
-      <nav>
-        <a>Theater</a>
-        <ul>
-          <li><a href='#'>Home </a></li>
-          <li><a href='#'>Logout</a></li>
-          <li><a href='#'>Login</a></li>
-          <li><a href='#'>Register</a></li>
-        </ul>
-      </nav>
+   <nav>
+      <a href='/'>Theatre</a>
+      <ul>
+        {{#if username}}
+          <li><a href='/'>Home </a></li>
+          <li><a href='/auth/logout'>Logout</a></li>
+          <li><a href='/create'>Create</a></li>
+        {{else}}
+          <li><a href='/auth/login'>Login</a></li>
+          <li><a href='/auth/register'>Register</a></li>
+        {{/if}}
+      </ul>
+    </nav>
 
-      <section class='notifications error'>
-        <p>Message...</p>
-      </section>
+      {{#if errors}}
+        <section class='notifications error'>
+          {{#each errors}}
+            <p>{{this}}</p>
+          {{/each}}
+        </section>
+      {{/if}}
 
       <main>
         {{{body}}}

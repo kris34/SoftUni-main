@@ -35,6 +35,7 @@ async function login(username, password) {
   if (!user) {
     throw new Error('Incorrect username or password!');
   }
+  
   const hasMatch = await bcrypt.compare(password, user.hashedPassword);
 
   if (!hasMatch) {

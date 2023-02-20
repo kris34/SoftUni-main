@@ -8,6 +8,7 @@ homeController.get('/', (req, res) => {
   } else {
     view = 'guest-home';
   }
+  
   res.render(view, {
     title: 'Home Page',
   });
