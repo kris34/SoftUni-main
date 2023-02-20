@@ -9,6 +9,7 @@ const userSchema = new Schema({
     minlength: [3, 'Username must be at least 3 charakters long!'],
   },
   hashedPassword: { type: String, required: true },
+  likedPlays: { type: [Types.ObjectId], ref: 'Play', default: [] },
 });
 
 userSchema.index(

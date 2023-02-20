@@ -6,9 +6,11 @@ homeController.get('/', (req, res) => {
   if (req.user) {
     view = 'user-home';
   } else {
-    view = 'guest home';
+    view = 'guest-home';
   }
-  res.render(view);
+  res.render(view, {
+    title: 'Home Page',
+  });
 });
 
 module.exports = homeController;
