@@ -20,6 +20,7 @@ export class AppInterceptor implements HttpInterceptor {
     if (req.url.startsWith('/api')) {
       req = req.clone({ url: req.url.replace('/api', apiURL), withCredentials: true })
     }
+    
     return next.handle(req).pipe(
       catchError(err => of(err).pipe( // combineLatest([err], this.authService.user$).pipe(take(1))
         switchMap((err) => {

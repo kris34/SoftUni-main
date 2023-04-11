@@ -21,7 +21,7 @@ import { BehaviorSubject } from 'rxjs';
     SharedModule,
   ],
   providers: [
-    appInterceptorProvider,
+     appInterceptorProvider,
     {
       provide: APP_ERROR,
       useValue: new BehaviorSubject(null),
