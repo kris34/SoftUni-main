@@ -1,4 +1,4 @@
-const { createItem } = require('../services/itemService');
+const { createItem, getAll } = require('../services/itemService');
 const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
@@ -38,5 +38,14 @@ siteController.post('/publish', async (req, res) => {
       user: req.user,
     });
   }
+});
+
+siteController.get('/catalog', async (req, res) => {
+  const items = await getAll();
+
+  res.render('catalog', {
+    title: 'Catalog',
+    items,
+  });
 });
 module.exports = siteController;
