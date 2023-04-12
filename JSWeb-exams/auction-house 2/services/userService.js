@@ -35,12 +35,12 @@ async function login(email, password) {
   });
 
   if (!user) {
-    throw new Error('Incorrect username or password!');
+    throw new Error('Incorrect email or password!');
   }
   const hasMatch = await bcrypt.compare(password, user.hashedPassword);
 
   if (!hasMatch) {
-    throw new Error('Incorrect username or password!');
+    throw new Error('Incorrect email or password!');
   }
   return createSession(user);
 }

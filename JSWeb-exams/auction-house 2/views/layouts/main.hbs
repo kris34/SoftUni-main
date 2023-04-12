@@ -1,58 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/site.css">
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <link rel='stylesheet' href='/static/css/site.css' />
     <title>Auction House</title>
-</head>
+  </head>
 
-<body>
+  <body>
 
-    <div id="page-content">
+    <div id='page-content'>
 
-        <header>
-            <a href="/" class="title-logo">
-                <img src="/static/assets/logo.png">
-                <span>Auction House</span>
-            </a>
-            <nav class="main-nav nav-mid">
-                <ul>
-                    <li>
-                        <a href="/site/catalog">Browse</a>
-                    </li>
-                    <!-- User actions -->
-                    <li class="user">
-                        <a href="/site/publish">Publish</a>
-                    </li>
+      <header>
+        <a href='/' class='title-logo'>
+          <img src='/static/assets/logo.png' />
+          <span>Auction House</span>
+        </a>
+        <nav class='main-nav nav-mid'>
+          <ul>
+            <li>
+              <a href='/site/catalog'>Browse</a>
+            </li>
 
-                    <!-- Bonus action -->
-                    <!--
+            {{#if email}}
+              <!-- User actions -->
+              <li class='user'>
+                <a href='/site/publish'>Publish</a>
+              </li>
+
+              <!-- Bonus action -->
+              <!--
                     <li class="user">
                         <a href="#">Closed Auctions</a>
                     </li>
                     -->
 
-                    <li class="user">
-                        <a href="/auth/logout">Logout</a>
-                    </li>
-                    <!-- Guest actions -->
-                    <li class="guest">
-                        <a href="/auth/register">Register</a>
-                    </li>
-                    <li class="guest">
-                        <a href="/auth/login">Login</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+              <li class='user'>
+                <a href='/auth/logout'>Logout</a>
+              </li>
+            {{else}}
+              <!-- Guest actions -->
+              <li class='guest'>
+                <a href='/auth/register'>Register</a>
+              </li>
+              <li class='guest'>
+                <a href='/auth/login'>Login</a>
+              </li>
+            {{/if}}
+          </ul>
+        </nav>
+      </header>
+
+      {{#if errors}}
+        {{#each errors}}
+          <div class='error-box'>
+            <p>{{this}}</p>
+          </div>
+        {{/each}}
+      {{/if}}
 
       {{{body}}}
 
-        <footer>SoftUni &copy; 2022 | Design by Viktor Kostadinov</footer>
+      <footer>SoftUni &copy; 2022 | Design by Viktor Kostadinov</footer>
     </div>
 
-</body>
+  </body>
 
 </html>
