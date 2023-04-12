@@ -18,3 +18,7 @@ const itemSchema = new Schema({
   author: { type: Types.ObjectId, ref: 'User' },
   bidders: { type: [Types.ObjectId], ref: 'User', default: [] },
 });
+
+const item = new model('Item', itemSchema);
+
+module.exports = item;
