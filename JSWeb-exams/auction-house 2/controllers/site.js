@@ -1,4 +1,5 @@
 const { createItem } = require('../services/itemService');
+const { parseError } = require('../util/parser');
 
 const siteController = require('express').Router();
 
@@ -15,8 +16,27 @@ siteController.post('/publish', async (req, res) => {
     price: req.body.price,
     author: req.user._id,
   };
-  const published = await createItem(item);
 
-  res.redirect('/site/publish');
+  try {
+    if (Object.values(req.body).some((v) => !v)) {
+      throw new Error('All fields required!');
+    }
+
+    if (Number(req.body.price) < 1) {
+      throw new Error('Price cannot be negative!');
+    }
+
+    const published = await createItem(item);
+
+    res.redirect('/');
+  } catch (err) {
+    const errors = parseError(err);
+
+    res.render('create', {
+      title: 'Create',
+      errors,
+      user: req.user,
+    });
+  }
 });
 module.exports = siteController;
