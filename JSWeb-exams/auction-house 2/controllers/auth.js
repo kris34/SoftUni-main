@@ -10,6 +10,7 @@ authController.get('/register', (req, res) => {
 });
 
 authController.post('/register', async (req, res) => {
+  console.log(req.body);
   try {
     if (req.body.email == '' || req.body.password == '') {
       throw new Error('All fields are required!');
@@ -19,7 +20,15 @@ authController.post('/register', async (req, res) => {
       throw new Error('Passwords dont match!');
     }
 
-    const token = await register(req.body.email, req.body.firstName, req.body.lastName, req.body.password);
+   
+
+    const token = await register(
+      req.body.email,
+      req.body.firstName,
+      req.body.lastName,
+      req.body.password
+    );
+    console.log(token);
     //TODO check assignment to see if register creates session
     res.cookie('token', token);
     res.redirect('/'); //TODO replace with redirect by assignment
