@@ -1,5 +1,5 @@
 const { publish } = require('../services/gameService');
-
+const { parseError } = require('../util/parser');
 const siteController = require('express').Router();
 
 siteController.get('/publish', async (req, res) => {
