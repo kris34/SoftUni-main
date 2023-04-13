@@ -1,5 +1,5 @@
 const { hasUser } = require('../middlewares/guards');
-const { publish, getAll } = require('../services/gameService');
+const { publish, getAll, getOne, buy } = require('../services/gameService');
 const { parseError } = require('../util/parser');
 const siteController = require('express').Router();
 
@@ -47,8 +47,47 @@ siteController.get('/catalog', async (req, res) => {
   const games = await getAll();
   res.render('catalog', {
     title: 'Catalog',
-    games
+    games,
   });
+});
+
+siteController.get('/details/:id', async (req, res) => {
+  const game = await getOne(req.params.id);
+  game.author = game.owner?._id == req.user?._id;
+  game.notBought = game.boughtBy.some((id) => id != req.user?._id)
+  console.log(game.notBought);
+  game.hasBought = game.boughtBy.some((id) => id == req.user?._id);
+
+  res.render('details', {
+    title: 'details',
+    game,
+  });
+});
+
+siteController.get('/details/:id/buy', async (req, res) => {
+  const game = await getOne(req.params.id);
+  const games = await getAll();
+
+  try {
+    if (game.owner._id == req.user?._id) {
+      throw new Error('You cannot buy your own game!');
+    }
+  
+     if (game.boughtBy.some((id) => id == req.user?._id)) {
+      throw new Error('You have already bought this game!');
+    } 
+
+    await buy(req.params.id, req.user._id);
+
+    res.redirect('/');
+  } catch (err) {
+    const errors = parseError(err);
+
+    res.render('catalog', {
+      games,
+      errors,
+    });
+  }
 });
 
 module.exports = siteController;
