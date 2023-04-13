@@ -1,9 +1,10 @@
+const { isGuest, hasUser } = require('../middlewares/guards');
 const { register, login } = require('../services/userService');
 const { parseError } = require('../util/parser');
 
 const authController = require('express').Router();
 
-authController.get('/register', (req, res) => {
+authController.get('/register',  (req, res) => {
   res.render('register', {
     title: 'Register',
   });

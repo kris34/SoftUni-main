@@ -18,9 +18,26 @@ async function buy(gameId, userId) {
   return existing.save();
 }
 
+async function editGame(data, id) {
+  const existing = await Game.findById(id);
+  existing.platform = data.platform;
+  existing.name = data.name;
+  existing.imageUrl = data.imageUrl;
+  existing.price = data.price;
+  existing.genre = data.genre;
+  existing.description = data.description;
+  return existing.save();
+}
+
+async function deleteById(id){ 
+    return await Game.findByIdAndDelete(id)
+  }
+
 module.exports = {
   publish,
   getAll,
   getOne,
-  buy
+  buy,
+  editGame,
+  deleteById
 };
