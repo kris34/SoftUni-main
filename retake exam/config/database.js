@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 //TODO change database according to assignment
-const CONNECTION_STRING = 'mongodb://localhost:27017/skeleton';
+const CONNECTION_STRING = 'mongodb://localhost:27017/gamingTeam';
 
 module.exports = async (app) => {
   try {
