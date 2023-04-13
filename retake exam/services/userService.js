@@ -4,8 +4,13 @@ const bcrypt = require('bcrypt');
 
 const jwt_secret = 'qwer234asdfg34w2r';
 
-async function register(username, password) {
+async function register(username, email, password) {
   const existing = await User.findOne({ username }).collation({
+    locale: 'en',
+    strength: 2,
+  });
+
+  const existingEmail = await User.findOne({ email }).collation({
     locale: 'en',
     strength: 2,
   });
@@ -14,10 +19,15 @@ async function register(username, password) {
     throw new Error('Username is taken!');
   }
 
+  if (existingEmail) {
+    throw new Error('Email is taken!');
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await User.create({
     username,
+    email,
     hashedPassword,
   });
 
@@ -26,14 +36,14 @@ async function register(username, password) {
   return createSession(user);
 }
 
-async function login(username, password) {
-  const user = await User.findOne({ username }).collation({
+async function login(email, password) {
+  const user = await User.findOne({ email }).collation({
     locale: 'en',
     strength: 2,
   });
 
   if (!user) {
-    throw new Error('Incorrect username or password!');
+    throw new Error('Incorrect email or password!');
   }
   const hasMatch = await bcrypt.compare(password, user.hashedPassword);
 
@@ -47,10 +57,10 @@ function verifyToken(token) {
   return jwt.verify(token, jwt_secret);
 }
 
-function createSession({ _id, username }) {
+function createSession({ _id, email }) {
   const payload = {
     _id,
-    username,
+    email,
   };
 
   return jwt.sign(payload, jwt_secret);
