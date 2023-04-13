@@ -1,8 +1,9 @@
-const { publish } = require('../services/gameService');
+const { hasUser } = require('../middlewares/guards');
+const { publish, getAll } = require('../services/gameService');
 const { parseError } = require('../util/parser');
 const siteController = require('express').Router();
 
-siteController.get('/publish', async (req, res) => {
+siteController.get('/publish', hasUser(), async (req, res) => {
   res.render('create', {
     title: 'Create',
   });
@@ -29,9 +30,9 @@ siteController.post('/publish', async (req, res) => {
     }
 
     const game = await publish(data);
-    console.log(game);
+    //  console.log(game);
 
-    res.redirect('/');
+    res.redirect('/site/catalog');
   } catch (err) {
     const errors = parseError(err);
 
@@ -40,6 +41,14 @@ siteController.post('/publish', async (req, res) => {
       errors,
     });
   }
+});
+
+siteController.get('/catalog', async (req, res) => {
+  const games = await getAll();
+  res.render('catalog', {
+    title: 'Catalog',
+    games
+  });
 });
 
 module.exports = siteController;

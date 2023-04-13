@@ -4,7 +4,11 @@ async function publish(data) {
   return await Game.create(data);
 }
 
-
-module.exports = { 
-    publish
+async function getAll() {
+  return await Game.find({}).lean();
 }
+
+module.exports = {
+  publish,
+  getAll
+};
