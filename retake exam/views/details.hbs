@@ -24,12 +24,13 @@
         {{else}}
           <!-- Logged in user who has not yet buy this game code-->
           {{#if user}}
-          {{#if game.notBought}}
-            <a href='/site/details/{{game._id}}/buy' class='btn-buy'>Buy</a>
-          {{else}}
+            {{#unless game.hasBought}}
+              <a href='/site/details/{{game._id}}/buy' class='btn-buy'>Buy</a>
+            {{/unless}}
             <!-- Logged in user who has already buy this game code-->
-            <p class='buy-message'>You have already bought this game</p>
-          {{/if}}
+            {{#if game.hasBought}}
+              <p class='buy-message'>You have already bought this game</p>
+            {{/if}}
           {{/if}}
         {{/if}}
       </div>

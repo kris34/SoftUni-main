@@ -54,9 +54,8 @@ siteController.get('/catalog', async (req, res) => {
 siteController.get('/details/:id', async (req, res) => {
   const game = await getOne(req.params.id);
   game.author = game.owner?._id == req.user?._id;
-  game.notBought = game.boughtBy.some((id) => id != req.user?._id)
-  console.log(game.notBought);
-  game.hasBought = game.boughtBy.some((id) => id == req.user?._id);
+
+  game.hasBought = game.boughtBy.some((id) => id == req.user?._id.toString());
 
   res.render('details', {
     title: 'details',
@@ -72,14 +71,14 @@ siteController.get('/details/:id/buy', async (req, res) => {
     if (game.owner._id == req.user?._id) {
       throw new Error('You cannot buy your own game!');
     }
-  
-     if (game.boughtBy.some((id) => id == req.user?._id)) {
+
+    if (game.boughtBy.some((id) => id == req.user?._id)) {
       throw new Error('You have already bought this game!');
-    } 
+    }
 
     await buy(req.params.id, req.user._id);
 
-    res.redirect('/');
+    res.redirect(`/site/details/${req.params.id}`);
   } catch (err) {
     const errors = parseError(err);
 
